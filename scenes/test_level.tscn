@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://vehicles/buggy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://player/camera.gd" type="Script" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 3 )
+
+[sub_resource type="ConcavePolygonShape" id=2]
+data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 99.9785, 0, 0, 0, 99.9785, 0, 0, 0, 99.9785, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+transform = Transform( 6.13726, 0, 0, 0, 6.13726, 0, 0, 0, 6.13726, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 6.13726, 0, 0, 0, 6.13726, 0, 0, 0, 6.13726, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="buggy" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1.00456, 0, 0, 0, 1.00456, 0, 0, 0, 1.00456, -0.0204048, 0.0478153, -0.0235357 )
+
+[node name="camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.88022, 23.0639 )
+script = ExtResource( 2 )
+follow_target_path = NodePath("../buggy")
+target_distance = 12.0
+target_height = 6.0

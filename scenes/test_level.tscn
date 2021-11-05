@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://vehicles/buggy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/camera.gd" type="Script" id=2]
@@ -12,10 +12,42 @@ albedo_texture = ExtResource( 3 )
 [sub_resource type="ConcavePolygonShape" id=2]
 data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
 
+[sub_resource type="Curve3D" id=4]
+_data = {
+"points": PoolVector3Array( 9.79904, 0, 18.6319, -9.79904, 0, -18.6319, -31.895, 0, 7.96057, 0, 0, 0, 0, 0, 0, -57.093, 0, -13.8155, -7.43263, 0, 17.8593, 7.43263, 0, -17.8593, -58.3374, 0, -41.6578, -15.1113, 0, 9.06681, 15.1113, 0, -9.06681, -37.8981, 0, -68.1249, -14.7755, 0, 2.35069, 14.7755, 0, -2.35069, 4.94635, 7.23662, -84.5424, -17.7978, 0, -2.68641, 17.7978, 0, 2.68641, 61.5006, 0, -91.6313, 0.67157, 0, -25.5212, -0.67157, 0, 25.5212, 97.0961, 0, -69.1323, 2.68643, 0, -7.38771, -2.68643, 0, 7.38771, 78.6267, 0, -42.2678, -8.73099, 0, -17.4619, 8.73099, 0, 17.4619, 66.0252, 8.78723, -14.4988, 0, 0, 0, 0, 0, 0, 95.7529, 0, -1.6352, 0, 0, 0, 0, 0, 0, 139.408, 0, 1.05125, -20.1485, 0, -13.7681, 20.1485, 0, 13.7681, 185.413, 0, 3.4019, 0, 0, 0, 0, 0, 0, 201.868, 0, 23.2145, 0.335724, 0, -17.462, -0.335724, 0, 17.462, 210.21, 5.87604, 64.836, 3.97235, -0.0415859, -7.46809, -3.97235, 0.0415859, 7.46809, 201.532, 0, 95.7487, 0, 0, 0, 0, 0, 0, 183.063, 0, 103.472, 14.7754, 0, 11.0815, -14.7754, 0, -11.0815, 157.877, 0, 103.472, -7.25508, 0, 9.91405, 7.25508, 0, -9.91405, 162.578, 0, 79.2942, 8.24519, 0, 4.16077, -8.24519, 0, -4.16077, 159.22, 0, 35.3035, 0, 0, 0, 0, 0, 0, 109.521, 0, 55.4519, 13.9191, 0, -4.46759, -13.9191, 0, 4.46759, 61.5006, 0, 84.6671, 0, 0, 0, 0, 0, 0, 19.5493, 3.78882, 91.2156, 12.2019, 0, 6.94766, -12.2019, 0, -6.94766, -14.7275, 0, 82.6522, 6.66099, 0.313545, 7.53158, -6.66099, -0.313545, -7.53158, -22.7176, 8.46592, 50.9225, 2.76307, 0.531036, 4.97682, -2.76307, -0.531036, -4.97682, -31.895, 0, 7.96057 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Shader" id=5]
+code = "shader_type spatial;
+
+uniform sampler2D road_texture;
+
+void fragment() {
+	vec2 road_uv = vec2(UV.y, UV.x);
+	
+	vec4 color = texture(road_texture, road_uv);
+	ALBEDO = color.rgb;
+	METALLIC = 0.0;
+	ROUGHNESS = 0.8;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=7]
+period = 0.1
+
+[sub_resource type="NoiseTexture" id=8]
+seamless = true
+noise = SubResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/road_texture = SubResource( 8 )
+
 [node name="Spatial" type="Spatial"]
 
 [node name="StaticBody" type="StaticBody" parent="."]
 transform = Transform( 99.9785, 0, 0, 0, 99.9785, 0, 0, 0, 99.9785, 0, 0, 0 )
+visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
 transform = Transform( 6.13726, 0, 0, 0, 6.13726, 0, 0, 0, 6.13726, 0, 0, 0 )
@@ -27,7 +59,7 @@ transform = Transform( 6.13726, 0, 0, 0, 6.13726, 0, 0, 0, 6.13726, 0, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="buggy" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1.00456, 0, 0, 0, 1.00456, 0, 0, 0, 1.00456, -0.0204048, 0.0478153, -0.0235357 )
+transform = Transform( 1.00456, 0, 0, 0, 1.00456, 0, 0, 0, 1.00456, -38.0965, 0.0478153, -0.0235357 )
 
 [node name="camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.88022, 23.0639 )
@@ -35,3 +67,21 @@ script = ExtResource( 2 )
 follow_target_path = NodePath("../buggy")
 target_distance = 12.0
 target_height = 6.0
+
+[node name="Track" type="Spatial" parent="."]
+
+[node name="Path" type="Path" parent="Track"]
+curve = SubResource( 4 )
+
+[node name="Road" type="CSGPolygon" parent="Track/Path"]
+use_collision = true
+invert_faces = true
+polygon = PoolVector2Array( -8, 0, -3, 0.1, 8, 0.1, 2, 0 )
+mode = 2
+path_node = NodePath("..")
+path_interval = 1.0
+path_rotation = 2
+path_local = false
+path_continuous_u = false
+path_joined = false
+material = SubResource( 6 )

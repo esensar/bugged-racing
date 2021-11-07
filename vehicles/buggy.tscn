@@ -11,6 +11,7 @@ extents = Vector3( 0.521885, 0.334919, 1.78849 )
 
 [node name="buggy" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+STEER_SPEED = 1.5
 power_curve = SubResource( 2 )
 
 [node name="chassis" parent="." index="0"]

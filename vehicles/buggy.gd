@@ -1,11 +1,20 @@
 extends VehicleBody
 
-const STEER_SPEED = 1.5
-const STEER_LIMIT = 0.4
+export (float) var MAX_STEER_ANGLE = 25
+export (float) var SPEED_STEER_ANGLE = 10
+export (float) var MAX_STEER_SPEED = 100.0
+export (float) var MAX_STEER_INPUT = 80.0
+export (float) var STEER_SPEED = 1.0
 
-var steer_target = 0
+onready var max_steer_angle_rad: float = deg2rad(MAX_STEER_ANGLE)
+onready var speed_steer_angle_rad: float = deg2rad(SPEED_STEER_ANGLE)
+onready var max_steer_input_rad: float = deg2rad(MAX_STEER_INPUT)
+export (Curve) var steer_curve = null
 
-export (float) var MAX_ENGINE_FORCE = 100.0
+var steer_target = 0.0
+var steer_angle = 0.0
+
+export (float) var MAX_ENGINE_FORCE = 50.0
 export (float) var MAX_BRAKE_FORCE = 50.0
 export (float) var THROTTLE_POWER = 10000.0
 export (float) var MAX_RPM_LOSS_PS = 3000.0
@@ -16,7 +25,7 @@ export (float) var final_drive = 3.38
 export (float) var max_rpm = 7000
 export (float) var min_rpm = 900
 export (float) var gear_switch_time = 0.2
-export (Curve) var power_curve
+export (Curve) var power_curve = null
 
 var clutch_position: float = 0.0
 var rpm = 0
@@ -104,9 +113,19 @@ func _physics_process(delta: float):
 	rrwheel.brake = handbrake * MAX_BRAKE_FORCE / 2
 	rlwheel.brake = handbrake * MAX_BRAKE_FORCE / 2
 
-	$Info.text = "Gear: %d, RPM: %.0f, TRPM: %.0f, Engine force: %.0f" % [ gear, rpm, transmission_rpm, engine_force ]
+	var speed = wheel_rpm * 2.0 * PI * rrwheel.wheel_radius / 60.0 * 3600.0 / 1000.0
+	$Info.text = "Gear: %d, KPH: %.0f, RPM: %.0f, TRPM: %.0f, Engine force: %.0f" % [ gear, speed, rpm, transmission_rpm, engine_force ]
 
-	steer_target = Input.get_action_strength("steer_left") - Input.get_action_strength("steer_right")
-	steer_target *= STEER_LIMIT
+	var steering_input = Input.get_action_strength("steer_left") - Input.get_action_strength("steer_right")
+	if abs(steering_input) < 0.05:
+		steering_input = 0.0
+	elif steer_curve:
+		if steering_input < 0.0:
+			steering_input = -steer_curve.interpolate_baked(-steering_input)
+		else:
+			steering_input = steer_curve.interpolate_baked(steering_input)
 
-	steering = move_toward(steering, steer_target, STEER_SPEED * delta)
+	var steer_speed_factor = clamp(speed / MAX_STEER_SPEED, 0.0, 1.0)
+
+	steer_angle = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
+	steering = steer_angle

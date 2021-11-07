@@ -35,6 +35,7 @@ shape = SubResource( 3 )
 [node name="buggy" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1.00456, 0, 0, 0, 1.00456, 0, 0, 0, 1.00456, -38.0928, 1.38435, -0.0872202 )
 mass = 250.0
+STEER_SPEED = 1.5
 
 [node name="camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.88022, 23.0639 )

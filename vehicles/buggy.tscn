@@ -17,10 +17,7 @@ mass = 150.0
 script = ExtResource( 3 )
 power_curve = SubResource( 2 )
 
-[node name="chassis" parent="." index="0"]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0.446435, 0 )
-
-[node name="front_left" parent="." index="1"]
+[node name="front_right" parent="." index="1"]
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.6
@@ -32,16 +29,16 @@ suspension_max_force = 10000.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23227, 0 )
 shape = SubResource( 1 )
 
-[node name="rear_left" parent="." index="4"]
+[node name="front_left" parent="." index="4"]
 use_as_traction = true
+use_as_steering = true
 wheel_radius = 0.6
 wheel_rest_length = 0.4
 suspension_travel = 1.0
 suspension_max_force = 10000.0
 
-[node name="front_right" parent="." index="5"]
+[node name="rear_left" parent="." index="5"]
 use_as_traction = true
-use_as_steering = true
 wheel_radius = 0.6
 wheel_rest_length = 0.4
 suspension_travel = 1.0

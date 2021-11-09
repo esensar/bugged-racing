@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://vehicles/buggy.gd" type="Script" id=1]
+[ext_resource path="res://assets/beetlecar.glb" type="PackedScene" id=2]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 1.32264, 0, 1, Vector2( 0.481132, 0.636364 ), 1.32264, 0.0, 1, 0, Vector2( 0.877358, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.417676, 0.42291, 1.58775 )
+
+[sub_resource type="AudioStreamGenerator" id=2]
+mix_rate = 5500.0
+
+[node name="beetlecar" instance=ExtResource( 2 )]
+mass = 140.0
+script = ExtResource( 1 )
+gear_ratios = [ 2.24, 2.0, 1.89, 1.67, 1.44, 1.23 ]
+final_drive = 5.6
+max_rpm = 8000.0
+power_curve = SubResource( 3 )
+
+[node name="rear_right" parent="." index="0"]
+use_as_traction = true
+wheel_radius = 0.38
+wheel_rest_length = 0.5
+wheel_friction_slip = 4.0
+suspension_travel = 0.5
+
+[node name="rear_left" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.375, -0.83483 )
+use_as_traction = true
+wheel_radius = 0.38
+wheel_rest_length = 0.5
+wheel_friction_slip = 4.0
+suspension_travel = 0.5
+
+[node name="rear_left" parent="rear_left" index="0"]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="front_right" parent="." index="4"]
+use_as_steering = true
+wheel_radius = 0.38
+wheel_rest_length = 0.5
+wheel_friction_slip = 4.0
+suspension_travel = 0.5
+
+[node name="front_left" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.375, 1.19336 )
+use_as_steering = true
+wheel_radius = 0.38
+wheel_rest_length = 0.5
+wheel_friction_slip = 4.0
+suspension_travel = 0.5
+
+[node name="front_left" parent="front_left" index="0"]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="." index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.843709, 0.205449 )
+shape = SubResource( 1 )
+
+[node name="Info" type="Label" parent="." index="7"]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="engine_sound_player" type="AudioStreamPlayer3D" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14201, 0.968668 )
+stream = SubResource( 2 )
+unit_db = 14.0

@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://vehicles/buggy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/camera.gd" type="Script" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://vehicles/beetlecar.tscn" type="PackedScene" id=4]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -49,15 +49,11 @@ material/0 = SubResource( 2 )
 transform = Transform( 6.13726, 0, 0, 0, 6.13726, 0, 0, 0, 6.13726, 0, 0, 0 )
 shape = SubResource( 3 )
 
-[node name="buggy" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1.00456, 0, 0, 0, 1.00456, 0, 0, 0, 1.00456, -38.0928, 1.38435, -0.0872202 )
-mass = 250.0
-
 [node name="camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.88022, 23.0639 )
 far = 457.7
 script = ExtResource( 2 )
-follow_target_path = NodePath("../buggy")
+follow_target_path = NodePath("../beetlecar")
 target_distance = 12.0
 target_height = 6.0
 
@@ -97,3 +93,6 @@ path_local = true
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = true
+
+[node name="beetlecar" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1.00456, 0, 0, 0, 1.00456, 0, 0, 0, 1.00456, -5.11782, -2.38419e-07, -0.860649 )

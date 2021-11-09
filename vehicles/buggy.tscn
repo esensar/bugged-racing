@@ -17,39 +17,43 @@ mass = 150.0
 script = ExtResource( 3 )
 power_curve = SubResource( 2 )
 
-[node name="front_right" parent="." index="1"]
+[node name="front_left" parent="." index="1"]
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.6
 wheel_rest_length = 0.4
+wheel_friction_slip = 1.75
 suspension_travel = 1.0
-suspension_max_force = 10000.0
+suspension_stiffness = 5.95
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23227, 0 )
 shape = SubResource( 1 )
 
-[node name="front_left" parent="." index="4"]
+[node name="front_right" parent="." index="4"]
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.6
 wheel_rest_length = 0.4
+wheel_friction_slip = 1.75
 suspension_travel = 1.0
-suspension_max_force = 10000.0
+suspension_stiffness = 5.95
 
 [node name="rear_left" parent="." index="5"]
 use_as_traction = true
 wheel_radius = 0.6
 wheel_rest_length = 0.4
+wheel_friction_slip = 1.8
 suspension_travel = 1.0
-suspension_max_force = 10000.0
+suspension_stiffness = 5.95
 
 [node name="rear_right" parent="." index="6"]
 use_as_traction = true
 wheel_radius = 0.6
 wheel_rest_length = 0.4
+wheel_friction_slip = 1.8
 suspension_travel = 1.0
-suspension_max_force = 10000.0
+suspension_stiffness = 5.95
 
 [node name="Info" type="Label" parent="." index="7"]
 margin_right = 40.0

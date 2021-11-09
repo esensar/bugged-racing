@@ -31,6 +31,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23227, 0 )
 shape = SubResource( 1 )
 
 [node name="front_right" parent="." index="4"]
+transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950754, 0.503756, 1.41438 )
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.6
@@ -38,6 +39,9 @@ wheel_rest_length = 0.4
 wheel_friction_slip = 1.75
 suspension_travel = 1.0
 suspension_stiffness = 5.95
+
+[node name="front_right" parent="front_right" index="0"]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="rear_left" parent="." index="5"]
 use_as_traction = true
@@ -48,12 +52,16 @@ suspension_travel = 1.0
 suspension_stiffness = 5.95
 
 [node name="rear_right" parent="." index="6"]
+transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950755, 0.503756, -1.41438 )
 use_as_traction = true
 wheel_radius = 0.6
 wheel_rest_length = 0.4
 wheel_friction_slip = 1.8
 suspension_travel = 1.0
 suspension_stiffness = 5.95
+
+[node name="rear_right" parent="rear_right" index="0"]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Info" type="Label" parent="." index="7"]
 margin_right = 40.0

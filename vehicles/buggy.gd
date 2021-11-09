@@ -153,5 +153,5 @@ func _generate_engine_sound(rpm_factor):
 	var factor = rpm_factor
 	while to_fill > 0:
 		engine_sound_playback.push_frame(Vector2(1.0, 1.0) * factor)
-		factor += cos(factor) * sin(factor)
+		factor += cos(factor) * sin(factor) * (1 + to_fill % 2)
 		to_fill -= 1

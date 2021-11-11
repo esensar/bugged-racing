@@ -33,5 +33,8 @@ jobs:
       - name: Itch.io deploy
         env:
           EXPORT_DIR_NAME: ${{ matrix.target[0] }}
+          ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
+          ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
         run: |
           butler push ./build/$EXPORT_DIR_NAME $ITCHIO_USERNAME/$ITCHIO_GAME:$EXPORT_DIR_NAME

@@ -4,15 +4,11 @@ export (float) var MAX_STEER_ANGLE = 25
 export (float) var SPEED_STEER_ANGLE = 10
 export (float) var MAX_STEER_SPEED = 100.0
 export (float) var MAX_STEER_INPUT = 80.0
-export (float) var STEER_SPEED = 1.0
 
 onready var max_steer_angle_rad: float = deg2rad(MAX_STEER_ANGLE)
 onready var speed_steer_angle_rad: float = deg2rad(SPEED_STEER_ANGLE)
 onready var max_steer_input_rad: float = deg2rad(MAX_STEER_INPUT)
 export (Curve) var steer_curve = null
-
-var steer_target = 0.0
-var steer_angle = 0.0
 
 export (float) var MAX_ENGINE_FORCE = 85.0
 export (float) var MAX_BRAKE_FORCE = 50.0
@@ -26,15 +22,6 @@ export (float) var max_rpm = 3500
 export (float) var min_rpm = 900
 export (float) var gear_switch_time = 0.2
 export (Curve) var power_curve = null
-
-
-var idle_sound_start: float = 0.5
-var idle_sound_end: float = 1
-
-var throttle_sound_start: float = 2.5
-var throttle_sound_end: float = 3.5
-
-var sound_time_left: float = 0.0
 
 var clutch_position: float = 0.0
 var rpm = 0
@@ -144,8 +131,7 @@ func _physics_process(delta: float):
 
 	var steer_speed_factor = clamp(speed / MAX_STEER_SPEED, 0.0, 1.0)
 
-	steer_angle = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
-	steering = steer_angle
+	steering = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
 
 func _generate_engine_sound(rpm_factor):
 	engine_sound_player.pitch_scale = 0.5 + rpm_factor

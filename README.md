@@ -1,6 +1,6 @@
 # Bugged Racing
 
-[![MIT](https://img.shields.io/github/license/esensar/bugged-racing?label=license&style=for-the-badge)](/LICENSE)
+[![MIT](https://img.shields.io/github/license/esensar/bugged-racing)](/LICENSE)
 [![CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](/assets/source/LICENSE)
 
 Buggy racing game.

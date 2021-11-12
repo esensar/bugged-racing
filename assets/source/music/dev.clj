@@ -15,6 +15,6 @@
 
 (defmethod task "play"
   [_]
-  (music.core/-main))
+  (music.core/-main "main_theme"))
 
 (task *command-line-args*)

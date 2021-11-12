@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/fonts/kenney-future-narrow.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/menu/start_menu.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 1 )
+
+[node name="StartMenu" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+margin_right = 984.0
+margin_bottom = 560.0
+dragger_visibility = 1
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer"]
+margin_right = 984.0
+margin_bottom = 72.0
+dragger_visibility = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/VSplitContainer/HSplitContainer"]
+margin_right = 42.0
+margin_bottom = 72.0
+text = "Back"
+
+[node name="Title" type="Label" parent="MarginContainer/VSplitContainer/HSplitContainer"]
+margin_left = 54.0
+margin_right = 984.0
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 1 )
+text = "Select Vehicle"
+align = 1
+valign = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VSplitContainer"]
+margin_top = 84.0
+margin_right = 984.0
+margin_bottom = 560.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/CenterContainer"]
+margin_left = 419.0
+margin_top = 194.0
+margin_right = 565.0
+margin_bottom = 282.0
+
+[node name="BuggyButton" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_right = 146.0
+margin_bottom = 42.0
+custom_fonts/font = SubResource( 2 )
+text = "Buggy"
+
+[node name="BeetleButton" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_top = 46.0
+margin_right = 146.0
+margin_bottom = 88.0
+custom_fonts/font = SubResource( 2 )
+text = "Beetle"
+
+[connection signal="pressed" from="MarginContainer/VSplitContainer/HSplitContainer/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BuggyButton" to="." method="_on_BuggyButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BeetleButton" to="." method="_on_BeetleButton_pressed"]

@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="bugged-racing"
-run/main_scene="res://scenes/test_level.tscn"
+run/main_scene="res://scenes/menu/main_menu.tscn"
 config/icon="res://icon.png"
 
 [input]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://player/camera.gd" type="Script" id=1]
+
+[node name="camera" type="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.88022, 23.0639 )
+far = 457.7
+script = ExtResource( 1 )
+target_distance = 12.0
+target_height = 6.0

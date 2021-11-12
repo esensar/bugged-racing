@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -e
+
+OLDWD=$PWD
+SCRIPTD=$(dirname "$0")
+ROOTD="$SCRIPTD/.."
+ASSETS_DIR="$ROOTD/assets"
+MUSIC_SOURCE_DIR="$ASSETS_DIR/source/music"
+MUSIC_OUTPUT_DIR="$MUSIC_SOURCE_DIR/target"
+MUSIC_ASSETS_DIR="$ASSETS_DIR/music"
+
+cd $MUSIC_SOURCE_DIR
+
+clj -M prod.clj soundtrack
+
+cd $OLDWD
+mv "$MUSIC_OUTPUT_DIR/"*.wav "$MUSIC_ASSETS_DIR/"

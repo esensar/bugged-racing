@@ -1,0 +1,5 @@
+target/
+resources/
+!resources/public/index.html
+.*
+!.gitignore

@@ -11,7 +11,7 @@ metadata={
 
 [deps]
 
-source_file="res://assets/dirttrack.png"
+source_file="res://assets/source/dirttrack.png"
 dest_files=[ "res://.import/dirttrack.png-083381fc44e646fa9111e81d122e1864.s3tc.stex", "res://.import/dirttrack.png-083381fc44e646fa9111e81d122e1864.etc2.stex" ]
 
 [params]

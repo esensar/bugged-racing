@@ -11,7 +11,7 @@ metadata={
 
 [deps]
 
-source_file="res://assets/tyretexture.png"
+source_file="res://assets/source/tyretexture.png"
 dest_files=[ "res://.import/tyretexture.png-815a19f346dc8bb593f48a3a9b625018.s3tc.stex", "res://.import/tyretexture.png-815a19f346dc8bb593f48a3a9b625018.etc2.stex" ]
 
 [params]

@@ -18,4 +18,4 @@
   (reset! state (edna/play! (read-music song))))
 
 (defmacro build-for-cljs []
-  (edna/edna->data-uri (read-music "main-theme")))
+  (edna/edna->data-uri (read-music "main_theme")))

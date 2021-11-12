@@ -10,9 +10,15 @@ MUSIC_SOURCE_DIR="$ASSETS_DIR/source/music"
 MUSIC_OUTPUT_DIR="$MUSIC_SOURCE_DIR/target"
 MUSIC_ASSETS_DIR="$ASSETS_DIR/music"
 
+echo "Removing all wav files from $MUSIC_OUTPUT_DIR"
+rm -f "$MUSIC_OUTPUT_DIR/"*.wav
 cd $MUSIC_SOURCE_DIR
 
+echo "Building songs"
 clj -M prod.clj soundtrack
 
 cd $OLDWD
+echo "Removing all wav files from $MUSIC_ASSETS_DIR"
+rm -f "$MUSIC_ASSETS_DIR/"*.wav
 mv "$MUSIC_OUTPUT_DIR/"*.wav "$MUSIC_ASSETS_DIR/"
+echo "Moved all songs to $MUSIC_ASSETS_DIR"

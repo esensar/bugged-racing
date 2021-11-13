@@ -14,6 +14,7 @@ export (float) var MAX_ENGINE_FORCE = 85.0
 export (float) var MAX_BRAKE_FORCE = 50.0
 export (float) var THROTTLE_POWER = 6000.0
 export (float) var MAX_RPM_LOSS_PS = 3000.0
+export (float) var BASE_ENGINE_PITCH = 0.5
 
 export (Array) var gear_ratios = [ 3.4, 2.5, 2.0, 1.5, 1.25 ]
 export (float) var reverse_ratio = -3
@@ -22,6 +23,7 @@ export (float) var max_rpm = 3500
 export (float) var min_rpm = 900
 export (float) var gear_switch_time = 0.2
 export (Curve) var power_curve = null
+export (Curve) var sound_curve = null
 
 var clutch_position: float = 0.0
 var rpm = 0
@@ -96,7 +98,7 @@ func _physics_process(delta: float):
 	else:
 		rpm = _lerp_rpm(rpm, min_rpm, delta, delta)
 	if _has_traction():
-		rpm += throttle * delta * clutch_position * THROTTLE_POWER
+		rpm += throttle * delta * (max(clutch_position, 1 if gear == 0 else 0)) * THROTTLE_POWER
 	else:
 		rpm += throttle * delta * THROTTLE_POWER
 	rpm = clamp(rpm, 0, max_rpm)
@@ -134,10 +136,15 @@ func _physics_process(delta: float):
 	steering = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
 
 func _generate_engine_sound(rpm_factor):
-	engine_sound_player.pitch_scale = 0.5 + rpm_factor
+	engine_sound_player.pitch_scale = BASE_ENGINE_PITCH + rpm_factor
 	var to_fill = engine_sound_playback.get_frames_available()
 	var factor = rpm_factor
+	if to_fill <= 0:
+		return
+	var fill_segment = 1.0 / to_fill
+	var fill_percent = 0.0
 	while to_fill > 0:
 		engine_sound_playback.push_frame(Vector2(1.0, 1.0) * factor)
-		factor += cos(factor) * sin(factor) * (1 + to_fill % 2)
+		factor += cos(factor) * sin(factor) * (1 + to_fill % 2) * (sound_curve.interpolate_baked(fill_percent) * 2 - 0.5)
 		to_fill -= 1
+		fill_percent += fill_segment

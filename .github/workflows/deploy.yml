@@ -31,6 +31,7 @@ jobs:
           mkdir -v -p build/$EXPORT_DIR_NAME
           godot -v --export "$EXPORT_TARGET_NAME"
       - name: Itch.io deploy
+        if: ${{ new Date() < new Date("2021-12-01T09:37:00")}}
         env:
           EXPORT_DIR_NAME: ${{ matrix.target[0] }}
           ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}

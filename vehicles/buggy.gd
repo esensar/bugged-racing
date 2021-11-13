@@ -93,7 +93,7 @@ func _physics_process(delta: float):
 	var transmission_rpm = final_rpm * abs(_get_gear_ratio())
 
 	if gear != 0:
-		rpm = lerp(rpm, transmission_rpm, delta * (1 - clutch_position))
+		rpm = lerp(rpm, transmission_rpm, delta * 10 * (1 - clutch_position))
 		rpm = _lerp_rpm(rpm, min_rpm, delta, delta * clutch_position)
 	else:
 		rpm = _lerp_rpm(rpm, min_rpm, delta, delta)

@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Particles",
+"class": "TireSmoke",
+"language": "GDScript",
+"path": "res://vehicles/tire_smoke.gd"
+} ]
+_global_script_class_icons={
+"TireSmoke": ""
+}
+
 [application]
 
 config/name="bugged-racing"

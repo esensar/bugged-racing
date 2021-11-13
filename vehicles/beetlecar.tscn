@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://vehicles/buggy.gd" type="Script" id=1]
 [ext_resource path="res://assets/beetlecar.glb" type="PackedScene" id=2]
+[ext_resource path="res://vehicles/tire_smoke.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 2.58337, 0, 1, Vector2( 0.221698, 0.572727 ), 2.58337, 0.0, 1, 0, Vector2( 0.830189, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -15,6 +16,30 @@ extents = Vector3( 0.417676, 0.42291, 1.58775 )
 [sub_resource type="AudioStreamGenerator" id=2]
 mix_rate = 5500.0
 buffer_length = 1.0
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.493182 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+direction = Vector3( 0, 0, -1 )
+gravity = Vector3( 0, 0.2, 0 )
+initial_velocity = 0.8
+scale = 0.1
+scale_random = 0.17
+scale_curve = SubResource( 10 )
+color = Color( 0.0705882, 0.0705882, 0.0705882, 0.435294 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id=8]
+material = SubResource( 6 )
+radial_segments = 4
+rings = 3
 
 [node name="beetlecar" instance=ExtResource( 2 )]
 mass = 140.0
@@ -77,3 +102,22 @@ __meta__ = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14201, 0.968668 )
 stream = SubResource( 2 )
 unit_db = 14.0
+
+[node name="Smoke" type="Particles" parent="." index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31514, 0.383062, -1.51247 )
+amount = 12
+local_coords = false
+process_material = SubResource( 7 )
+draw_pass_1 = SubResource( 8 )
+
+[node name="rr_tire_smoke" parent="." index="10" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.621508, 0.0502438, -0.83483 )
+
+[node name="rl_tire_smoke" parent="." index="11" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.0502438, -0.83483 )
+
+[node name="fr_tire_smoke" parent="." index="12" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.621508, 0.0502438, 1.19336 )
+
+[node name="fl_tire_smoke" parent="." index="13" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.0502438, 1.19336 )

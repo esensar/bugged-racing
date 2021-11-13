@@ -35,6 +35,10 @@ onready var frwheel: VehicleWheel = $front_right
 onready var flwheel: VehicleWheel = $front_left
 onready var rrwheel: VehicleWheel = $rear_right
 onready var rlwheel: VehicleWheel = $rear_left
+onready var frsmoke: TireSmoke = $fr_tire_smoke
+onready var flsmoke: TireSmoke = $fl_tire_smoke
+onready var rrsmoke: TireSmoke = $rr_tire_smoke
+onready var rlsmoke: TireSmoke = $rl_tire_smoke
 
 onready var engine_sound_player: AudioStreamPlayer3D = $engine_sound_player
 onready var engine_sound_playback: AudioStreamPlayback = $engine_sound_player.get_stream_playback()
@@ -76,6 +80,10 @@ func _has_traction():
 			return true
 	return false
 
+func _update_wheels_smoke():
+	for wheelnsmoke in [[frwheel, frsmoke], [flwheel, flsmoke], [rrwheel, rrsmoke], [rlwheel, rlsmoke]]:
+		wheelnsmoke[1].update(wheelnsmoke[0].get_skidinfo())
+
 func _lerp_rpm(from, to, delta, factor):
 	var new_val = lerp(from, to, factor)
 	if abs(from - new_val) > MAX_RPM_LOSS_PS * delta:
@@ -84,6 +92,7 @@ func _lerp_rpm(from, to, delta, factor):
 	return new_val
 
 func _physics_process(delta: float):
+	_update_wheels_smoke()
 	clutch_position = Input.get_action_strength("clutch")
 	_handle_gear_switch(delta)
 	var throttle = Input.get_action_strength("throttle")

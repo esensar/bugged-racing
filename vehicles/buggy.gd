@@ -148,7 +148,7 @@ func _physics_process(delta: float):
 	steering = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
 
 func _generate_engine_sound(rpm_factor):
-	engine_sound_player.pitch_scale = BASE_ENGINE_PITCH + rpm_factor
+	engine_sound_player.pitch_scale = BASE_ENGINE_PITCH + 2 * rpm_factor
 	var to_fill = engine_sound_playback.get_frames_available()
 	var factor = rpm_factor
 	if to_fill <= 0:

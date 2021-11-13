@@ -22,6 +22,7 @@ script = ExtResource( 1 )
 gear_ratios = [ 2.95, 2.2, 1.76, 1.43, 1.25, 1.0 ]
 final_drive = 5.0
 max_rpm = 8000.0
+gear_switch_time = 0.5
 power_curve = SubResource( 3 )
 sound_curve = SubResource( 4 )
 

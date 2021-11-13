@@ -87,6 +87,9 @@ func _physics_process(delta: float):
 	clutch_position = Input.get_action_strength("clutch")
 	_handle_gear_switch(delta)
 	var throttle = Input.get_action_strength("throttle")
+	if gear_timer > 0:
+		clutch_position = 1
+		throttle = 0
 
 	var wheel_rpm = traction_wheels[0].get_rpm()
 	var final_rpm = abs(wheel_rpm) * final_drive

@@ -3,6 +3,7 @@ extends Panel
 const buggy = preload("res://vehicles/buggy.tscn")
 const beetle = preload("res://vehicles/beetlecar.tscn")
 const test_scene = preload("res://scenes/test_level.tscn")
+const gui_scene = preload("res://player/gui.tscn")
 
 func _on_BuggyButton_pressed() -> void:
 	_start_with_vehicle(buggy.instance())
@@ -11,8 +12,12 @@ func _on_BeetleButton_pressed() -> void:
 	_start_with_vehicle(beetle.instance())
 
 func _start_with_vehicle(vehicle: Node) -> void:
+	var gui = gui_scene.instance()
 	var scene = test_scene.instance()
-	scene.call_deferred("spawn_player", vehicle)
+	vehicle.connect("speed_updated", gui, "update_speed")
+	vehicle.connect("rpm_updated", gui, "update_rpm")
+	vehicle.connect("gear_updated", gui, "update_gear")
+	scene.call_deferred("spawn_player", vehicle, gui)
 	get_tree().root.call_deferred("add_child", scene)
 	queue_free()
 

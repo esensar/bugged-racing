@@ -44,6 +44,7 @@ rings = 3
 [node name="beetlecar" instance=ExtResource( 2 )]
 mass = 140.0
 script = ExtResource( 1 )
+EXPECTED_MAX_SPEED = 180.0
 gear_ratios = [ 2.95, 2.2, 1.76, 1.43, 1.25, 1.0 ]
 final_drive = 5.0
 max_rpm = 8000.0

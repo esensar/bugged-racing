@@ -1,5 +1,9 @@
 extends VehicleBody
 
+signal speed_updated(speed_percent)
+signal rpm_updated(rpm_percent)
+signal gear_updated(gear)
+
 export (float) var MAX_STEER_ANGLE = 25
 export (float) var SPEED_STEER_ANGLE = 10
 export (float) var MAX_STEER_SPEED = 100.0
@@ -15,6 +19,7 @@ export (float) var MAX_BRAKE_FORCE = 50.0
 export (float) var THROTTLE_POWER = 6000.0
 export (float) var MAX_RPM_LOSS_PS = 3000.0
 export (float) var BASE_ENGINE_PITCH = 0.5
+export (float) var EXPECTED_MAX_SPEED = 200
 
 export (Array) var gear_ratios = [ 3.4, 2.5, 2.0, 1.5, 1.25 ]
 export (float) var reverse_ratio = -3
@@ -69,10 +74,12 @@ func _handle_gear_switch(delta: float):
 			if gear + 1 <= gear_ratios.size():
 				gear += 1
 				gear_timer = gear_switch_time * (2 - clutch_position)
+				emit_signal("gear_updated", gear)
 		if Input.is_action_just_pressed("gear_down"):
 			if gear - 1 >= -1:
 				gear -= 1
 				gear_timer = gear_switch_time * (2 - clutch_position)
+				emit_signal("gear_updated", gear)
 
 func _has_traction():
 	for wheel in traction_wheels:
@@ -132,6 +139,8 @@ func _physics_process(delta: float):
 	rlwheel.brake = handbrake * MAX_BRAKE_FORCE / 2
 
 	var speed = wheel_rpm * 2.0 * PI * rrwheel.wheel_radius / 60.0 * 3600.0 / 1000.0
+	emit_signal("speed_updated", speed / EXPECTED_MAX_SPEED)
+	emit_signal("rpm_updated", rpm_factor)
 	$Info.text = "Gear: %d, KPH: %.0f, RPM: %.0f, WheelRPM: %.0f, FinalRPM: %.0f, TRPM: %.0f, Engine force: %.0f" % [ gear, speed, rpm, wheel_rpm, final_rpm, transmission_rpm, engine_force ]
 
 	var steering_input = Input.get_action_strength("steer_left") - Input.get_action_strength("steer_right")

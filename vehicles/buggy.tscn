@@ -94,32 +94,25 @@ suspension_stiffness = 5.95
 [node name="rear_right" parent="rear_right" index="0"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="Info" type="Label" parent="." index="7"]
-margin_right = 40.0
-margin_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="engine_sound_player" type="AudioStreamPlayer3D" parent="." index="8"]
+[node name="engine_sound_player" type="AudioStreamPlayer3D" parent="." index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14201, 0.968668 )
 stream = SubResource( 3 )
 unit_db = 14.0
 
-[node name="Smoke" type="Particles" parent="." index="9"]
+[node name="Smoke" type="Particles" parent="." index="8"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.855953, -1.87797 )
 local_coords = false
 process_material = SubResource( 5 )
 draw_pass_1 = SubResource( 7 )
 
-[node name="fl_tire_smoke" parent="." index="10" instance=ExtResource( 2 )]
+[node name="fl_tire_smoke" parent="." index="9" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.950754, -0.0380455, 1.41438 )
 
-[node name="fr_tire_smoke" parent="." index="11" instance=ExtResource( 2 )]
+[node name="fr_tire_smoke" parent="." index="10" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950754, -0.038045, 1.41438 )
 
-[node name="rl_tire_smoke" parent="." index="12" instance=ExtResource( 2 )]
+[node name="rl_tire_smoke" parent="." index="11" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.950753, -0.0380455, -1.41438 )
 
-[node name="rr_tire_smoke" parent="." index="13" instance=ExtResource( 2 )]
+[node name="rr_tire_smoke" parent="." index="12" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950755, -0.038045, -1.41438 )

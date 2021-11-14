@@ -92,33 +92,26 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.843709, 0.205449 )
 shape = SubResource( 1 )
 
-[node name="Info" type="Label" parent="." index="7"]
-margin_right = 40.0
-margin_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="engine_sound_player" type="AudioStreamPlayer3D" parent="." index="8"]
+[node name="engine_sound_player" type="AudioStreamPlayer3D" parent="." index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14201, 0.968668 )
 stream = SubResource( 2 )
 unit_db = 14.0
 
-[node name="Smoke" type="Particles" parent="." index="9"]
+[node name="Smoke" type="Particles" parent="." index="8"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31514, 0.383062, -1.51247 )
 amount = 12
 local_coords = false
 process_material = SubResource( 7 )
 draw_pass_1 = SubResource( 8 )
 
-[node name="rr_tire_smoke" parent="." index="10" instance=ExtResource( 3 )]
+[node name="rr_tire_smoke" parent="." index="9" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.621508, 0.0502438, -0.83483 )
 
-[node name="rl_tire_smoke" parent="." index="11" instance=ExtResource( 3 )]
+[node name="rl_tire_smoke" parent="." index="10" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.0502438, -0.83483 )
 
-[node name="fr_tire_smoke" parent="." index="12" instance=ExtResource( 3 )]
+[node name="fr_tire_smoke" parent="." index="11" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.621508, 0.0502438, 1.19336 )
 
-[node name="fl_tire_smoke" parent="." index="13" instance=ExtResource( 3 )]
+[node name="fl_tire_smoke" parent="." index="12" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.0502438, 1.19336 )

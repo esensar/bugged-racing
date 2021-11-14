@@ -141,7 +141,6 @@ func _physics_process(delta: float):
 	var speed = wheel_rpm * 2.0 * PI * rrwheel.wheel_radius / 60.0 * 3600.0 / 1000.0
 	emit_signal("speed_updated", speed / EXPECTED_MAX_SPEED)
 	emit_signal("rpm_updated", rpm_factor)
-	$Info.text = "Gear: %d, KPH: %.0f, RPM: %.0f, WheelRPM: %.0f, FinalRPM: %.0f, TRPM: %.0f, Engine force: %.0f" % [ gear, speed, rpm, wheel_rpm, final_rpm, transmission_rpm, engine_force ]
 
 	var steering_input = Input.get_action_strength("steer_left") - Input.get_action_strength("steer_right")
 	if abs(steering_input) < 0.05:

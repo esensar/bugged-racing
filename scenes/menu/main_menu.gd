@@ -1,5 +1,8 @@
 extends Panel
 
+func _ready() -> void:
+	$MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/StartButton.grab_focus()
+
 func _on_StartButton_pressed() -> void:
 	get_tree().change_scene("res://scenes/menu/start_menu.tscn")
 

@@ -5,6 +5,9 @@ const beetle = preload("res://vehicles/beetlecar.tscn")
 const test_scene = preload("res://scenes/test_level.tscn")
 const gui_scene = preload("res://player/gui.tscn")
 
+func _ready() -> void:
+	$MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BuggyButton.grab_focus()
+
 func _on_BuggyButton_pressed() -> void:
 	_start_with_vehicle(buggy.instance())
 

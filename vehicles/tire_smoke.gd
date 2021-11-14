@@ -23,5 +23,5 @@ func _update_sound(skidinfo: float) -> void:
 		return
 	while to_fill > 0:
 		sound_playback.push_frame(Vector2(1.0, 1.0) * factor)
-		factor += sin(factor) * 2
+		factor += 1
 		to_fill -= 1

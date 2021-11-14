@@ -1,7 +1,7 @@
 extends VehicleBody
 
-signal speed_updated(speed_percent)
-signal rpm_updated(rpm_percent)
+signal speed_updated(speed_kph, speed_percent)
+signal rpm_updated(rpm, rpm_percent)
 signal gear_updated(gear)
 
 export (float) var MAX_STEER_ANGLE = 25
@@ -139,8 +139,8 @@ func _physics_process(delta: float):
 	rlwheel.brake = handbrake * MAX_BRAKE_FORCE / 2
 
 	var speed = wheel_rpm * 2.0 * PI * rrwheel.wheel_radius / 60.0 * 3600.0 / 1000.0
-	emit_signal("speed_updated", speed / EXPECTED_MAX_SPEED)
-	emit_signal("rpm_updated", rpm_factor)
+	emit_signal("speed_updated", speed, speed / EXPECTED_MAX_SPEED)
+	emit_signal("rpm_updated", rpm, rpm_factor)
 
 	var steering_input = Input.get_action_strength("steer_left") - Input.get_action_strength("steer_right")
 	if abs(steering_input) < 0.05:

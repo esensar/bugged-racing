@@ -135,8 +135,8 @@ func _physics_process(delta: float):
 	engine_force = throttle * final_input * MAX_ENGINE_FORCE
 
 	var handbrake = Input.get_action_strength("handbrake")
-	rrwheel.brake = handbrake * MAX_BRAKE_FORCE / 2
-	rlwheel.brake = handbrake * MAX_BRAKE_FORCE / 2
+	rrwheel.brake = handbrake * MAX_BRAKE_FORCE
+	rlwheel.brake = handbrake * MAX_BRAKE_FORCE
 
 	var speed = wheel_rpm * 2.0 * PI * rrwheel.wheel_radius / 60.0 * 3600.0 / 1000.0
 	emit_signal("speed_updated", speed, speed / EXPECTED_MAX_SPEED)

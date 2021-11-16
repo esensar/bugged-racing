@@ -1,0 +1,118 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://vehicles/tire_smoke.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/bugmobile.glb" type="PackedScene" id=2]
+[ext_resource path="res://vehicles/buggy.gd" type="Script" id=3]
+
+[sub_resource type="Curve" id=18]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.103774, 0.493182 ), 0.0, 0.0, 0, 0, Vector2( 0.339623, 0.629545 ), 0.0, 0.0, 0, 0, Vector2( 0.806604, 0.989773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=19]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.127358, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.174528, 0.65 ), 0.0, 0.0, 0, 0, Vector2( 0.212264, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.353774, 0.35 ), 0.0, 0.0, 0, 0, Vector2( 0.363208, 0.968182 ), 0.0, 0.0, 0, 0, Vector2( 0.485849, 0.313636 ), 0.0, 0.0, 0, 0, Vector2( 0.627358, 0.140909 ), 0.0, 0.0, 0, 0, Vector2( 0.721698, 0.259091 ), 0.0, 0.0, 0, 0, Vector2( 0.783019, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.872642, 0.794318 ), 0.0, 0.0, 0, 0, Vector2( 0.915094, 0.248864 ), 0.0, 0.0, 0, 0, Vector2( 0.933962, 0.5125 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.476136 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 0.156484, 0.596214, 1.89026 )
+
+[sub_resource type="AudioStreamGenerator" id=12]
+mix_rate = 5500.0
+
+[sub_resource type="Gradient" id=13]
+offsets = PoolRealArray( 0, 0.5, 1 )
+colors = PoolColorArray( 0, 0.278431, 0.270588, 1, 0.356863, 0.764706, 0.670588, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=14]
+gradient = SubResource( 13 )
+
+[sub_resource type="Curve" id=15]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.205682 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 15 )
+
+[sub_resource type="ParticlesMaterial" id=16]
+direction = Vector3( 0, 0, -1 )
+gravity = Vector3( 0, 0.2, 0 )
+initial_velocity = 0.8
+scale = 0.2
+scale_random = 0.25
+scale_curve = SubResource( 9 )
+color = Color( 0.521569, 0.521569, 0.521569, 0.435294 )
+color_ramp = SubResource( 14 )
+
+[sub_resource type="SpatialMaterial" id=10]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id=17]
+material = SubResource( 10 )
+radial_segments = 4
+rings = 3
+
+[node name="bugmobile" instance=ExtResource( 2 )]
+mass = 600.0
+script = ExtResource( 3 )
+MAX_ENGINE_FORCE = 400.0
+MAX_BRAKE_FORCE = 80.0
+THROTTLE_POWER = 7500.0
+BASE_ENGINE_PITCH = 0.76
+EXPECTED_MAX_SPEED = 260.0
+gear_ratios = [ 3.5, 2.95, 2.64, 2.0, 1.67, 1.42 ]
+final_drive = 4.36
+max_rpm = 9000.0
+power_curve = SubResource( 18 )
+sound_curve = SubResource( 19 )
+
+[node name="rear_left" parent="." index="0"]
+use_as_traction = true
+wheel_radius = 0.55
+wheel_rest_length = 0.6
+wheel_friction_slip = 7.0
+suspension_travel = 0.8
+
+[node name="front_left" parent="." index="2"]
+use_as_steering = true
+wheel_radius = 0.35
+wheel_rest_length = 0.7
+wheel_friction_slip = 5.0
+suspension_travel = 0.6
+
+[node name="front_right" parent="." index="4"]
+use_as_steering = true
+wheel_radius = 0.35
+wheel_rest_length = 0.7
+wheel_friction_slip = 5.0
+suspension_travel = 0.6
+
+[node name="rear_right" parent="." index="5"]
+use_as_traction = true
+wheel_radius = 0.55
+wheel_rest_length = 0.6
+wheel_friction_slip = 7.0
+suspension_travel = 0.8
+
+[node name="CollisionShape" type="CollisionShape" parent="." index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.771473, -0.625139 )
+shape = SubResource( 11 )
+
+[node name="engine_sound_player" type="AudioStreamPlayer3D" parent="." index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.791119, -2.27857 )
+stream = SubResource( 12 )
+unit_db = 14.0
+
+[node name="Smoke" type="Particles" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.686323, -2.72067 )
+local_coords = false
+process_material = SubResource( 16 )
+draw_pass_1 = SubResource( 17 )
+
+[node name="fl_tire_smoke" parent="." index="9" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.377735, 0.0239591, 0.971391 )
+
+[node name="fr_tire_smoke" parent="." index="10" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.338267, -0.00527258, 0.997852 )
+
+[node name="rl_tire_smoke" parent="." index="11" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18159, 0.117865, -1.93644 )
+
+[node name="rr_tire_smoke" parent="." index="12" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -1.02536, 0.101852, -1.93766 )

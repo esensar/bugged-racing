@@ -57,24 +57,35 @@ margin_right = 984.0
 margin_bottom = 560.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/CenterContainer"]
-margin_left = 419.0
-margin_top = 194.0
-margin_right = 565.0
-margin_bottom = 282.0
-
-[node name="BuggyButton" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_right = 146.0
-margin_bottom = 42.0
-custom_fonts/font = SubResource( 2 )
-text = "Buggy"
+margin_left = 386.0
+margin_top = 171.0
+margin_right = 597.0
+margin_bottom = 305.0
 
 [node name="BeetleButton" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 46.0
-margin_right = 146.0
-margin_bottom = 88.0
+margin_right = 211.0
+margin_bottom = 42.0
 custom_fonts/font = SubResource( 2 )
 text = "Beetle"
 
+[node name="BuggyButton" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_top = 46.0
+margin_right = 211.0
+margin_bottom = 88.0
+custom_fonts/font = SubResource( 2 )
+text = "Buggy"
+
+[node name="BugmobileButton" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_top = 92.0
+margin_right = 211.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 2 )
+text = "Bugmobile"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="MarginContainer/VSplitContainer/HSplitContainer/BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="pressed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BuggyButton" to="." method="_on_BuggyButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BeetleButton" to="." method="_on_BeetleButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BuggyButton" to="." method="_on_BuggyButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BugmobileButton" to="." method="_on_BugmobileButton_pressed"]

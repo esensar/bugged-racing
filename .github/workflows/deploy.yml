@@ -53,7 +53,8 @@ jobs:
           mkdir -v -p ~/Library/Application Support/Godot/templates/${GODOT_VERSION}.stable
           wget -q https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
-          mv templates/* ~/Library/Application Support/Godot/templates/${GODOT_VERSION}.stable
+          mv templates/* ~/Library/Application Support/Godot/templates/${GODOT_VERSION}.stable/
+          ls ~/Library/Application Support/Godot/templates/${GODOT_VERSION}.stable/
       - name: Build game
         run: |
           mkdir -v -p build/mac

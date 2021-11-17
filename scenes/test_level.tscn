@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/test_level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/pause_menu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://scenes/track.gd" type="Script" id=4]
+[ext_resource path="res://assets/fonts/kenney-future-narrow.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://scenes/trackgui.gd" type="Script" id=6]
 
 [sub_resource type="PlaneMesh" id=1]
 
@@ -11,6 +14,10 @@ albedo_texture = ExtResource( 3 )
 
 [sub_resource type="ConcavePolygonShape" id=3]
 data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+
+[sub_resource type="SpatialMaterial" id=9]
+flags_transparent = true
+albedo_color = Color( 0.0470588, 0.956863, 0.921569, 0.439216 )
 
 [sub_resource type="Curve3D" id=4]
 _data = {
@@ -35,13 +42,19 @@ noise_offset = Vector2( -1, -1 )
 albedo_color = Color( 0.4, 0.301961, 0.00784314, 1 )
 albedo_texture = SubResource( 6 )
 
+[sub_resource type="DynamicFont" id=8]
+size = 36
+outline_size = 2
+outline_color = Color( 1, 1, 1, 0.317647 )
+font_data = ExtResource( 5 )
+
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 2 )]
 
-[node name="PlayerSpawnLocation" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -53.0538, 4.97082, -42.7552 )
+[node name="PlayerSpawnLocation" type="Position3D" parent="."]
+transform = Transform( -0.577573, 0, -0.816339, 0, 1, 0, 0.816339, 0, -0.577573, -28.4356, 7.65286, 30.9025 )
 
 [node name="StaticBody" type="StaticBody" parent="."]
 transform = Transform( 99.9785, 0, 0, 0, 99.9785, 0, 0, 0, 99.9785, 0, 0, 0 )
@@ -56,12 +69,16 @@ transform = Transform( 6.13726, 0, 0, 0, 6.13726, 0, 0, 0, 6.13726, 0, 0, 0 )
 shape = SubResource( 3 )
 
 [node name="Track" type="Spatial" parent="."]
+script = ExtResource( 4 )
+track_path = NodePath("Path")
+debug = true
+debug_material = SubResource( 9 )
 
 [node name="Path" type="Path" parent="Track"]
 curve = SubResource( 4 )
 
 [node name="Road" type="CSGPolygon" parent="Track/Path"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194962, 0.721504, -0.0180283 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.381588, 0.85226, -0.386032 )
 use_collision = true
 invert_faces = true
 polygon = PoolVector2Array( -8, 0, 2, 0.1, 8, 0.1, 2, 0 )
@@ -91,3 +108,83 @@ path_local = true
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = true
+
+[node name="Checkpoints" type="Spatial" parent="Track"]
+
+[node name="TrackGUI" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TrackGUI"]
+margin_right = 984.0
+margin_bottom = 560.0
+
+[node name="TimeLabel" type="Label" parent="TrackGUI/HBoxContainer"]
+margin_right = 289.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Current lap -"
+align = 1
+valign = 1
+
+[node name="TimeValue" type="Label" parent="TrackGUI/HBoxContainer"]
+margin_left = 297.0
+margin_right = 489.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "12:23.245"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Divider" type="Label" parent="TrackGUI/HBoxContainer"]
+margin_left = 497.0
+margin_right = 562.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BestTimeLabel" type="Label" parent="TrackGUI/HBoxContainer"]
+margin_left = 570.0
+margin_right = 784.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Best Lap -"
+
+[node name="BestTimeValue" type="Label" parent="TrackGUI/HBoxContainer"]
+margin_left = 792.0
+margin_right = 984.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "01:23.256"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="lap_complete" from="Track" to="TrackGUI" method="_on_lap_complete"]
+[connection signal="time_updated" from="Track" to="TrackGUI" method="_on_time_updated"]

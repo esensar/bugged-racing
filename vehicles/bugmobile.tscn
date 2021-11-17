@@ -48,7 +48,7 @@ material = SubResource( 10 )
 radial_segments = 4
 rings = 3
 
-[node name="bugmobile" instance=ExtResource( 2 )]
+[node name="bugmobile" groups=["car"] instance=ExtResource( 2 )]
 mass = 600.0
 script = ExtResource( 3 )
 MAX_ENGINE_FORCE = 400.0

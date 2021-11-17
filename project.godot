@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "TireSmoke",
 "language": "GDScript",
 "path": "res://vehicles/tire_smoke.gd"
+}, {
+"base": "Spatial",
+"class": "Track",
+"language": "GDScript",
+"path": "res://scenes/track.gd"
 } ]
 _global_script_class_icons={
-"TireSmoke": ""
+"TireSmoke": "",
+"Track": ""
 }
 
 [application]

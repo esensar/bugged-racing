@@ -7,7 +7,6 @@ signal lap_complete(lap_time)
 export (NodePath) var track_path = null
 export (int, 10, 50) var checkpoint_count = 20
 export (Vector2) var checkpoint_dim = Vector2(20, 15)
-export (bool) var debug = false
 export (Material) var debug_material = null
 
 onready var checkpoints = $Checkpoints
@@ -28,7 +27,7 @@ func _ready() -> void:
 		new_checkpoint.transform.origin = path.curve.interpolate_baked(section, true)
 		section += section_size
 		checkpoints.add_child(new_checkpoint)
-		if debug:
+		if GlobalSettings.debug:
 			var mesh = CylinderMesh.new()
 			mesh.top_radius = checkpoint_dim.y
 			mesh.bottom_radius = checkpoint_dim.y

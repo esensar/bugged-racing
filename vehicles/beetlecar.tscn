@@ -96,6 +96,7 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14201, 0.968668 )
 stream = SubResource( 2 )
 unit_db = 14.0
+bus = "Sound"
 
 [node name="Smoke" type="Particles" parent="." index="8"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31514, 0.383062, -1.51247 )

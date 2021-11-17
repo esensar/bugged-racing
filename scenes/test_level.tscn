@@ -72,7 +72,6 @@ shape = SubResource( 3 )
 [node name="Track" type="Spatial" parent="."]
 script = ExtResource( 4 )
 track_path = NodePath("Path")
-debug = true
 debug_material = SubResource( 9 )
 
 [node name="Path" type="Path" parent="Track"]

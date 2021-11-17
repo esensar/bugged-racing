@@ -98,6 +98,7 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14201, 0.968668 )
 stream = SubResource( 3 )
 unit_db = 14.0
+bus = "Sound"
 
 [node name="Smoke" type="Particles" parent="." index="8"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.855953, -1.87797 )

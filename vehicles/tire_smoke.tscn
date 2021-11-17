@@ -42,4 +42,5 @@ script = ExtResource( 1 )
 stream = SubResource( 6 )
 unit_db = 25.0
 unit_size = 2.0
+bus = "Sound"
 area_mask = 2

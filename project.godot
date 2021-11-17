@@ -31,6 +31,10 @@ run/main_scene="res://scenes/menu/main_menu.tscn"
 boot_splash/image="res://assets/bugged-racing-cover.png"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalSettings="*res://settings/GlobalSettings.gd"
+
 [gui]
 
 theme/use_hidpi=true

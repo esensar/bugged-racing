@@ -12,7 +12,7 @@ dest_files=[ "res://.import/basic_buggy.glb-491f41c174abd7ab44359967355d9327.scn
 [params]
 
 nodes/root_type="VehicleBody"
-nodes/root_name="buggy"
+nodes/root_name="Scene Root"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
@@ -21,7 +21,7 @@ materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
 meshes/octahedral_compression=true
-meshes/compress=true
+meshes/compress=4286
 meshes/ensure_tangents=true
 meshes/storage=0
 meshes/light_baking=0

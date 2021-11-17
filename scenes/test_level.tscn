@@ -52,6 +52,7 @@ font_data = ExtResource( 5 )
 script = ExtResource( 1 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 2 )]
+visible = true
 
 [node name="PlayerSpawnLocation" type="Position3D" parent="."]
 transform = Transform( -0.577573, 0, -0.816339, 0, 1, 0, 0.816339, 0, -0.577573, -28.4356, 7.65286, 30.9025 )

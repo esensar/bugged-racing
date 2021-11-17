@@ -40,7 +40,7 @@ jobs:
           butler push ./build/$EXPORT_DIR_NAME $ITCHIO_USERNAME/$ITCHIO_GAME:$EXPORT_DIR_NAME
 
   export-mac:
-    runs-on: mac-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2

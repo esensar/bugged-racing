@@ -55,17 +55,13 @@ jobs:
           unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           mv templates/* ~/.local/share/godot/templates/${GODOT_VERSION}.stable/
       - name: Build game
-        env:
-          EXPORT_DIR_NAME: ${{ matrix.target[0] }}
-          EXPORT_TARGET_NAME: ${{ matrix.target[1] }}
         run: |
-          mkdir -v -p build/$EXPORT_DIR_NAME
-          godot -v --export "$EXPORT_TARGET_NAME"
+          mkdir -v -p build/mac
+          godot -v --export "Mac OSX"
       - name: Itch.io deploy
         env:
-          EXPORT_DIR_NAME: ${{ matrix.target[0] }}
           ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
           ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
         run: |
-          butler push ./build/$EXPORT_DIR_NAME $ITCHIO_USERNAME/$ITCHIO_GAME:$EXPORT_DIR_NAME
+          butler push ./build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:$EXPORT_DIR_NAME

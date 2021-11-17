@@ -12,7 +12,7 @@ jobs:
   export:
     strategy:
       matrix:
-        target: [[windows, Windows Desktop], [linux, Linux/X11], [html, HTML5]]
+        target: [[windows, Windows Desktop], [linux, Linux/X11], [mac, Mac OSX], [html, HTML5]]
     runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:3.4
@@ -38,31 +38,3 @@ jobs:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
         run: |
           butler push ./build/$EXPORT_DIR_NAME $ITCHIO_USERNAME/$ITCHIO_GAME:$EXPORT_DIR_NAME
-
-  export-mac:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install godot
-        run: brew install --cask godot
-      - name: Install butler
-        run: brew install --cask butler
-      - name: Setup export templates
-        run: |
-          mkdir -v -p "~/Library/Application Support/Godot/templates/${GODOT_VERSION}.stable"
-          wget -q https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
-          unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
-          mv templates/* "~/Library/Application Support/Godot/templates/${GODOT_VERSION}.stable/"
-          ls "~/Library/Application Support/Godot/templates/${GODOT_VERSION}.stable/"
-      - name: Build game
-        run: |
-          mkdir -v -p build/mac
-          godot -v --export "Mac OSX"
-      - name: Itch.io deploy
-        env:
-          ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
-          ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
-        run: |
-          butler push ./build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:$EXPORT_DIR_NAME

@@ -26,6 +26,9 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = -20.0
 margin_bottom = -20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
 margin_right = 984.0
@@ -38,12 +41,12 @@ margin_bottom = 72.0
 dragger_visibility = 1
 
 [node name="BackButton" type="Button" parent="MarginContainer/VSplitContainer/HSplitContainer"]
-margin_right = 42.0
+margin_right = 75.0
 margin_bottom = 72.0
 text = "Back"
 
 [node name="Title" type="Label" parent="MarginContainer/VSplitContainer/HSplitContainer"]
-margin_left = 54.0
+margin_left = 99.0
 margin_right = 984.0
 margin_bottom = 72.0
 custom_fonts/font = SubResource( 1 )
@@ -52,40 +55,43 @@ align = 1
 valign = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VSplitContainer"]
-margin_top = 84.0
+margin_top = 96.0
 margin_right = 984.0
 margin_bottom = 560.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/CenterContainer"]
-margin_left = 386.0
-margin_top = 171.0
-margin_right = 597.0
-margin_bottom = 305.0
+margin_left = 317.0
+margin_top = 152.0
+margin_right = 666.0
+margin_bottom = 312.0
 
-[node name="BeetleButton" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_right = 211.0
-margin_bottom = 42.0
+[node name="VehicleSelector" type="OptionButton" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_right = 349.0
+margin_bottom = 48.0
 custom_fonts/font = SubResource( 2 )
-text = "Beetle"
+text = "Select vehicle"
+align = 1
 
-[node name="BuggyButton" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 46.0
-margin_right = 211.0
-margin_bottom = 88.0
+[node name="TrackSelector" type="OptionButton" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_top = 56.0
+margin_right = 349.0
+margin_bottom = 104.0
 custom_fonts/font = SubResource( 2 )
-text = "Buggy"
+text = "Select Track"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="BugmobileButton" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 92.0
-margin_right = 211.0
-margin_bottom = 134.0
+[node name="StartButton" type="Button" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_top = 112.0
+margin_right = 349.0
+margin_bottom = 160.0
 custom_fonts/font = SubResource( 2 )
-text = "Bugmobile"
+text = "Start"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [connection signal="pressed" from="MarginContainer/VSplitContainer/HSplitContainer/BackButton" to="." method="_on_BackButton_pressed"]
-[connection signal="pressed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BeetleButton" to="." method="_on_BeetleButton_pressed"]
-[connection signal="pressed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BuggyButton" to="." method="_on_BuggyButton_pressed"]
-[connection signal="pressed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BugmobileButton" to="." method="_on_BugmobileButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]

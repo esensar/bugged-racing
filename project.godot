@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Spatial",
+"class": "BaseTrackLevel",
+"language": "GDScript",
+"path": "res://scenes/base_track_level.gd"
+}, {
 "base": "Particles",
 "class": "TireSmoke",
 "language": "GDScript",
@@ -17,9 +22,10 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "Track",
 "language": "GDScript",
-"path": "res://scenes/track.gd"
+"path": "res://scenes/tracks/track.gd"
 } ]
 _global_script_class_icons={
+"BaseTrackLevel": "",
 "TireSmoke": "",
 "Track": ""
 }

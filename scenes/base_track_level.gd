@@ -1,3 +1,4 @@
+class_name BaseTrackLevel
 extends Spatial
 
 const camera = preload("res://player/camera.tscn")
@@ -10,6 +11,8 @@ func _ready() -> void:
 	add_child(player_node)
 	add_child(gui)
 	var player_camera = camera.instance()
+	player_camera.global_transform = spawn_point.global_transform
+	player_camera.global_transform.origin = -spawn_point.global_transform.basis.z * 1000
 	player_camera.follow_target_path = player_node.get_path()
 	add_child(player_camera)
 

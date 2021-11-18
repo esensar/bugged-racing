@@ -1,83 +1,63 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scenes/test_level.gd" type="Script" id=1]
-[ext_resource path="res://menu/pause_menu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/base_track_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://scenes/track.gd" type="Script" id=4]
-[ext_resource path="res://assets/fonts/kenney-future-narrow.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://scenes/trackgui.gd" type="Script" id=6]
 
-[sub_resource type="PlaneMesh" id=1]
+[sub_resource type="PlaneMesh" id=11]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=12]
 albedo_texture = ExtResource( 3 )
 
-[sub_resource type="ConcavePolygonShape" id=3]
+[sub_resource type="ConcavePolygonShape" id=13]
 data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
 
-[sub_resource type="SpatialMaterial" id=9]
-flags_transparent = true
-albedo_color = Color( 0.0470588, 0.956863, 0.921569, 0.439216 )
-
-[sub_resource type="Curve3D" id=4]
+[sub_resource type="Curve3D" id=14]
 _data = {
 "points": PoolVector3Array( 9.79904, 0, 18.6319, -9.79904, 0, -18.6319, -31.895, 0, 7.96057, 0, 0, 0, 0, 0, 0, -57.093, 0, -13.8155, -7.43263, 0, 17.8593, 7.43263, 0, -17.8593, -58.3374, 0, -41.6578, -15.1113, 0, 9.06681, 15.1113, 0, -9.06681, -37.8981, 0, -68.1249, -14.7755, 0, 2.35069, 14.7755, 0, -2.35069, 4.94635, 7.23662, -84.5424, -17.7978, 0, -2.68641, 17.7978, 0, 2.68641, 61.5006, 0, -91.6313, 0.67157, 0, -25.5212, -0.67157, 0, 25.5212, 97.0961, 0, -69.1323, 2.68643, 0, -7.38771, -2.68643, 0, 7.38771, 78.6267, 0, -42.2678, -8.73099, 0, -17.4619, 8.73099, 0, 17.4619, 66.0252, 8.78723, -14.4988, 0, 0, 0, 0, 0, 0, 95.7529, 0, -1.6352, 0, 0, 0, 0, 0, 0, 139.408, 0, 1.05125, -20.1485, 0, -13.7681, 20.1485, 0, 13.7681, 185.413, 0, 3.4019, 0, 0, 0, 0, 0, 0, 201.868, 0, 23.2145, 0.335724, 0, -17.462, -0.335724, 0, 17.462, 210.21, 5.87604, 64.836, 3.97235, -0.0415859, -7.46809, -3.97235, 0.0415859, 7.46809, 201.532, 0, 95.7487, 0, 0, 0, 0, 0, 0, 183.063, 0, 103.472, 14.7754, 0, 11.0815, -14.7754, 0, -11.0815, 157.877, 0, 103.472, -7.25508, 0, 9.91405, 7.25508, 0, -9.91405, 162.578, 0, 79.2942, 8.24519, 0, 4.16077, -8.24519, 0, -4.16077, 159.22, 0, 35.3035, 0, 0, 0, 0, 0, 0, 109.521, 0, 55.4519, 13.9191, 0, -4.46759, -13.9191, 0, 4.46759, 61.5006, 0, 84.6671, 0, 0, 0, 0, 0, 0, 19.5493, 3.78882, 91.2156, 12.2019, 0, 6.94766, -12.2019, 0, -6.94766, -14.7275, 0, 82.6522, 6.66099, 0.313545, 7.53158, -6.66099, -0.313545, -7.53158, -22.7176, 8.46592, 50.9225, 2.76307, 0.531036, 4.97682, -2.76307, -0.531036, -4.97682, -31.895, 0, 7.96057 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="OpenSimplexNoise" id=5]
+[sub_resource type="OpenSimplexNoise" id=15]
 seed = -8
 octaves = 9
 period = 10.0
 persistence = 0.49
 lacunarity = 2.04
 
-[sub_resource type="NoiseTexture" id=6]
+[sub_resource type="NoiseTexture" id=10]
 flags = 39
 seamless = true
-noise = SubResource( 5 )
+noise = SubResource( 15 )
 noise_offset = Vector2( -1, -1 )
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=16]
 albedo_color = Color( 0.4, 0.301961, 0.00784314, 1 )
-albedo_texture = SubResource( 6 )
+albedo_texture = SubResource( 10 )
 
-[sub_resource type="DynamicFont" id=8]
-size = 36
-outline_size = 2
-outline_color = Color( 1, 1, 1, 0.317647 )
-font_data = ExtResource( 5 )
+[node name="Spatial" instance=ExtResource( 1 )]
 
-[node name="Spatial" type="Spatial"]
-script = ExtResource( 1 )
+[node name="PlayerSpawnLocation" parent="." index="1"]
+transform = Transform( -0.951412, 0, -0.307921, 0, 1, 0, 0.307921, 0, -0.951412, -26.0175, 5.60708, 25.9637 )
 
-[node name="PauseMenu" parent="." instance=ExtResource( 2 )]
-visible = true
+[node name="Track" parent="." index="2"]
+track_path = NodePath("../Path")
 
-[node name="PlayerSpawnLocation" type="Position3D" parent="."]
-transform = Transform( -0.577573, 0, -0.816339, 0, 1, 0, 0.816339, 0, -0.577573, -28.4356, 7.65286, 30.9025 )
-
-[node name="StaticBody" type="StaticBody" parent="."]
+[node name="StaticBody" type="StaticBody" parent="." index="3"]
 transform = Transform( 99.9785, 0, 0, 0, 99.9785, 0, 0, 0, 99.9785, 0, 0, 0 )
 
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody" index="0"]
 transform = Transform( 6.13726, 0, 0, 0, 6.13726, 0, 0, 0, 6.13726, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 12 )
 
-[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="1"]
 transform = Transform( 6.13726, 0, 0, 0, 6.13726, 0, 0, 0, 6.13726, 0, 0, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 13 )
 
-[node name="Track" type="Spatial" parent="."]
-script = ExtResource( 4 )
-track_path = NodePath("Path")
-debug_material = SubResource( 9 )
+[node name="Path" type="Path" parent="." index="4"]
+curve = SubResource( 14 )
 
-[node name="Path" type="Path" parent="Track"]
-curve = SubResource( 4 )
-
-[node name="Road" type="CSGPolygon" parent="Track/Path"]
+[node name="Road" type="CSGPolygon" parent="Path" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.381588, 0.85226, -0.386032 )
 use_collision = true
 invert_faces = true
@@ -92,9 +72,9 @@ path_local = false
 path_continuous_u = false
 path_u_distance = 1.0
 path_joined = true
-material = SubResource( 7 )
+material = SubResource( 16 )
 
-[node name="Slope" type="CSGPolygon" parent="Track/Path"]
+[node name="Slope" type="CSGPolygon" parent="Path" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131294, 0.632256, -0.0876541 )
 use_collision = true
 polygon = PoolVector2Array( -12, -10, -10, -0.1, -3, 0, 3, 0, 10, -0.1, 12, -15 )
@@ -108,103 +88,3 @@ path_local = true
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = true
-
-[node name="Checkpoints" type="Spatial" parent="Track"]
-
-[node name="TrackGUI" type="MarginContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = -20.0
-margin_bottom = -20.0
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TrackGUI"]
-margin_right = 984.0
-margin_bottom = 560.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TrackGUI/VBoxContainer"]
-margin_right = 984.0
-margin_bottom = 41.0
-
-[node name="TimeLabel" type="Label" parent="TrackGUI/VBoxContainer/HBoxContainer"]
-margin_right = 289.0
-margin_bottom = 41.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 8 )
-text = "Current lap -"
-align = 1
-valign = 1
-
-[node name="TimeValue" type="Label" parent="TrackGUI/VBoxContainer/HBoxContainer"]
-margin_left = 297.0
-margin_right = 489.0
-margin_bottom = 41.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 8 )
-text = "12:23.245"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Divider" type="Label" parent="TrackGUI/VBoxContainer/HBoxContainer"]
-margin_left = 497.0
-margin_right = 562.0
-margin_bottom = 41.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BestTimeLabel" type="Label" parent="TrackGUI/VBoxContainer/HBoxContainer"]
-margin_left = 570.0
-margin_right = 784.0
-margin_bottom = 41.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 8 )
-text = "Best Lap -"
-
-[node name="BestTimeValue" type="Label" parent="TrackGUI/VBoxContainer/HBoxContainer"]
-margin_left = 792.0
-margin_right = 984.0
-margin_bottom = 41.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 8 )
-text = "01:23.256"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="WrongWayLabel" type="Label" parent="TrackGUI/VBoxContainer"]
-visible = false
-margin_top = 49.0
-margin_right = 984.0
-margin_bottom = 90.0
-size_flags_horizontal = 3
-size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 8 )
-text = "Wrong Way! Turn Around!"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="lap_complete" from="Track" to="TrackGUI" method="_on_lap_complete"]
-[connection signal="time_updated" from="Track" to="TrackGUI" method="_on_time_updated"]
-[connection signal="wrong_way" from="Track" to="TrackGUI" method="_on_wrong_way_detected"]

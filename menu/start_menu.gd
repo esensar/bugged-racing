@@ -21,8 +21,6 @@ func _ready() -> void:
 	track_selector.add_item("Test track")
 
 func _on_StartButton_pressed() -> void:
-	print(vehicle_selector.get_selected_id())
-	print(track_selector.get_selected_id())
 	if vehicle_selector.get_selected_id() < 0:
 		return
 	if track_selector.get_selected_id() < 0:

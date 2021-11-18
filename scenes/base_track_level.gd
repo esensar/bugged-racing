@@ -1,7 +1,7 @@
 class_name BaseTrackLevel
 extends Spatial
 
-const CAMERA = preload("res://player/CAMERA.tscn")
+const CAMERA = preload("res://player/camera.tscn")
 
 var player_node: Node
 var gui: Node

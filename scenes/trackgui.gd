@@ -6,6 +6,7 @@ onready var time_value = $VBoxContainer/HBoxContainer/TimeValue
 onready var best_time_value = $VBoxContainer/HBoxContainer/BestTimeValue
 onready var wrong_way_label = $VBoxContainer/WrongWayLabel
 
+
 func _ready() -> void:
 	time_value.text = "NaN"
 	best_time_value.text = "NaN"

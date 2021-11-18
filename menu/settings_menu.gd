@@ -4,14 +4,23 @@ onready var master_bus := AudioServer.get_bus_index("Master")
 onready var sound_bus := AudioServer.get_bus_index("Sound")
 onready var music_bus := AudioServer.get_bus_index("Music")
 
+# gdlint: ignore=max-line-length
 onready var master_slider: HSlider = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/MasterSlider
+# gdlint: ignore=max-line-length
 onready var sound_slider: HSlider = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/SoundEffectsSlider
+# gdlint: ignore=max-line-length
 onready var music_slider: HSlider = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/MusicSlider
+# gdlint: ignore=max-line-length
 onready var auto_clutch_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/AutoClutchCheckBox
+# gdlint: ignore=max-line-length
 onready var automatic_transmission_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/AutomaticTransmissionCheckBox
+# gdlint: ignore=max-line-length
 onready var debug_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/DebugModeCheckBox
+# gdlint: ignore=max-line-length
 onready var fullscreen_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/FullscreenCheckBox
+# gdlint: ignore=max-line-length
 onready var borderless_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BorderlessCheckBox
+
 
 func _ready() -> void:
 	master_slider.value = db2linear(AudioServer.get_bus_volume_db(master_bus))

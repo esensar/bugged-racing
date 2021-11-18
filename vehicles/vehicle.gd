@@ -5,22 +5,19 @@ signal speed_updated(speed_kph, speed_percent)
 signal rpm_updated(rpm, rpm_percent)
 signal gear_updated(gear)
 
-export(float) var MAX_STEER_ANGLE = 25
-export(float) var SPEED_STEER_ANGLE = 10
-export(float) var MAX_STEER_SPEED = 100.0
-export(float) var MAX_STEER_INPUT = 80.0
+export(float) var max_steer_angle = 25
+export(float) var speed_steer_angle = 10
+export(float) var max_steer_speed = 100.0
+export(float) var max_steer_input = 80.0
 
-onready var max_steer_angle_rad: float = deg2rad(MAX_STEER_ANGLE)
-onready var speed_steer_angle_rad: float = deg2rad(SPEED_STEER_ANGLE)
-onready var max_steer_input_rad: float = deg2rad(MAX_STEER_INPUT)
 export(Curve) var steer_curve = null
 
-export(float) var MAX_ENGINE_FORCE = 85.0
-export(float) var MAX_BRAKE_FORCE = 50.0
-export(float) var THROTTLE_POWER = 6000.0
-export(float) var MAX_RPM_LOSS_PS = 3000.0
-export(float) var BASE_ENGINE_PITCH = 0.5
-export(float) var EXPECTED_MAX_SPEED = 200
+export(float) var max_engine_force = 85.0
+export(float) var max_brake_force = 50.0
+export(float) var throttle_power = 6000.0
+export(float) var max_rpm_loss_ps = 3000.0
+export(float) var base_engine_pitch = 0.5
+export(float) var expected_max_speed = 200
 
 export(Array) var gear_ratios = [3.4, 2.5, 2.0, 1.5, 1.25]
 export(float) var reverse_ratio = -3
@@ -37,6 +34,9 @@ var gear = 1
 
 var gear_timer = 0
 
+var traction_wheels: Array
+var reset_transform: Transform = Transform.IDENTITY
+
 onready var frwheel: VehicleWheel = $front_right
 onready var flwheel: VehicleWheel = $front_left
 onready var rrwheel: VehicleWheel = $rear_right
@@ -49,8 +49,9 @@ onready var rlsmoke: TireSmoke = $rl_tire_smoke
 onready var engine_sound_player: AudioStreamPlayer3D = $engine_sound_player
 onready var engine_sound_playback: AudioStreamPlayback = $engine_sound_player.get_stream_playback()
 
-var traction_wheels: Array
-var reset_transform: Transform = Transform.IDENTITY
+onready var max_steer_angle_rad: float = deg2rad(max_steer_angle)
+onready var speed_steer_angle_rad: float = deg2rad(speed_steer_angle)
+onready var max_steer_input_rad: float = deg2rad(max_steer_input)
 
 
 func _ready():
@@ -61,10 +62,12 @@ func _ready():
 	_generate_engine_sound(0)
 	engine_sound_player.play()
 
+
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	if reset_transform != Transform.IDENTITY:
 		state.set_transform(reset_transform)
 		reset_transform = Transform.IDENTITY
+
 
 func _get_gear_ratio():
 	if gear == 0:
@@ -107,9 +110,9 @@ func _update_wheels_smoke():
 
 func _lerp_rpm(from, to, delta, factor):
 	var new_val = lerp(from, to, factor)
-	if abs(from - new_val) > MAX_RPM_LOSS_PS * delta:
+	if abs(from - new_val) > max_rpm_loss_ps * delta:
 		var new_factor = inverse_lerp(
-			from, to, from - sign(from - new_val) * MAX_RPM_LOSS_PS * delta
+			from, to, from - sign(from - new_val) * max_rpm_loss_ps * delta
 		)
 		new_val = lerp(from, to, new_factor)
 	return new_val
@@ -134,9 +137,9 @@ func _physics_process(delta: float):
 	else:
 		rpm = _lerp_rpm(rpm, min_rpm, delta, delta)
 	if _has_traction():
-		rpm += throttle * delta * (max(clutch_position, 1 if gear == 0 else 0)) * THROTTLE_POWER
+		rpm += throttle * delta * (max(clutch_position, 1 if gear == 0 else 0)) * throttle_power
 	else:
-		rpm += throttle * delta * THROTTLE_POWER
+		rpm += throttle * delta * throttle_power
 	rpm = clamp(rpm, 0, max_rpm)
 	var rpm_factor = clamp(rpm / max_rpm, 0.0, 1.0)
 	var power_factor = power_curve.interpolate_baked(rpm_factor)
@@ -148,15 +151,15 @@ func _physics_process(delta: float):
 
 	var final_input = transmission_input * final_drive
 
-	brake = Input.get_action_strength("brake") * MAX_BRAKE_FORCE
-	engine_force = throttle * final_input * MAX_ENGINE_FORCE
+	brake = Input.get_action_strength("brake") * max_brake_force
+	engine_force = throttle * final_input * max_engine_force
 
 	var handbrake = Input.get_action_strength("handbrake")
-	rrwheel.brake = handbrake * MAX_BRAKE_FORCE
-	rlwheel.brake = handbrake * MAX_BRAKE_FORCE
+	rrwheel.brake = handbrake * max_brake_force
+	rlwheel.brake = handbrake * max_brake_force
 
 	var speed = wheel_rpm * 2.0 * PI * rrwheel.wheel_radius / 60.0 * 3600.0 / 1000.0
-	emit_signal("speed_updated", speed, speed / EXPECTED_MAX_SPEED)
+	emit_signal("speed_updated", speed, speed / expected_max_speed)
 	emit_signal("rpm_updated", rpm, rpm_factor)
 
 	var steering_input = (
@@ -171,13 +174,13 @@ func _physics_process(delta: float):
 		else:
 			steering_input = steer_curve.interpolate_baked(steering_input)
 
-	var steer_speed_factor = clamp(speed / MAX_STEER_SPEED, 0.0, 1.0)
+	var steer_speed_factor = clamp(speed / max_steer_speed, 0.0, 1.0)
 
 	steering = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
 
 
 func _generate_engine_sound(rpm_factor):
-	engine_sound_player.pitch_scale = BASE_ENGINE_PITCH + 2 * rpm_factor
+	engine_sound_player.pitch_scale = base_engine_pitch + 2 * rpm_factor
 	var to_fill = engine_sound_playback.get_frames_available()
 	var factor = rpm_factor
 	if to_fill <= 0:

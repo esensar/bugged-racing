@@ -1,17 +1,20 @@
 extends Panel
 
-const buggy = preload("res://vehicles/buggy.tscn")
-const beetle = preload("res://vehicles/beetlecar.tscn")
-const bugmobile = preload("res://vehicles/bugmobile.tscn")
-const test_scene = preload("res://scenes/test_level.tscn")
-const infinite_loop_scene = preload("res://scenes/infinite_loop_track_level.tscn")
-const gui_scene = preload("res://player/gui.tscn")
+const BUGGY = preload("res://vehicles/buggy.tscn")
+const BEETLE = preload("res://vehicles/beetlecar.tscn")
+const BUGMOBILE = preload("res://vehicles/bugmobile.tscn")
+const TEST_SCENE = preload("res://scenes/test_level.tscn")
+const INFINITE_LOOP_SCENE = preload("res://scenes/infinite_loop_track_level.tscn")
+const GUI_SCENE = preload("res://player/gui.tscn")
 
+var vehicles = [BEETLE, BUGGY, BUGMOBILE]
+var tracks = [TEST_SCENE, INFINITE_LOOP_SCENE]
+
+# gdlint: ignore=max-line-length
 onready var vehicle_selector = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/VehicleSelector
+# gdlint: ignore=max-line-length
 onready var track_selector = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/TrackSelector
 
-var vehicles = [beetle, buggy, bugmobile]
-var tracks = [test_scene, infinite_loop_scene]
 
 func _ready() -> void:
 	vehicle_selector.grab_focus()
@@ -22,6 +25,7 @@ func _ready() -> void:
 	track_selector.add_item("Test track")
 	track_selector.add_item("Infinite Loop")
 
+
 func _on_StartButton_pressed() -> void:
 	if vehicle_selector.get_selected_id() < 0:
 		return
@@ -31,14 +35,16 @@ func _on_StartButton_pressed() -> void:
 	var track = tracks[track_selector.get_selected_id()]
 	_start_track_with_vehicle(track.instance(), vehicle.instance())
 
+
 func _start_track_with_vehicle(track: Node, vehicle: Node) -> void:
-	var gui = gui_scene.instance()
+	var gui = GUI_SCENE.instance()
 	vehicle.connect("speed_updated", gui, "update_speed")
 	vehicle.connect("rpm_updated", gui, "update_rpm")
 	vehicle.connect("gear_updated", gui, "update_gear")
 	track.call_deferred("spawn_player", vehicle, gui)
 	get_tree().root.call_deferred("add_child", track)
 	queue_free()
+
 
 func _on_BackButton_pressed() -> void:
 	get_tree().change_scene("res://menu/main_menu.tscn")

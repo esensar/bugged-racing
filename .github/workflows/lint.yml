@@ -15,4 +15,4 @@ jobs:
       - name: Setup tools
         run: scripts/devsetup
       - name: Run linter
-        run: gdformat .
+        run: gdlint .

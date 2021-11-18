@@ -18,5 +18,5 @@ func _on_ContinueButton_pressed():
 
 func _on_ExitButton_pressed():
 	get_tree().paused = false
-	get_tree().change_scene("res://scenes/menu/main_menu.tscn")
+	get_tree().change_scene("res://menu/main_menu.tscn")
 	get_tree().root.get_child(get_tree().root.get_child_count() - 1).queue_free()

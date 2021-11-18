@@ -52,7 +52,7 @@ func _on_automatictransmission_toggled(new_state: bool) -> void:
 
 
 func _on_BackButton_pressed() -> void:
-	get_tree().change_scene("res://scenes/menu/main_menu.tscn")
+	get_tree().change_scene("res://menu/main_menu.tscn")
 
 
 func _on_MasterSlider_value_changed(new_value: float) -> void:

@@ -41,4 +41,4 @@ func _start_track_with_vehicle(track: Node, vehicle: Node) -> void:
 	queue_free()
 
 func _on_BackButton_pressed() -> void:
-	get_tree().change_scene("res://scenes/menu/main_menu.tscn")
+	get_tree().change_scene("res://menu/main_menu.tscn")

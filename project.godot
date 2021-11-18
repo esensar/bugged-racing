@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="bugged-racing"
-run/main_scene="res://scenes/menu/main_menu.tscn"
+run/main_scene="res://menu/main_menu.tscn"
 boot_splash/image="res://assets/bugged-racing-cover.png"
 config/icon="res://icon.png"
 

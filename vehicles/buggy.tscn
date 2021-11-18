@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/basic_buggy.glb" type="PackedScene" id=1]
 [ext_resource path="res://vehicles/tire_smoke.tscn" type="PackedScene" id=2]
-[ext_resource path="res://vehicles/buggy.gd" type="Script" id=3]
+[ext_resource path="res://vehicles/vehicle.gd" type="Script" id=3]
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0660377, 0.243255 ), 0.0, 0.0, 0, 0, Vector2( 0.240566, 0.315982 ), 0.0, 0.0, 0, 0, Vector2( 0.45283, 0.927273 ), 0.0, 0.0, 0, 0, Vector2( 0.891509, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]

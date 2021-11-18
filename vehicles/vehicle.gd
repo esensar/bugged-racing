@@ -1,34 +1,35 @@
+class_name BuggedVehicle
 extends VehicleBody
 
 signal speed_updated(speed_kph, speed_percent)
 signal rpm_updated(rpm, rpm_percent)
 signal gear_updated(gear)
 
-export (float) var MAX_STEER_ANGLE = 25
-export (float) var SPEED_STEER_ANGLE = 10
-export (float) var MAX_STEER_SPEED = 100.0
-export (float) var MAX_STEER_INPUT = 80.0
+export(float) var MAX_STEER_ANGLE = 25
+export(float) var SPEED_STEER_ANGLE = 10
+export(float) var MAX_STEER_SPEED = 100.0
+export(float) var MAX_STEER_INPUT = 80.0
 
 onready var max_steer_angle_rad: float = deg2rad(MAX_STEER_ANGLE)
 onready var speed_steer_angle_rad: float = deg2rad(SPEED_STEER_ANGLE)
 onready var max_steer_input_rad: float = deg2rad(MAX_STEER_INPUT)
-export (Curve) var steer_curve = null
+export(Curve) var steer_curve = null
 
-export (float) var MAX_ENGINE_FORCE = 85.0
-export (float) var MAX_BRAKE_FORCE = 50.0
-export (float) var THROTTLE_POWER = 6000.0
-export (float) var MAX_RPM_LOSS_PS = 3000.0
-export (float) var BASE_ENGINE_PITCH = 0.5
-export (float) var EXPECTED_MAX_SPEED = 200
+export(float) var MAX_ENGINE_FORCE = 85.0
+export(float) var MAX_BRAKE_FORCE = 50.0
+export(float) var THROTTLE_POWER = 6000.0
+export(float) var MAX_RPM_LOSS_PS = 3000.0
+export(float) var BASE_ENGINE_PITCH = 0.5
+export(float) var EXPECTED_MAX_SPEED = 200
 
-export (Array) var gear_ratios = [ 3.4, 2.5, 2.0, 1.5, 1.25 ]
-export (float) var reverse_ratio = -3
-export (float) var final_drive = 3.45
-export (float) var max_rpm = 3500
-export (float) var min_rpm = 900
-export (float) var gear_switch_time = 0.2
-export (Curve) var power_curve = null
-export (Curve) var sound_curve = null
+export(Array) var gear_ratios = [3.4, 2.5, 2.0, 1.5, 1.25]
+export(float) var reverse_ratio = -3
+export(float) var final_drive = 3.45
+export(float) var max_rpm = 3500
+export(float) var min_rpm = 900
+export(float) var gear_switch_time = 0.2
+export(Curve) var power_curve = null
+export(Curve) var sound_curve = null
 
 var clutch_position: float = 0.0
 var rpm = 0
@@ -49,6 +50,8 @@ onready var engine_sound_player: AudioStreamPlayer3D = $engine_sound_player
 onready var engine_sound_playback: AudioStreamPlayback = $engine_sound_player.get_stream_playback()
 
 var traction_wheels: Array
+var reset_transform: Transform = Transform.IDENTITY
+
 
 func _ready():
 	for wheel in [frwheel, flwheel, rrwheel, rlwheel]:
@@ -58,6 +61,11 @@ func _ready():
 	_generate_engine_sound(0)
 	engine_sound_player.play()
 
+func _integrate_forces(state: PhysicsDirectBodyState) -> void:
+	if reset_transform != Transform.IDENTITY:
+		state.set_transform(reset_transform)
+		reset_transform = Transform.IDENTITY
+
 func _get_gear_ratio():
 	if gear == 0:
 		return 0
@@ -65,6 +73,7 @@ func _get_gear_ratio():
 		return reverse_ratio
 	else:
 		return gear_ratios[gear - 1]
+
 
 func _handle_gear_switch(delta: float):
 	if gear_timer > 0:
@@ -81,22 +90,30 @@ func _handle_gear_switch(delta: float):
 				gear_timer = gear_switch_time * (2 - clutch_position)
 				emit_signal("gear_updated", gear)
 
+
 func _has_traction():
 	for wheel in traction_wheels:
 		if wheel.is_in_contact():
 			return true
 	return false
 
+
 func _update_wheels_smoke():
-	for wheelnsmoke in [[frwheel, frsmoke], [flwheel, flsmoke], [rrwheel, rrsmoke], [rlwheel, rlsmoke]]:
+	for wheelnsmoke in [
+		[frwheel, frsmoke], [flwheel, flsmoke], [rrwheel, rrsmoke], [rlwheel, rlsmoke]
+	]:
 		wheelnsmoke[1].update(wheelnsmoke[0].get_skidinfo())
+
 
 func _lerp_rpm(from, to, delta, factor):
 	var new_val = lerp(from, to, factor)
 	if abs(from - new_val) > MAX_RPM_LOSS_PS * delta:
-		var new_factor = inverse_lerp(from, to, from - sign(from - new_val) * MAX_RPM_LOSS_PS * delta)
+		var new_factor = inverse_lerp(
+			from, to, from - sign(from - new_val) * MAX_RPM_LOSS_PS * delta
+		)
 		new_val = lerp(from, to, new_factor)
 	return new_val
+
 
 func _physics_process(delta: float):
 	_update_wheels_smoke()
@@ -142,7 +159,10 @@ func _physics_process(delta: float):
 	emit_signal("speed_updated", speed, speed / EXPECTED_MAX_SPEED)
 	emit_signal("rpm_updated", rpm, rpm_factor)
 
-	var steering_input = Input.get_action_strength("steer_left") - Input.get_action_strength("steer_right")
+	var steering_input = (
+		Input.get_action_strength("steer_left")
+		- Input.get_action_strength("steer_right")
+	)
 	if abs(steering_input) < 0.05:
 		steering_input = 0.0
 	elif steer_curve:
@@ -155,6 +175,7 @@ func _physics_process(delta: float):
 
 	steering = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
 
+
 func _generate_engine_sound(rpm_factor):
 	engine_sound_player.pitch_scale = BASE_ENGINE_PITCH + 2 * rpm_factor
 	var to_fill = engine_sound_playback.get_frames_available()
@@ -165,6 +186,11 @@ func _generate_engine_sound(rpm_factor):
 	var fill_percent = 0.0
 	while to_fill > 0:
 		engine_sound_playback.push_frame(Vector2(1.0, 1.0) * factor)
-		factor += cos(factor) * sin(factor) * (1 + to_fill % 2) * ((sound_curve.interpolate_baked(fill_percent) - 0.5) * 2)
+		factor += (
+			cos(factor)
+			* sin(factor)
+			* (1 + to_fill % 2)
+			* ((sound_curve.interpolate_baked(fill_percent) - 0.5) * 2)
+		)
 		to_fill -= 1
 		fill_percent += fill_segment

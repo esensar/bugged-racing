@@ -18,6 +18,9 @@ var last_checkpoint = -1
 var start_time = 0
 var current_time = 0
 
+func get_last_checkpoint() -> Node:
+	return checkpoints.get_child(max(0, last_checkpoint))
+
 func _ready() -> void:
 	start_time = OS.get_ticks_msec()
 	var length = path.curve.get_baked_length()

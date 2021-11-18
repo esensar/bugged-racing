@@ -4,13 +4,14 @@ const buggy = preload("res://vehicles/buggy.tscn")
 const beetle = preload("res://vehicles/beetlecar.tscn")
 const bugmobile = preload("res://vehicles/bugmobile.tscn")
 const test_scene = preload("res://scenes/test_level.tscn")
+const infinite_loop_scene = preload("res://scenes/infinite_loop_track_level.tscn")
 const gui_scene = preload("res://player/gui.tscn")
 
 onready var vehicle_selector = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/VehicleSelector
 onready var track_selector = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/TrackSelector
 
 var vehicles = [beetle, buggy, bugmobile]
-var tracks = [test_scene]
+var tracks = [test_scene, infinite_loop_scene]
 
 func _ready() -> void:
 	vehicle_selector.grab_focus()
@@ -19,6 +20,7 @@ func _ready() -> void:
 	vehicle_selector.add_item("Bugmobile")
 
 	track_selector.add_item("Test track")
+	track_selector.add_item("Infinite Loop")
 
 func _on_StartButton_pressed() -> void:
 	if vehicle_selector.get_selected_id() < 0:

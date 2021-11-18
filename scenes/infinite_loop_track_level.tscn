@@ -1,0 +1,126 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/base_track_level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/dirttrack.png" type="Texture" id=2]
+
+[sub_resource type="Curve3D" id=4]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -2.93816, 32.5746, 79.8871, 0, 0, 0, 0, 0, 0, 48.497, 32.0944, 57.4446, 0, 0, 0, 0, 0, 0, 63.2095, 34.3302, 15.7474, 0, 0, 0, 0, 0, 0, 52.1399, 31.6108, -13.5262, 0, 0, 0, 0, 0, 0, 24.6326, 28.4639, -50.053, 0, 0, 0, 0, 0, 0, -27.2831, 20.865, -58.278, 0, 0, 0, 0, 0, 0, -51.0554, 17.038, -30.3413, 0, 0, 0, 0, 0, 0, -55.8672, 12.2, 4.13316, 0, 0, 0, 0, 0, 0, -43.3482, 10.9209, 32.963, 0, 0, 0, 0, 0, 0, -8.39052, 10.014, 49.1887, 0, 0, 0, 0, 0, 0, 21.4522, 8.65878, 34.7661, 0, 0, 0, 0, 0, 0, 40.2058, 0, 6.92621, 0, 0, 0, 0, 0, 0, 40.8815, 0, -14.6971, 0, 0, 0, 0, 0, 0, 23.3126, 0, -42.064, 0, 0, 0, 0, 0, 0, 10.4817, 0, -41.5338, 0, 0, 0, 0, 0, 0, -17.5689, 0, -40.3747, 0, 0, 0, 0, 0, 0, -34.1963, -9.99896, -28.4392, 0, 0, 0, 0, 0, 0, -35.0374, -17.5733, 0.755226, -25.1643, -4.15447, -7.00803, 25.1643, 4.15447, 7.00803, -25.3277, -17.0155, 35.5891, 0, 0, 0, 0, 0, 0, 30.9663, -31.3594, 41.4015, 25.1095, -0.168312, 40.6886, -25.1095, 0.168312, -40.6886, 74.4387, -42.4322, -34.9872, 24.8366, -1.73885, -2.57295, -24.8366, 1.73885, 2.57295, -18.0245, -47.6623, -77.0386, 12.9167, -19.1161, -39.5709, -12.9167, 19.1161, 39.5709, -70.8996, -35.9135, -10.4648, -18.5671, -3.54956, -12.2084, 18.5671, 3.54956, 12.2084, 3.23056, -46.2198, 38.3433, -7.34602, -0.837053, 9.12145, 7.34602, 0.837053, -9.12145, 20.9351, -29.8038, 7.50687, 0, 0, 0, 0, 0, 0, 26.4735, -17.5292, -28.661, 0, 0, 0, 0, 0, 0, 9.62503, -10.9842, -69.6461, 0, 0, 0, 0, 0, 0, -19.9905, -9.72571, -68.5394, 0, 0, 0, 0, 0, 0, -54.9526, -10.7115, -44.0475, 0, 0, 0, 0, 0, 0, -68.7456, 2.561, -7.1355, 0, 0, 0, 0, 0, 0, -73.1627, 5.26929, 22.8885, 0, 0, 0, 0, 0, 0, -71.8098, 8.6919, 52.5234, 0, 0, 0, 0, 0, 0, -51.5358, 8.57028, 72.9606, 0, 0, 0, 0, 0, 0, -14.1531, 12.9298, 80.3355, 0, 0, 0, 0, 0, 0, 30.0845, 16.7699, 78.7283, 0, 0, 0, 0, 0, 0, 60.5624, 16.4306, 67.9377, 0, 0, 0, 0, 0, 0, 86.4323, 23.8986, 22.6343, 0, 0, 0, 0, 0, 0, 85.6148, 33.9947, -16.8435, 0, 0, 0, 0, 0, 0, 59.5998, 39.7632, -56.7583, 0, 0, 0, 0, 0, 0, -16.8105, 77.966, -101.612, 0, 0, 0, 0, 0, 0, -92.7544, 76.6498, -73.9173, 0, 0, 0, 0, 0, 0, -103.525, 68.271, -15.5888, 0, 0, 0, 0, 0, 0, -98.0169, 53.956, 35.8501, 0, 0, 0, 0, 0, 0, -35.8837, 32.0277, 68.4275, 0, 0, 0, 0, 0, 0, -14.8362, 33.0891, 79.7792, 0, 0, 0, 0, 0, 0, -2.93816, 32.5746, 79.8871 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Shader" id=5]
+code = "// NOTE: Shader automatically converted from Godot Engine 3.4.stable's SpatialMaterial.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : hint_color;
+uniform sampler2D texture_albedo : hint_albedo;
+uniform float specular;
+uniform float metallic;
+uniform float roughness : hint_range(0,1);
+uniform float point_size : hint_range(0,128);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void vertex() {
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+}
+
+vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
+	float sine = sin(rotation);
+    float cosine = cos(rotation);
+
+    uv -= pivot;
+    uv.x = uv.x * cosine - uv.y * sine;
+    uv.y = uv.x * sine + uv.y * cosine;
+    uv += pivot;
+
+    return uv;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo, rotateUV(base_uv, vec2(0.5), 3.14/2.0));
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	METALLIC = metallic;
+	ROUGHNESS = roughness;
+	SPECULAR = specular;
+}
+"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/specular = 0.5
+shader_param/metallic = 0.0
+shader_param/roughness = 1.0
+shader_param/point_size = 1.0
+shader_param/uv1_scale = Vector3( 5, 50, 0 )
+shader_param/uv1_offset = Vector3( 0.14, -0.525, 0 )
+shader_param/uv2_scale = Vector3( 1, 1, 1 )
+shader_param/uv2_offset = Vector3( 0, 0, 0 )
+shader_param/texture_albedo = ExtResource( 2 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0.333333, 0.262745, 0.262745, 1 )
+roughness = 0.76
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.0862745, 0.929412, 0.858824, 1 )
+
+[sub_resource type="SphereMesh" id=3]
+material = SubResource( 2 )
+flip_faces = true
+
+[node name="Spatial" instance=ExtResource( 1 )]
+
+[node name="PlayerSpawnLocation" parent="." index="1"]
+transform = Transform( -0.726143, 0, 0.687544, 0, 1, 0, -0.687544, 0, -0.726143, -14.0246, 40.6615, 83.417 )
+
+[node name="Track" parent="." index="2"]
+track_path = NodePath("../Path")
+checkpoint_count = 30
+checkpoint_dim = Vector2( 10, 20 )
+
+[node name="Path" type="Path" parent="." index="3"]
+transform = Transform( 1.06734, 0, 0, 0, 1.06734, 0, 0, 0, 1.06734, 0, 0, 0 )
+curve = SubResource( 4 )
+
+[node name="Track" type="CSGPolygon" parent="Path" index="0"]
+use_collision = true
+polygon = PoolVector2Array( -10, -3, -2, -1, 2, 0, 10, 3 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 10.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource( 6 )
+
+[node name="Rails" type="CSGPolygon" parent="Path" index="1"]
+use_collision = true
+polygon = PoolVector2Array( -10, 3, -12, 3, -12, -3.1, 12, -3.1, 12, 6, 10, 6, 10, 2.9, -10, -3.1 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 10.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource( 7 )
+
+[node name="Background" type="MeshInstance" parent="." index="4"]
+transform = Transform( 224.434, 0, 0, 0, 224.434, 0, 0, 0, 224.434, 0, 0, 0 )
+mesh = SubResource( 3 )
+material/0 = null

@@ -35,7 +35,7 @@ margin_bottom = -20.0
 
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
 margin_right = 984.0
-margin_bottom = 602.0
+margin_bottom = 714.0
 dragger_visibility = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer"]
@@ -60,12 +60,12 @@ valign = 1
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VSplitContainer"]
 margin_top = 96.0
 margin_right = 984.0
-margin_bottom = 602.0
+margin_bottom = 714.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/CenterContainer"]
 margin_left = 311.0
 margin_right = 672.0
-margin_bottom = 506.0
+margin_bottom = 618.0
 
 [node name="Gameplay" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
 margin_right = 361.0
@@ -181,25 +181,48 @@ custom_fonts/font = SubResource( 4 )
 text = "Video"
 align = 1
 
-[node name="DebugLabel" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+[node name="FullscreenCheckBox" type="CheckBox" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
 margin_top = 415.0
 margin_right = 361.0
-margin_bottom = 442.0
+margin_bottom = 463.0
+custom_fonts/font = SubResource( 3 )
+text = "Fullscreen"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BorderlessCheckBox" type="CheckBox" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_top = 471.0
+margin_right = 361.0
+margin_bottom = 519.0
+custom_fonts/font = SubResource( 3 )
+text = "Borderless"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DebugLabel" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_top = 527.0
+margin_right = 361.0
+margin_bottom = 554.0
 custom_fonts/font = SubResource( 4 )
 text = "Debug"
 align = 1
 
 [node name="DebugModeCheckBox" type="CheckBox" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 450.0
+margin_top = 562.0
 margin_right = 361.0
-margin_bottom = 498.0
+margin_bottom = 610.0
 custom_fonts/font = SubResource( 3 )
 text = "Debug mode (visible checkpoints)"
+align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 506.0
+margin_top = 618.0
 margin_right = 361.0
-margin_bottom = 506.0
+margin_bottom = 618.0
 
 [connection signal="pressed" from="MarginContainer/VSplitContainer/HSplitContainer/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="toggled" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/AutoClutchCheckBox" to="." method="_on_autoclutch_toggled"]
@@ -207,4 +230,6 @@ margin_bottom = 506.0
 [connection signal="value_changed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/MasterSlider" to="." method="_on_MasterSlider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/SoundEffectsSlider" to="." method="_on_SoundEffectsSlider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="toggled" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/FullscreenCheckBox" to="." method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BorderlessCheckBox" to="." method="_on_borderless_toggled"]
 [connection signal="toggled" from="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/DebugModeCheckBox" to="." method="_on_debug_toggled"]

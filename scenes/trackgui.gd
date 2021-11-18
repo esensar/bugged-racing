@@ -2,8 +2,9 @@ extends MarginContainer
 
 var best_time = -1
 
-onready var time_value = $HBoxContainer/TimeValue
-onready var best_time_value = $HBoxContainer/BestTimeValue
+onready var time_value = $VBoxContainer/HBoxContainer/TimeValue
+onready var best_time_value = $VBoxContainer/HBoxContainer/BestTimeValue
+onready var wrong_way_label = $VBoxContainer/WrongWayLabel
 
 func _ready() -> void:
 	time_value.text = "NaN"
@@ -15,10 +16,15 @@ func _on_time_updated(new_time: float) -> void:
 
 
 func _on_lap_complete(lap_time: float) -> void:
-	print(lap_time)
 	if lap_time < best_time or best_time < 0:
 		best_time = lap_time
 		best_time_value.text = _format_time(best_time)
+
+
+func _on_wrong_way_detected() -> void:
+	wrong_way_label.visible = true
+	yield(get_tree().create_timer(3.0), "timeout")
+	wrong_way_label.visible = false
 
 
 func _format_time(time: float) -> String:

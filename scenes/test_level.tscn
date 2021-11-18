@@ -123,11 +123,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TrackGUI"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TrackGUI"]
 margin_right = 984.0
 margin_bottom = 560.0
 
-[node name="TimeLabel" type="Label" parent="TrackGUI/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TrackGUI/VBoxContainer"]
+margin_right = 984.0
+margin_bottom = 41.0
+
+[node name="TimeLabel" type="Label" parent="TrackGUI/VBoxContainer/HBoxContainer"]
 margin_right = 289.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
@@ -138,7 +142,7 @@ text = "Current lap -"
 align = 1
 valign = 1
 
-[node name="TimeValue" type="Label" parent="TrackGUI/HBoxContainer"]
+[node name="TimeValue" type="Label" parent="TrackGUI/VBoxContainer/HBoxContainer"]
 margin_left = 297.0
 margin_right = 489.0
 margin_bottom = 41.0
@@ -151,7 +155,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Divider" type="Label" parent="TrackGUI/HBoxContainer"]
+[node name="Divider" type="Label" parent="TrackGUI/VBoxContainer/HBoxContainer"]
 margin_left = 497.0
 margin_right = 562.0
 margin_bottom = 41.0
@@ -163,7 +167,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BestTimeLabel" type="Label" parent="TrackGUI/HBoxContainer"]
+[node name="BestTimeLabel" type="Label" parent="TrackGUI/VBoxContainer/HBoxContainer"]
 margin_left = 570.0
 margin_right = 784.0
 margin_bottom = 41.0
@@ -173,7 +177,7 @@ custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
 custom_fonts/font = SubResource( 8 )
 text = "Best Lap -"
 
-[node name="BestTimeValue" type="Label" parent="TrackGUI/HBoxContainer"]
+[node name="BestTimeValue" type="Label" parent="TrackGUI/VBoxContainer/HBoxContainer"]
 margin_left = 792.0
 margin_right = 984.0
 margin_bottom = 41.0
@@ -186,5 +190,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="WrongWayLabel" type="Label" parent="TrackGUI/VBoxContainer"]
+visible = false
+margin_top = 49.0
+margin_right = 984.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Wrong Way! Turn Around!"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="lap_complete" from="Track" to="TrackGUI" method="_on_lap_complete"]
 [connection signal="time_updated" from="Track" to="TrackGUI" method="_on_time_updated"]
+[connection signal="wrong_way" from="Track" to="TrackGUI" method="_on_wrong_way_detected"]

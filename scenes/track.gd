@@ -3,6 +3,7 @@ extends Spatial
 
 signal time_updated(new_time)
 signal lap_complete(lap_time)
+signal wrong_way()
 
 export (NodePath) var track_path = null
 export (int, 10, 50) var checkpoint_count = 20
@@ -11,6 +12,7 @@ export (Material) var debug_material = null
 
 onready var checkpoints = $Checkpoints
 onready var path: Path = get_node(track_path)
+var furthest_checkpoint = -1
 var last_checkpoint = -1
 
 var start_time = 0
@@ -47,15 +49,21 @@ func _process(delta: float) -> void:
 
 func _on_body_entered_area(body: Node, area: Area) -> void:
 	if body.get_groups().has("car"):
-		# We got the correct checkpoint
-		if last_checkpoint == area.get_index() - 1:
-			last_checkpoint += 1
 
-		if last_checkpoint == checkpoints.get_child_count() - 1:
+		if area.get_index() < last_checkpoint || abs(area.get_index() - last_checkpoint) > 1:
+			emit_signal("wrong_way")
+
+		last_checkpoint = area.get_index()
+
+		# We got the correct checkpoint
+		if furthest_checkpoint == area.get_index() - 1:
+			furthest_checkpoint += 1
+
+		if furthest_checkpoint == checkpoints.get_child_count() - 1:
 			emit_signal("lap_complete", current_time)
 			start_time = OS.get_ticks_msec()
 			_update_time()
-			last_checkpoint = -1
+			furthest_checkpoint = -1
 
 
 func _build_checkpoint_collision():

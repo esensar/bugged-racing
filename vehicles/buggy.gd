@@ -69,7 +69,7 @@ func _get_gear_ratio():
 func _handle_gear_switch(delta: float):
 	if gear_timer > 0:
 		gear_timer = max(0, gear_timer - delta)
-	elif clutch_position > 0.8:
+	if clutch_position > 0.8:
 		if Input.is_action_just_pressed("gear_up"):
 			if gear + 1 <= gear_ratios.size():
 				gear += 1

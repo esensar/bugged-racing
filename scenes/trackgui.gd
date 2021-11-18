@@ -24,5 +24,5 @@ func _on_lap_complete(lap_time: float) -> void:
 func _format_time(time: float) -> String:
 	var minute = floor(time / 1000.0 / 60.0)
 	var second = floor((time / 1000.0) - minute * 60)
-	var millisecond = time - minute * 60 - second * 1000
+	var millisecond = time - minute * 60 * 1000 - second * 1000
 	return "%02d:%02d.%03d" % [minute, second, millisecond]

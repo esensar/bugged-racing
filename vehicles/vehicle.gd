@@ -139,11 +139,6 @@ func _physics_process(delta: float):
 	var wheel_rpm = traction_wheels[0].get_rpm()
 	var speed = wheel_rpm * 2.0 * PI * rrwheel.wheel_radius / 60.0 * 3600.0 / 1000.0
 
-	if GlobalSettings.automatic_transmission and gear == -1:
-		var swap = throttle
-		throttle = brake_input
-		brake_input = swap
-
 	if (
 		GlobalSettings.automatic_transmission
 		and speed >= 0
@@ -153,6 +148,21 @@ func _physics_process(delta: float):
 	):
 		_gear_down()
 		_gear_down()
+
+	if (
+		GlobalSettings.automatic_transmission
+		and speed <= 0
+		and speed > -1
+		and gear == -1
+		and throttle > 0.1
+	):
+		_gear_up()
+		_gear_up()
+
+	if GlobalSettings.automatic_transmission and gear == -1:
+		var swap = throttle
+		throttle = brake_input
+		brake_input = swap
 
 	if GlobalSettings.auto_clutch or GlobalSettings.automatic_transmission:
 		clutch_position = 1 - min(rpm, 900) / 900.0

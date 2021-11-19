@@ -81,7 +81,7 @@ func _get_gear_ratio():
 func _handle_gear_switch(delta: float):
 	if gear_timer > 0:
 		gear_timer = max(0, gear_timer - delta)
-	if clutch_position > 0.8:
+	if clutch_position > 0.8 or GlobalSettings.auto_clutch:
 		if Input.is_action_just_pressed("gear_up"):
 			if gear + 1 <= gear_ratios.size():
 				gear += 1
@@ -123,6 +123,9 @@ func _physics_process(delta: float):
 	clutch_position = Input.get_action_strength("clutch")
 	_handle_gear_switch(delta)
 	var throttle = Input.get_action_strength("throttle")
+	if GlobalSettings.auto_clutch:
+		clutch_position = 1 - min(rpm, 900) / 900.0
+
 	if gear_timer > 0:
 		clutch_position = 1
 		throttle = 0

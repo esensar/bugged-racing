@@ -41,12 +41,10 @@ __meta__ = {
 margin_right = 824.0
 margin_bottom = 600.0
 scroll_horizontal_enabled = false
-scroll_vertical = 1344
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
-margin_top = -1344.0
 margin_right = 800.0
-margin_bottom = 600.0
+margin_bottom = 1974.0
 size_flags_horizontal = 3
 
 [node name="Title" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
@@ -65,7 +63,7 @@ margin_top = 302.0
 margin_right = 800.0
 margin_bottom = 320.0
 custom_fonts/font = SubResource( 2 )
-text = "Created by Ensar Sarajcic, for GitHub Game Off 2021. Game theme was \"Bug\"."
+text = "Created by Ensar Sarajcic, for GitHub Game Off 2021. Game theme: \"Bug\"."
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -87,8 +85,8 @@ margin_bottom = 374.0
 size_flags_vertical = 0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
-bbcode_text = "Source code is avaialble on [url=https://github.com/esensar/bugged-racing]GitHub[/url]."
-text = "Source code is avaialble on GitHub."
+bbcode_text = "Source code is available on [url=https://github.com/esensar/bugged-racing]GitHub[/url]."
+text = "Source code is available on GitHub."
 fit_content_height = true
 
 [node name="Label4" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
@@ -101,20 +99,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label5" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Label19" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer"]
 margin_top = 408.0
 margin_right = 800.0
-margin_bottom = 426.0
-custom_fonts/font = SubResource( 2 )
-text = "Game was built using Godot Engine."
+margin_bottom = 428.0
+size_flags_vertical = 0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "The game is built using [url=https://godotengine.org]Godot Engine[/url]."
+text = "The game is built using Godot Engine."
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label18" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+margin_top = 436.0
+margin_right = 800.0
+margin_bottom = 456.0
+size_flags_vertical = 0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "This game also uses [url=https://kenney.nl/]Kenney[/url] assets (fonts)."
+text = "This game also uses Kenney assets (fonts)."
+fit_content_height = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label6" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 434.0
+margin_top = 464.0
 margin_right = 800.0
-margin_bottom = 452.0
+margin_bottom = 482.0
 custom_fonts/font = SubResource( 2 )
 align = 1
 __meta__ = {
@@ -122,9 +138,9 @@ __meta__ = {
 }
 
 [node name="Label7" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 460.0
+margin_top = 490.0
 margin_right = 800.0
-margin_bottom = 478.0
+margin_bottom = 508.0
 custom_fonts/font = SubResource( 2 )
 text = "Open source licences:"
 __meta__ = {
@@ -132,9 +148,9 @@ __meta__ = {
 }
 
 [node name="Label8" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 486.0
+margin_top = 516.0
 margin_right = 800.0
-margin_bottom = 504.0
+margin_bottom = 534.0
 custom_fonts/font = SubResource( 2 )
 align = 1
 __meta__ = {
@@ -142,9 +158,9 @@ __meta__ = {
 }
 
 [node name="Label11" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 512.0
+margin_top = 542.0
 margin_right = 800.0
-margin_bottom = 532.0
+margin_bottom = 562.0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "Godot Engine (also available in [url=https://godotengine.org/license]web version[/url]):"
@@ -152,9 +168,9 @@ text = "Godot Engine (also available in web version):"
 fit_content_height = true
 
 [node name="Label9" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 540.0
+margin_top = 570.0
 margin_right = 800.0
-margin_bottom = 1062.0
+margin_bottom = 1092.0
 custom_fonts/font = SubResource( 2 )
 text = "
     This game uses Godot Engine, available under the following license:
@@ -172,9 +188,9 @@ __meta__ = {
 }
 
 [node name="Label12" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 1070.0
+margin_top = 1100.0
 margin_right = 800.0
-margin_bottom = 1088.0
+margin_bottom = 1118.0
 custom_fonts/font = SubResource( 2 )
 align = 1
 __meta__ = {
@@ -182,9 +198,9 @@ __meta__ = {
 }
 
 [node name="Label10" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 1096.0
+margin_top = 1126.0
 margin_right = 800.0
-margin_bottom = 1176.0
+margin_bottom = 1206.0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[url=https://www.freetype.org/]FreeType[/url]:
@@ -196,9 +212,9 @@ text = "FreeType:
 fit_content_height = true
 
 [node name="Label13" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 1184.0
+margin_top = 1214.0
 margin_right = 800.0
-margin_bottom = 1202.0
+margin_bottom = 1232.0
 custom_fonts/font = SubResource( 2 )
 align = 1
 __meta__ = {
@@ -206,9 +222,9 @@ __meta__ = {
 }
 
 [node name="Label14" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 1210.0
+margin_top = 1240.0
 margin_right = 800.0
-margin_bottom = 1630.0
+margin_bottom = 1660.0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[url=http://enet.bespin.org/]ENet[/url]:
@@ -234,9 +250,9 @@ text = "ENet:
 fit_content_height = true
 
 [node name="Label15" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 1638.0
+margin_top = 1668.0
 margin_right = 800.0
-margin_bottom = 1656.0
+margin_bottom = 1686.0
 custom_fonts/font = SubResource( 2 )
 align = 1
 __meta__ = {
@@ -244,9 +260,9 @@ __meta__ = {
 }
 
 [node name="Label16" type="RichTextLabel" parent="MarginContainer/ScrollContainer/VBoxContainer"]
-margin_top = 1664.0
+margin_top = 1694.0
 margin_right = 800.0
-margin_bottom = 1944.0
+margin_bottom = 1974.0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "[url=https://tls.mbed.org/]MBedTLS[/url]:
@@ -273,6 +289,8 @@ fit_content_height = true
 
 [connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="meta_clicked" from="MarginContainer/ScrollContainer/VBoxContainer/Label3" to="." method="_on_link_meta_clicked"]
+[connection signal="meta_clicked" from="MarginContainer/ScrollContainer/VBoxContainer/Label19" to="." method="_on_link_meta_clicked"]
+[connection signal="meta_clicked" from="MarginContainer/ScrollContainer/VBoxContainer/Label18" to="." method="_on_link_meta_clicked"]
 [connection signal="meta_clicked" from="MarginContainer/ScrollContainer/VBoxContainer/Label11" to="." method="_on_link_meta_clicked"]
 [connection signal="meta_clicked" from="MarginContainer/ScrollContainer/VBoxContainer/Label10" to="." method="_on_link_meta_clicked"]
 [connection signal="meta_clicked" from="MarginContainer/ScrollContainer/VBoxContainer/Label14" to="." method="_on_link_meta_clicked"]

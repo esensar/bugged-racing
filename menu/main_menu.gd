@@ -24,3 +24,15 @@ func _on_AboutButton_pressed() -> void:
 
 func _on_GodotButton_pressed() -> void:
 	OS.shell_open("https://godotengine.org")
+
+
+func _on_BlenderButton_pressed() -> void:
+	OS.shell_open("https://www.blender.org")
+
+
+func _on_KritaButton_pressed() -> void:
+	OS.shell_open("https://krita.org")
+
+
+func _on_KenneyButton_pressed() -> void:
+	OS.shell_open("https://kenney.nl")

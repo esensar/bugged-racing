@@ -24,7 +24,7 @@ period = 10.0
 persistence = 0.49
 lacunarity = 2.04
 
-[sub_resource type="NoiseTexture" id=10]
+[sub_resource type="NoiseTexture" id=17]
 flags = 39
 seamless = true
 noise = SubResource( 15 )
@@ -32,9 +32,9 @@ noise_offset = Vector2( -1, -1 )
 
 [sub_resource type="SpatialMaterial" id=16]
 albedo_color = Color( 0.4, 0.301961, 0.00784314, 1 )
-albedo_texture = SubResource( 10 )
+albedo_texture = SubResource( 17 )
 
-[node name="Spatial" instance=ExtResource( 1 )]
+[node name="Spatial2" instance=ExtResource( 1 )]
 
 [node name="PlayerSpawnLocation" parent="." index="1"]
 transform = Transform( -0.951412, 0, -0.307921, 0, 1, 0, 0.307921, 0, -0.951412, -26.0175, 5.60708, 25.9637 )

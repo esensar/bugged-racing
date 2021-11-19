@@ -32,7 +32,7 @@ func _ready() -> void:
 	for _checkpoint_number in range(checkpoint_count):
 		var new_checkpoint: Area = Area.new()
 		new_checkpoint.add_child(_build_checkpoint_collision())
-		new_checkpoint.transform.origin = path.curve.interpolate_baked(section, true)
+		new_checkpoint.transform.origin = path.curve.interpolate_baked(section)
 		section += section_size
 		checkpoints.add_child(new_checkpoint)
 		if GlobalSettings.debug:

@@ -144,7 +144,13 @@ func _physics_process(delta: float):
 		throttle = brake_input
 		brake_input = swap
 
-	if GlobalSettings.automatic_transmission and speed >= 0 and speed < 1 and gear == 1 and brake_input > 0.1:
+	if (
+		GlobalSettings.automatic_transmission
+		and speed >= 0
+		and speed < 1
+		and gear == 1
+		and brake_input > 0.1
+	):
 		_gear_down()
 		_gear_down()
 

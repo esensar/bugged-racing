@@ -28,6 +28,9 @@ export(float) var gear_switch_time = 0.2
 export(Curve) var power_curve = null
 export(Curve) var sound_curve = null
 
+export(float) var automatic_gear_up_threshold = 0.8
+export(float) var automatic_gear_down_threshold = 0.3
+
 var clutch_position: float = 0.0
 var rpm = 0
 var gear = 1
@@ -81,17 +84,25 @@ func _get_gear_ratio():
 func _handle_gear_switch(delta: float):
 	if gear_timer > 0:
 		gear_timer = max(0, gear_timer - delta)
-	if clutch_position > 0.8 or GlobalSettings.auto_clutch:
+	if clutch_position > 0.8 or GlobalSettings.auto_clutch or GlobalSettings.automatic_transmission:
 		if Input.is_action_just_pressed("gear_up"):
-			if gear + 1 <= gear_ratios.size():
-				gear += 1
-				gear_timer = gear_switch_time * (2 - clutch_position)
-				emit_signal("gear_updated", gear)
+			_gear_up()
 		if Input.is_action_just_pressed("gear_down"):
-			if gear - 1 >= -1:
-				gear -= 1
-				gear_timer = gear_switch_time * (2 - clutch_position)
-				emit_signal("gear_updated", gear)
+			_gear_down()
+
+
+func _gear_up():
+	if gear + 1 <= gear_ratios.size():
+		gear += 1
+		gear_timer = gear_switch_time * (2 - clutch_position)
+		emit_signal("gear_updated", gear)
+
+
+func _gear_down():
+	if gear - 1 >= -1:
+		gear -= 1
+		gear_timer = gear_switch_time * (2 - clutch_position)
+		emit_signal("gear_updated", gear)
 
 
 func _has_traction():
@@ -123,14 +134,27 @@ func _physics_process(delta: float):
 	clutch_position = Input.get_action_strength("clutch")
 	_handle_gear_switch(delta)
 	var throttle = Input.get_action_strength("throttle")
-	if GlobalSettings.auto_clutch:
+	var brake_input = Input.get_action_strength("brake")
+
+	var wheel_rpm = traction_wheels[0].get_rpm()
+	var speed = wheel_rpm * 2.0 * PI * rrwheel.wheel_radius / 60.0 * 3600.0 / 1000.0
+
+	if GlobalSettings.automatic_transmission and gear == -1:
+		var swap = throttle
+		throttle = brake_input
+		brake_input = swap
+
+	if GlobalSettings.automatic_transmission and speed >= 0 and speed < 1 and gear == 1 and brake_input > 0.1:
+		_gear_down()
+		_gear_down()
+
+	if GlobalSettings.auto_clutch or GlobalSettings.automatic_transmission:
 		clutch_position = 1 - min(rpm, 900) / 900.0
 
 	if gear_timer > 0:
 		clutch_position = 1
 		throttle = 0
 
-	var wheel_rpm = traction_wheels[0].get_rpm()
 	var final_rpm = abs(wheel_rpm) * final_drive
 	var transmission_rpm = final_rpm * abs(_get_gear_ratio())
 
@@ -154,14 +178,19 @@ func _physics_process(delta: float):
 
 	var final_input = transmission_input * final_drive
 
-	brake = Input.get_action_strength("brake") * max_brake_force
+	brake = brake_input * max_brake_force
 	engine_force = throttle * final_input * max_engine_force
 
 	var handbrake = Input.get_action_strength("handbrake")
 	rrwheel.brake = handbrake * max_brake_force
 	rlwheel.brake = handbrake * max_brake_force
 
-	var speed = wheel_rpm * 2.0 * PI * rrwheel.wheel_radius / 60.0 * 3600.0 / 1000.0
+	if GlobalSettings.automatic_transmission and rpm_factor > automatic_gear_up_threshold:
+		_gear_up()
+	elif GlobalSettings.automatic_transmission and rpm_factor < automatic_gear_down_threshold:
+		if gear > 1:
+			_gear_down()
+
 	emit_signal("speed_updated", speed, speed / expected_max_speed)
 	emit_signal("rpm_updated", rpm, rpm_factor)
 

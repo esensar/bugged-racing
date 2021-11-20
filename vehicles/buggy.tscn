@@ -41,8 +41,16 @@ radial_segments = 4
 rings = 3
 
 [node name="buggy" groups=["car"] instance=ExtResource( 1 )]
-mass = 150.0
+mass = 400.0
 script = ExtResource( 3 )
+max_steer_angle = 30.0
+speed_steer_angle = 14.0
+max_steer_speed = 120.0
+max_engine_force = 160.0
+max_brake_force = 80.0
+throttle_power = 10000.0
+max_rpm_loss_ps = 4000.0
+base_engine_pitch = 0.45
 gear_ratios = [ 3.4, 2.5, 2.0, 1.5, 1.25, 1.0 ]
 power_curve = SubResource( 2 )
 sound_curve = SubResource( 4 )
@@ -55,7 +63,7 @@ wheel_rest_length = 0.68
 wheel_friction_slip = 2.0
 suspension_travel = 1.2
 suspension_stiffness = 4.5
-suspension_max_force = 10000.0
+suspension_max_force = 14000.0
 damping_compression = 0.9
 damping_relaxation = 0.94
 
@@ -72,7 +80,7 @@ wheel_rest_length = 0.68
 wheel_friction_slip = 2.0
 suspension_travel = 1.2
 suspension_stiffness = 4.5
-suspension_max_force = 10000.0
+suspension_max_force = 14000.0
 damping_compression = 0.9
 damping_relaxation = 0.94
 
@@ -86,7 +94,7 @@ wheel_rest_length = 0.68
 wheel_friction_slip = 1.95
 suspension_travel = 1.2
 suspension_stiffness = 4.5
-suspension_max_force = 10000.0
+suspension_max_force = 14000.0
 damping_compression = 0.9
 damping_relaxation = 0.94
 
@@ -98,7 +106,7 @@ wheel_rest_length = 0.68
 wheel_friction_slip = 1.95
 suspension_travel = 1.2
 suspension_stiffness = 4.5
-suspension_max_force = 10000.0
+suspension_max_force = 14000.0
 damping_compression = 0.9
 damping_relaxation = 0.94
 

@@ -84,6 +84,7 @@ extents = Vector3( 226.72, 25.6138, 197.933 )
 [node name="Track" parent="." index="1"]
 track_path = NodePath("../Path")
 checkpoint_count = 30
+checkpoint_polygon = PoolVector2Array( -16, -6, -16, 10, 16, 10, 16, -6 )
 
 [node name="Path" type="Path" parent="." index="2"]
 curve = SubResource( 4 )

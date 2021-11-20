@@ -10,7 +10,7 @@ onready var track = $Track
 
 
 func _ready() -> void:
-	reset_player_to(track.get_last_checkpoint(), player_node)
+	reset_player_to(track.get_furthest_checkpoint(), player_node)
 	add_child(player_node)
 	add_child(gui)
 	var player_camera = CAMERA.instance()
@@ -38,9 +38,9 @@ func reset_player_to(node_to_reset_to: Node, player_node: BuggedVehicle) -> void
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_released("reset_vehicle"):
-		reset_player_to(track.get_last_checkpoint(), player_node)
+		reset_player_to(track.get_furthest_checkpoint(), player_node)
 
 
 func _on_ResetArea_body_entered(body: Node) -> void:
 	if body.get_groups().has("car"):
-		reset_player_to(track.get_last_checkpoint(), body)
+		reset_player_to(track.get_furthest_checkpoint(), body)

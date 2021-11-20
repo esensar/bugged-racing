@@ -22,8 +22,8 @@ onready var checkpoints = $Checkpoints
 onready var path: Path = get_node(track_path)
 
 
-func get_last_checkpoint() -> Node:
-	return checkpoints.get_child(max(0, last_checkpoint))
+func get_furthest_checkpoint() -> Node:
+	return checkpoints.get_child(max(0, furthest_checkpoint))
 
 
 func _ready() -> void:

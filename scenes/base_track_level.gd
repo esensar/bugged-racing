@@ -27,8 +27,13 @@ func spawn_player(player_node: Node, gui: Node) -> void:
 
 
 func reset_player_to(node_to_reset_to: Node, player_node: BuggedVehicle) -> void:
-	player_node.reset_transform = node_to_reset_to.global_transform
-	player_node.reset_transform.origin += node_to_reset_to.global_transform.basis.y * 15
+	player_node.reset_transform = node_to_reset_to.global_transform.looking_at(
+		node_to_reset_to.global_transform.translated(
+			node_to_reset_to.global_transform.basis.z
+		).origin,
+		node_to_reset_to.global_transform.basis.y
+	)
+	player_node.reset_transform.origin += node_to_reset_to.global_transform.basis.y * 5
 
 
 func _on_ResetArea_body_entered(body: Node) -> void:

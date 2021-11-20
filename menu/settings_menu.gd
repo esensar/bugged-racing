@@ -15,8 +15,6 @@ onready var auto_clutch_cb: CheckBox = $MarginContainer/VSplitContainer/CenterCo
 # gdlint: ignore=max-line-length
 onready var automatic_transmission_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/AutomaticTransmissionCheckBox
 # gdlint: ignore=max-line-length
-onready var debug_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/DebugModeCheckBox
-# gdlint: ignore=max-line-length
 onready var fullscreen_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/FullscreenCheckBox
 # gdlint: ignore=max-line-length
 onready var borderless_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BorderlessCheckBox
@@ -26,7 +24,6 @@ func _ready() -> void:
 	master_slider.value = db2linear(AudioServer.get_bus_volume_db(master_bus))
 	sound_slider.value = db2linear(AudioServer.get_bus_volume_db(sound_bus))
 	music_slider.value = db2linear(AudioServer.get_bus_volume_db(music_bus))
-	debug_cb.pressed = GlobalSettings.debug
 	auto_clutch_cb.pressed = GlobalSettings.auto_clutch
 	automatic_transmission_cb.pressed = GlobalSettings.automatic_transmission
 	fullscreen_cb.pressed = false
@@ -35,10 +32,6 @@ func _ready() -> void:
 		_set_fullscreen(true)
 	if OS.get_borderless_window():
 		_set_borderless(true)
-
-
-func _on_debug_toggled(new_state: bool) -> void:
-	GlobalSettings.debug = new_state
 
 
 func _on_autoclutch_toggled(new_state: bool) -> void:

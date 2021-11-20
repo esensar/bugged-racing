@@ -7,8 +7,10 @@ signal wrong_way
 
 export(NodePath) var track_path = null
 export(int, 10, 50) var checkpoint_count = 20
-export(Vector2) var checkpoint_dim = Vector2(20, 15)
-export(Material) var debug_material = null
+export(float) var checkpoint_depth = 5.0
+export(PoolVector2Array) var checkpoint_polygon = PoolVector2Array(
+	[Vector2(-10, -10), Vector2(-10, 10), Vector2(10, 10), Vector2(10, -10)]
+)
 
 var furthest_checkpoint = -1
 var last_checkpoint = -1
@@ -39,14 +41,6 @@ func _ready() -> void:
 		)
 		section += section_size
 		checkpoints.add_child(new_checkpoint)
-		if GlobalSettings.debug:
-			var mesh = CubeMesh.new()
-			mesh.size = Vector3(checkpoint_dim.x, checkpoint_dim.y, 5)
-			if debug_material != null:
-				mesh.material = debug_material
-			var meshinst = MeshInstance.new()
-			meshinst.mesh = mesh
-			new_checkpoint.add_child(meshinst)
 		new_checkpoint.connect("body_entered", self, "_on_body_entered_area", [new_checkpoint])
 	checkpoints.global_transform.origin = path.global_transform.origin
 
@@ -74,11 +68,9 @@ func _on_body_entered_area(body: Node, area: Area) -> void:
 
 
 func _build_checkpoint_collision():
-	var collision = CollisionShape.new()
-	var shape = CylinderShape.new()
-	shape.radius = checkpoint_dim.x
-	shape.height = checkpoint_dim.y
-	collision.shape = shape
+	var collision = CollisionPolygon.new()
+	collision.depth = checkpoint_depth
+	collision.polygon = checkpoint_polygon
 	return collision
 
 

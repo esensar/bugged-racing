@@ -1,0 +1,99 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://scenes/base_track_level.tscn" type="PackedScene" id=2]
+
+[sub_resource type="PlaneMesh" id=11]
+
+[sub_resource type="SpatialMaterial" id=12]
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="ConcavePolygonShape" id=13]
+data = PoolVector3Array( 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1 )
+
+[sub_resource type="Curve3D" id=14]
+_data = {
+"points": PoolVector3Array( 10.4255, 3.62741, 16.6706, -10.4255, -3.62741, -16.6706, -33.0971, 3.09441, 1.77408, 0, 0, 0, 0, 0, 0, -57.093, 0, -13.8155, -22.2798, 0.0414181, 19.7139, 22.2798, -0.0414181, -19.7139, -58.3374, 0, -41.6578, -20.0737, 0.16305, 2.73921, 20.0737, -0.16305, -2.73921, -32.8028, 0.749697, -81.4305, -14.7755, 0, 2.35069, 14.7755, 0, -2.35069, 4.94635, 7.23662, -84.5424, -17.7978, 0, -2.68641, 17.7978, 0, 2.68641, 61.5006, 0, -91.6313, 0.67157, 0, -25.5212, -0.67157, 0, 25.5212, 121.293, 1.90735e-06, -70.1066, 15.0235, 0.627165, -15.8058, -15.0235, -0.627165, 15.8058, 78.6267, 0, -42.2678, -8.73099, 0, -17.4619, 8.73099, 0, 17.4619, 57.4219, 4.51235, -13.2662, 0, 0, 0, 0, 0, 0, 136.564, 5.61479, -6.73579, -19.3015, -2.15428, -5.61835, 19.3015, 2.15428, 5.61835, 183.774, 5.59447, -6.94775, 0.335724, 0, -17.462, -0.335724, 0, 17.462, 210.21, 5.87604, 64.836, 3.97235, -0.0415859, -7.46809, -3.97235, 0.0415859, 7.46809, 201.693, 2.98505, 94.8519, 14.7754, 0, 11.0815, -14.7754, 0, -11.0815, 157.616, 1.88635, 103.695, 60.6821, -0.431276, 10.8129, -60.6821, 0.431276, -10.8129, 109.521, 0, 55.4519, 16.9775, -5.83046, -18.3609, -16.9775, 5.83046, 18.3609, 58.8353, 5.93703, 84.6764, 0, 0, 0, -3.04807, -1.27833, -2.1503, -31.707, 3.888, 4.19654 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="OpenSimplexNoise" id=15]
+seed = -8
+octaves = 9
+period = 10.0
+persistence = 0.49
+lacunarity = 2.04
+
+[sub_resource type="NoiseTexture" id=17]
+flags = 39
+seamless = true
+noise = SubResource( 15 )
+noise_offset = Vector2( -1, -1 )
+
+[sub_resource type="SpatialMaterial" id=16]
+albedo_color = Color( 0.4, 0.301961, 0.00784314, 1 )
+albedo_texture = SubResource( 17 )
+
+[sub_resource type="BoxShape" id=18]
+extents = Vector3( 226.72, 25.6138, 197.933 )
+
+[node name="Spatial2" instance=ExtResource( 2 )]
+
+[node name="Track" parent="." index="1"]
+track_path = NodePath("../Path")
+checkpoint_polygon = PoolVector2Array( -15, -2, -15, 10, 15, 10, 15, -2 )
+
+[node name="StaticBody" type="StaticBody" parent="." index="2"]
+transform = Transform( 99.9785, 0, 0, 0, 99.9785, 0, 0, 0, 99.9785, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody" index="0"]
+transform = Transform( 6.13726, 0, 0, 0, 6.13726, 0, 0, 0, 6.13726, 0, 0, 0 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 12 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="1"]
+transform = Transform( 6.13726, 0, 0, 0, 6.13726, 0, 0, 0, 6.13726, 0, 0, 0 )
+shape = SubResource( 13 )
+
+[node name="Path" type="Path" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00166, 0 )
+curve = SubResource( 14 )
+
+[node name="Road" type="CSGPolygon" parent="Path" index="0"]
+use_collision = true
+invert_faces = true
+polygon = PoolVector2Array( -8, 0, -2, -0.1, 2, -0.1, 8, 0 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource( 16 )
+
+[node name="Slope" type="CSGPolygon" parent="Path" index="1"]
+use_collision = true
+polygon = PoolVector2Array( -12, -20, -10, 1.25, -8, 0.75, -8, -1, 8, -1, 8, 0.75, 10, 1.25, 12, -20 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+
+[node name="ResetArea" type="Area" parent="." index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 81.1217, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="ResetArea" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -106.576, 0 )
+shape = SubResource( 18 )
+
+[connection signal="body_entered" from="ResetArea" to="." method="_on_ResetArea_body_entered"]

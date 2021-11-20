@@ -70,9 +70,9 @@ func _ready():
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
 	if reset_transform != Transform.IDENTITY:
-		state.set_transform(reset_transform)
 		state.linear_velocity = Vector3.ZERO
 		state.angular_velocity = Vector3.ZERO
+		state.set_transform(reset_transform)
 		reset_transform = Transform.IDENTITY
 
 

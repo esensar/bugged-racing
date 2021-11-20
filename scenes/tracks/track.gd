@@ -32,14 +32,16 @@ func _ready() -> void:
 	for _checkpoint_number in range(checkpoint_count):
 		var new_checkpoint: Area = Area.new()
 		new_checkpoint.add_child(_build_checkpoint_collision())
-		new_checkpoint.transform.origin = path.curve.interpolate_baked(section)
+		new_checkpoint.look_at_from_position(
+			checkpoints.to_global(path.curve.interpolate_baked(section)),
+			checkpoints.to_global(path.curve.interpolate_baked(section + 0.01)),
+			path.curve.interpolate_baked_up_vector(section)
+		)
 		section += section_size
 		checkpoints.add_child(new_checkpoint)
 		if GlobalSettings.debug:
-			var mesh = CylinderMesh.new()
-			mesh.top_radius = checkpoint_dim.y
-			mesh.bottom_radius = checkpoint_dim.y
-			mesh.height = checkpoint_dim.x
+			var mesh = CubeMesh.new()
+			mesh.size = Vector3(checkpoint_dim.x, checkpoint_dim.y, 5)
 			if debug_material != null:
 				mesh.material = debug_material
 			var meshinst = MeshInstance.new()

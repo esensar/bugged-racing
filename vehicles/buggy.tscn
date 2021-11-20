@@ -51,10 +51,13 @@ sound_curve = SubResource( 4 )
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.6
-wheel_rest_length = 0.4
-wheel_friction_slip = 1.75
-suspension_travel = 1.0
-suspension_stiffness = 5.95
+wheel_rest_length = 0.68
+wheel_friction_slip = 2.0
+suspension_travel = 1.2
+suspension_stiffness = 4.5
+suspension_max_force = 10000.0
+damping_compression = 0.9
+damping_relaxation = 0.94
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23227, 0 )
@@ -65,10 +68,13 @@ transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950754
 use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.6
-wheel_rest_length = 0.4
-wheel_friction_slip = 1.75
-suspension_travel = 1.0
-suspension_stiffness = 5.95
+wheel_rest_length = 0.68
+wheel_friction_slip = 2.0
+suspension_travel = 1.2
+suspension_stiffness = 4.5
+suspension_max_force = 10000.0
+damping_compression = 0.9
+damping_relaxation = 0.94
 
 [node name="front_right" parent="front_right" index="0"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -76,19 +82,25 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 [node name="rear_left" parent="." index="5"]
 use_as_traction = true
 wheel_radius = 0.6
-wheel_rest_length = 0.4
-wheel_friction_slip = 1.8
-suspension_travel = 1.0
-suspension_stiffness = 5.95
+wheel_rest_length = 0.68
+wheel_friction_slip = 1.95
+suspension_travel = 1.2
+suspension_stiffness = 4.5
+suspension_max_force = 10000.0
+damping_compression = 0.9
+damping_relaxation = 0.94
 
 [node name="rear_right" parent="." index="6"]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950755, 0.503756, -1.41438 )
 use_as_traction = true
 wheel_radius = 0.6
-wheel_rest_length = 0.4
-wheel_friction_slip = 1.8
-suspension_travel = 1.0
-suspension_stiffness = 5.95
+wheel_rest_length = 0.68
+wheel_friction_slip = 1.95
+suspension_travel = 1.2
+suspension_stiffness = 4.5
+suspension_max_force = 10000.0
+damping_compression = 0.9
+damping_relaxation = 0.94
 
 [node name="rear_right" parent="rear_right" index="0"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )

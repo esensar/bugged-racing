@@ -11,7 +11,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 2.58337, 0, 1, Vector2( 0.221698, 0.572727 ), 2.
 _data = [ Vector2( 0, 0.492045 ), 0.0, 0.0, 0, 0, Vector2( 0.15566, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.212264, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.29717, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.410377, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.481132, 0.701136 ), 0.0, 0.0, 0, 0, Vector2( 0.566038, 0.282955 ), 0.0, 0.0, 0, 0, Vector2( 0.589623, 0.6375 ), 0.0, 0.0, 0, 0, Vector2( 0.660377, 0.373864 ), 0.0, 0.0, 0, 0, Vector2( 0.669811, 0.5375 ), 0.0, 0.0, 0, 0, Vector2( 0.764151, 0.0284091 ), 0.0, 0.0, 0, 0, Vector2( 0.811321, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.938679, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.417676, 0.42291, 1.58775 )
+extents = Vector3( 0.417676, 0.361785, 1.51891 )
 
 [sub_resource type="AudioStreamGenerator" id=2]
 mix_rate = 5500.0
@@ -42,9 +42,13 @@ radial_segments = 4
 rings = 3
 
 [node name="beetlecar" groups=["car"] instance=ExtResource( 2 )]
-mass = 140.0
+mass = 175.0
 script = ExtResource( 1 )
-EXPECTED_MAX_SPEED = 180.0
+max_steer_angle = 18.0
+max_steer_speed = 75.0
+max_engine_force = 100.0
+max_brake_force = 60.0
+base_engine_pitch = 0.38
 gear_ratios = [ 2.95, 2.2, 1.76, 1.43, 1.25, 1.0 ]
 final_drive = 5.0
 max_rpm = 8000.0
@@ -55,17 +59,23 @@ sound_curve = SubResource( 4 )
 [node name="rear_right" parent="." index="0"]
 use_as_traction = true
 wheel_radius = 0.38
-wheel_rest_length = 0.5
-wheel_friction_slip = 4.0
-suspension_travel = 0.5
+wheel_rest_length = 0.35
+wheel_friction_slip = 5.0
+suspension_travel = 0.4
+suspension_stiffness = 8.0
+damping_compression = 0.75
+damping_relaxation = 0.8
 
 [node name="rear_left" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.375, -0.83483 )
 use_as_traction = true
 wheel_radius = 0.38
-wheel_rest_length = 0.5
-wheel_friction_slip = 4.0
-suspension_travel = 0.5
+wheel_rest_length = 0.35
+wheel_friction_slip = 5.0
+suspension_travel = 0.4
+suspension_stiffness = 8.0
+damping_compression = 0.75
+damping_relaxation = 0.8
 
 [node name="rear_left" parent="rear_left" index="0"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -73,23 +83,29 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 [node name="front_right" parent="." index="4"]
 use_as_steering = true
 wheel_radius = 0.38
-wheel_rest_length = 0.5
-wheel_friction_slip = 4.0
-suspension_travel = 0.5
+wheel_rest_length = 0.35
+wheel_friction_slip = 5.0
+suspension_travel = 0.4
+suspension_stiffness = 8.0
+damping_compression = 0.75
+damping_relaxation = 0.8
 
 [node name="front_left" parent="." index="5"]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.375, 1.19336 )
 use_as_steering = true
 wheel_radius = 0.38
-wheel_rest_length = 0.5
-wheel_friction_slip = 4.0
-suspension_travel = 0.5
+wheel_rest_length = 0.35
+wheel_friction_slip = 5.0
+suspension_travel = 0.4
+suspension_stiffness = 8.0
+damping_compression = 0.75
+damping_relaxation = 0.8
 
 [node name="front_left" parent="front_left" index="0"]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="6"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.843709, 0.205449 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.899997, 0.205449 )
 shape = SubResource( 1 )
 
 [node name="engine_sound_player" type="AudioStreamPlayer3D" parent="." index="7"]

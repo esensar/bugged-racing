@@ -57,6 +57,7 @@ speed_steer_angle = 9.0
 max_engine_force = 280.0
 max_brake_force = 95.0
 throttle_power = 8000.0
+max_rpm_loss_ps = 2200.0
 base_engine_pitch = 0.65
 gear_ratios = [ 3.5, 2.95, 2.64, 2.0, 1.67, 1.42 ]
 final_drive = 4.36

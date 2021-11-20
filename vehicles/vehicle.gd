@@ -10,8 +10,6 @@ export(float) var speed_steer_angle = 10
 export(float) var max_steer_speed = 100.0
 export(float) var max_steer_input = 80.0
 
-export(Curve) var steer_curve = null
-
 export(float) var max_engine_force = 85.0
 export(float) var max_brake_force = 50.0
 export(float) var throttle_power = 6000.0
@@ -208,11 +206,6 @@ func _physics_process(delta: float):
 	)
 	if abs(steering_input) < 0.05:
 		steering_input = 0.0
-	elif steer_curve:
-		if steering_input < 0.0:
-			steering_input = -steer_curve.interpolate_baked(-steering_input)
-		else:
-			steering_input = steer_curve.interpolate_baked(steering_input)
 
 	var steer_speed_factor = clamp(speed / max_steer_speed, 0.0, 1.0)
 

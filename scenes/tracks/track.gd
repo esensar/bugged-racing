@@ -29,7 +29,7 @@ func get_last_checkpoint() -> Node:
 func _ready() -> void:
 	start_time = OS.get_ticks_msec()
 	var length = path.curve.get_baked_length()
-	var section_size = 1.0 * length / checkpoint_count
+	var section_size = 1 * length / checkpoint_count
 	var section = 0.0
 	for _checkpoint_number in range(checkpoint_count):
 		var new_checkpoint: Area = Area.new()

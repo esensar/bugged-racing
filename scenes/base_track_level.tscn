@@ -69,8 +69,6 @@ margin_bottom = 143.0
 custom_fonts/font = SubResource( 2 )
 text = "Exit to main menu"
 
-[node name="PlayerSpawnLocation" type="Position3D" parent="."]
-
 [node name="Track" parent="." instance=ExtResource( 6 )]
 
 [connection signal="pressed" from="PauseMenu/MarginContainer/VSplitContainer/VBoxContainer/ContinueButton" to="PauseMenu" method="_on_ContinueButton_pressed"]

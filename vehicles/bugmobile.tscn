@@ -1,17 +1,14 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://vehicles/tire_smoke.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/bugmobile.glb" type="PackedScene" id=2]
 [ext_resource path="res://vehicles/vehicle.gd" type="Script" id=3]
 
-[sub_resource type="Curve" id=21]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.811321, 0.836364 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.581818 ), 0.0, 0.0, 0, 0 ]
-
 [sub_resource type="Curve" id=18]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.179245, 0.584091 ), -0.306612, -0.306612, 0, 0, Vector2( 0.603774, 0.954545 ), 0.0, 0.0, 0, 0, Vector2( 0.806604, 0.989773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.179245, 0.584091 ), 4.91185, 4.91185, 0, 0, Vector2( 0.603774, 0.954545 ), 6.05975, 6.05975, 0, 0, Vector2( 0.806604, 0.989773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=19]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.127358, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.174528, 0.65 ), 0.0, 0.0, 0, 0, Vector2( 0.212264, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.353774, 0.35 ), 0.0, 0.0, 0, 0, Vector2( 0.363208, 0.968182 ), 0.0, 0.0, 0, 0, Vector2( 0.485849, 0.313636 ), 0.0, 0.0, 0, 0, Vector2( 0.627358, 0.140909 ), 0.0, 0.0, 0, 0, Vector2( 0.721698, 0.259091 ), 0.0, 0.0, 0, 0, Vector2( 0.783019, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.872642, 0.794318 ), 0.0, 0.0, 0, 0, Vector2( 0.915094, 0.248864 ), 0.0, 0.0, 0, 0, Vector2( 0.933962, 0.5125 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.476136 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.127358, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.174528, 0.65 ), 0.0, 0.0, 0, 0, Vector2( 0.212264, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.353774, 0.35 ), 0.0, 0.0, 0, 0, Vector2( 0.363208, 0.968182 ), 0.0, 0.0, 0, 0, Vector2( 0.485849, 0.313636 ), 0.0, 0.0, 0, 0, Vector2( 0.627358, 0.140909 ), 0.0, 0.0, 0, 0, Vector2( 0.721698, 0.259091 ), 0.0, 0.0, 0, 0, Vector2( 0.745283, 0.623864 ), 0.0, 0.0, 0, 0, Vector2( 0.872642, 0.794318 ), 0.0, 0.0, 0, 0, Vector2( 0.915094, 0.248864 ), 0.0, 0.0, 0, 0, Vector2( 0.933962, 0.5125 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CapsuleShape" id=20]
 radius = 0.274866
@@ -55,10 +52,11 @@ rings = 3
 [node name="bugmobile" groups=["car"] instance=ExtResource( 2 )]
 mass = 600.0
 script = ExtResource( 3 )
-max_steer_angle = 20.0
-speed_steer_angle = 9.0
-steer_curve = SubResource( 21 )
-max_engine_force = 280.0
+max_steer_angle = 16.0
+speed_steer_angle = 8.0
+max_steer_speed = 60.0
+max_steer_input = 50.0
+max_engine_force = 320.0
 max_brake_force = 95.0
 throttle_power = 8000.0
 max_rpm_loss_ps = 2200.0

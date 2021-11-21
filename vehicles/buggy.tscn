@@ -5,7 +5,7 @@
 [ext_resource path="res://vehicles/vehicle.gd" type="Script" id=3]
 
 [sub_resource type="Curve" id=2]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0660377, 0.243255 ), 0.0, 0.0, 0, 0, Vector2( 0.240566, 0.315982 ), 0.0, 0.0, 0, 0, Vector2( 0.45283, 0.927273 ), 0.0, 0.0, 0, 0, Vector2( 0.891509, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0660377, 0.243255 ), 0.0, 0.0, 0, 0, Vector2( 0.25, 0.563636 ), 4.02975, 4.02975, 0, 0, Vector2( 0.518868, 0.761364 ), 3.22818, 3.22818, 0, 0, Vector2( 0.849057, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0849057, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.15566, 0.746591 ), 0.0, 0.0, 0, 0, Vector2( 0.349057, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.382075, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.400943, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.438679, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
@@ -54,6 +54,8 @@ base_engine_pitch = 0.45
 gear_ratios = [ 3.4, 2.5, 2.0, 1.5, 1.25, 1.0 ]
 power_curve = SubResource( 2 )
 sound_curve = SubResource( 4 )
+automatic_gear_up_threshold = 0.85
+automatic_gear_down_threshold = 0.4
 
 [node name="front_left" parent="." index="1"]
 use_as_traction = true
@@ -91,7 +93,7 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 use_as_traction = true
 wheel_radius = 0.6
 wheel_rest_length = 0.68
-wheel_friction_slip = 1.95
+wheel_friction_slip = 1.9
 suspension_travel = 1.2
 suspension_stiffness = 4.5
 suspension_max_force = 14000.0
@@ -103,7 +105,7 @@ transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950755
 use_as_traction = true
 wheel_radius = 0.6
 wheel_rest_length = 0.68
-wheel_friction_slip = 1.95
+wheel_friction_slip = 1.9
 suspension_travel = 1.2
 suspension_stiffness = 4.5
 suspension_max_force = 14000.0

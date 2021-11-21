@@ -47,6 +47,10 @@ config/icon="res://icon.png"
 
 GlobalSettings="*res://settings/GlobalSettings.gd"
 
+[editor_plugins]
+
+enabled=PoolStringArray(  )
+
 [gui]
 
 theme/use_hidpi=true

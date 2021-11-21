@@ -10,8 +10,9 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0660377, 0.243255 ), 0.0, 
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0849057, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.15566, 0.746591 ), 0.0, 0.0, 0, 0, Vector2( 0.349057, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.382075, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.400943, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.438679, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.521885, 0.334919, 1.78849 )
+[sub_resource type="CapsuleShape" id=11]
+radius = 0.452181
+height = 2.78888
 
 [sub_resource type="AudioStreamGenerator" id=3]
 mix_rate = 5500.0
@@ -71,7 +72,7 @@ damping_relaxation = 0.94
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23227, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 11 )
 
 [node name="front_right" parent="." index="4"]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950754, 0.503756, 1.41438 )

@@ -10,8 +10,9 @@ _data = [ Vector2( 0, 0 ), 0.0, 3.60634, 0, 1, Vector2( 0.15566, 0.561364 ), 1.5
 [sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 0.492045 ), 0.0, 0.0, 0, 0, Vector2( 0.15566, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.212264, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.29717, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.410377, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.481132, 0.701136 ), 0.0, 0.0, 0, 0, Vector2( 0.566038, 0.282955 ), 0.0, 0.0, 0, 0, Vector2( 0.589623, 0.6375 ), 0.0, 0.0, 0, 0, Vector2( 0.660377, 0.373864 ), 0.0, 0.0, 0, 0, Vector2( 0.669811, 0.5375 ), 0.0, 0.0, 0, 0, Vector2( 0.764151, 0.0284091 ), 0.0, 0.0, 0, 0, Vector2( 0.811321, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.938679, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.417676, 0.306859, 1.33114 )
+[sub_resource type="CapsuleShape" id=11]
+radius = 0.394377
+height = 2.03536
 
 [sub_resource type="AudioStreamGenerator" id=2]
 mix_rate = 5500.0
@@ -112,7 +113,7 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="." index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.954429, 0.205449 )
-shape = SubResource( 1 )
+shape = SubResource( 11 )
 
 [node name="engine_sound_player" type="AudioStreamPlayer3D" parent="." index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14201, 0.968668 )

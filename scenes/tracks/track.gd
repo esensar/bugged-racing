@@ -18,6 +18,8 @@ var last_checkpoint = -1
 var start_time = 0
 var current_time = 0
 
+var lap_done = false
+
 onready var checkpoints = $Checkpoints
 onready var path: Path = get_node(track_path)
 
@@ -60,11 +62,16 @@ func _on_body_entered_area(body: Node, area: Area) -> void:
 		if furthest_checkpoint == area.get_index() - 1:
 			furthest_checkpoint += 1
 
-		if furthest_checkpoint == checkpoints.get_child_count() - 1:
+		if lap_done and furthest_checkpoint == 0:
 			emit_signal("lap_complete", current_time)
 			start_time = OS.get_ticks_msec()
 			_update_time()
+			lap_done = false
+
+		if furthest_checkpoint == checkpoints.get_child_count() - 1:
+			lap_done = true
 			furthest_checkpoint = -1
+			last_checkpoint = -1
 
 
 func _build_checkpoint_collision():

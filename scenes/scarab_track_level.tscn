@@ -43,7 +43,7 @@ points = PoolVector3Array( 0, -0.143305, -9.98867, 0, 0.142717, -9.98867, 0.9777
 [node name="Track" parent="." index="1"]
 track_path = NodePath("../Path")
 checkpoint_count = 25
-checkpoint_polygon = PoolVector2Array( -10, -0.1, -4, 10, 4, 10, 10, -0.1 )
+checkpoint_polygon = PoolVector2Array( -10, -0.1, -4, 15, 4, 15, 10, -0.1 )
 
 [node name="StaticBody" type="StaticBody" parent="." index="2"]
 transform = Transform( 99.9785, 0, 0, 0, 99.9785, 0, 0, 0, 99.9785, 0, 0, 0 )
@@ -65,7 +65,7 @@ material_override = SubResource( 22 )
 
 [node name="CSGPolygon" type="CSGPolygon" parent="Path/CSGCombiner" index="0"]
 invert_faces = true
-polygon = PoolVector2Array( -5, 0, -5, 1, 5, 1, 5, 0 )
+polygon = PoolVector2Array( -5, 0.01, -5, 1, 5, 1, 5, 0.01 )
 mode = 2
 path_node = NodePath("../..")
 path_interval_type = 0

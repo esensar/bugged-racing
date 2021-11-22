@@ -12,7 +12,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.127358, 1 ), 0.0, 0.0, 0, 
 
 [sub_resource type="CapsuleShape" id=20]
 radius = 0.274866
-height = 3.59516
+height = 2.75974
 
 [sub_resource type="AudioStreamGenerator" id=12]
 mix_rate = 5500.0
@@ -70,7 +70,7 @@ sound_curve = SubResource( 19 )
 [node name="rear_left" parent="." index="0"]
 use_as_traction = true
 wheel_radius = 0.52
-wheel_rest_length = 0.4
+wheel_rest_length = 0.47
 wheel_friction_slip = 8.0
 suspension_travel = 0.4
 suspension_stiffness = 9.0
@@ -81,9 +81,9 @@ damping_relaxation = 0.9
 [node name="front_left" parent="." index="2"]
 use_as_steering = true
 wheel_radius = 0.35
-wheel_rest_length = 0.36
+wheel_rest_length = 0.45
 wheel_friction_slip = 7.0
-suspension_travel = 0.36
+suspension_travel = 0.45
 suspension_stiffness = 12.0
 suspension_max_force = 7000.0
 damping_compression = 0.9
@@ -92,9 +92,9 @@ damping_relaxation = 0.92
 [node name="front_right" parent="." index="4"]
 use_as_steering = true
 wheel_radius = 0.35
-wheel_rest_length = 0.36
+wheel_rest_length = 0.45
 wheel_friction_slip = 7.0
-suspension_travel = 0.36
+suspension_travel = 0.45
 suspension_stiffness = 12.0
 suspension_max_force = 7000.0
 damping_compression = 0.9
@@ -103,7 +103,7 @@ damping_relaxation = 0.92
 [node name="rear_right" parent="." index="5"]
 use_as_traction = true
 wheel_radius = 0.52
-wheel_rest_length = 0.4
+wheel_rest_length = 0.47
 wheel_friction_slip = 8.0
 suspension_travel = 0.4
 suspension_stiffness = 9.0

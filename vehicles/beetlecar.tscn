@@ -43,16 +43,16 @@ radial_segments = 4
 rings = 3
 
 [node name="beetlecar" groups=["car"] instance=ExtResource( 2 )]
-mass = 200.0
+mass = 340.0
 script = ExtResource( 1 )
 max_steer_angle = 18.0
 speed_steer_angle = 8.0
 max_steer_speed = 60.0
 max_steer_input = 60.0
-max_engine_force = 90.0
+max_engine_force = 100.0
 max_brake_force = 60.0
 base_engine_pitch = 0.38
-gear_ratios = [ 2.95, 2.2, 1.76, 1.43, 1.25, 1.0 ]
+gear_ratios = [ 2.99, 2.5, 1.98, 1.56, 1.32, 1.12 ]
 final_drive = 4.0
 max_rpm = 8000.0
 gear_switch_time = 0.5
@@ -61,7 +61,7 @@ sound_curve = SubResource( 4 )
 
 [node name="rear_right" parent="." index="0"]
 use_as_traction = true
-wheel_roll_influence = 0.06
+wheel_roll_influence = 0.01
 wheel_radius = 0.38
 wheel_rest_length = 0.3
 wheel_friction_slip = 12.0
@@ -73,7 +73,7 @@ damping_relaxation = 0.8
 [node name="rear_left" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.375, -0.83483 )
 use_as_traction = true
-wheel_roll_influence = 0.06
+wheel_roll_influence = 0.01
 wheel_radius = 0.38
 wheel_rest_length = 0.3
 wheel_friction_slip = 12.0
@@ -87,7 +87,7 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="front_right" parent="." index="4"]
 use_as_steering = true
-wheel_roll_influence = 0.06
+wheel_roll_influence = 0.01
 wheel_radius = 0.38
 wheel_rest_length = 0.3
 wheel_friction_slip = 10.0
@@ -99,7 +99,7 @@ damping_relaxation = 0.8
 [node name="front_left" parent="." index="5"]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.375, 1.19336 )
 use_as_steering = true
-wheel_roll_influence = 0.06
+wheel_roll_influence = 0.01
 wheel_radius = 0.38
 wheel_rest_length = 0.3
 wheel_friction_slip = 10.0

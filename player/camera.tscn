@@ -4,7 +4,7 @@
 
 [node name="camera" type="Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.88022, 23.0639 )
-far = 450.0
+far = 1000.0
 script = ExtResource( 1 )
 target_distance = 12.0
 target_height = 6.0

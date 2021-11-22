@@ -4,6 +4,7 @@ extends Panel
 func _ready() -> void:
 	# gdlint: ignore=max-line-length
 	$MarginContainer/VSplitContainer/VSplitContainer/CenterContainer/VBoxContainer/StartButton.grab_focus()
+	MusicPlayer.play_theme("main")
 
 
 func _on_StartButton_pressed() -> void:

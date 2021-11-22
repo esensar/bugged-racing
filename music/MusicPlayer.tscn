@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://music/MusicPlayer.gd" type="Script" id=1]
+[ext_resource path="res://assets/music/main_theme.wav" type="AudioStream" id=2]
+
+[node name="Node" type="Node"]
+script = ExtResource( 1 )
+main_theme = ExtResource( 2 )
+
+[node name="Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+bus = "Music"

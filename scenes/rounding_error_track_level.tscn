@@ -219,4 +219,9 @@ transform = Transform( 10.1959, 0, 0, 0, 0.278844, 0, 0, 0, 10.1959, -0.0041151,
 mesh = SubResource( 22 )
 material/0 = null
 
+[node name="DirectionalLight" type="DirectionalLight" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 114.863, 0 )
+light_energy = 10.0
+shadow_enabled = true
+
 [connection signal="body_entered" from="ResetArea" to="." method="_on_ResetArea_body_entered"]

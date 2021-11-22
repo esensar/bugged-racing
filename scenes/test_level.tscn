@@ -86,3 +86,5 @@ path_local = true
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="." index="4"]

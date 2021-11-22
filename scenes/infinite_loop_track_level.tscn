@@ -152,4 +152,13 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="1"]
 shape = SubResource( 11 )
 
+[node name="OmniLight" type="OmniLight" parent="." index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 152.638, 0 )
+light_energy = 2.0
+light_indirect_energy = 9.073
+light_specular = 0.0
+shadow_bias = 5.0
+shadow_contact = 10.0
+omni_range = 386.504
+
 [connection signal="body_entered" from="ResetArea" to="." method="_on_ResetArea_body_entered"]

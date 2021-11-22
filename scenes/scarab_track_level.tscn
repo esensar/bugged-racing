@@ -69,7 +69,7 @@ polygon = PoolVector2Array( -5, 0.01, -5, 1, 5, 1, 5, 0.01 )
 mode = 2
 path_node = NodePath("../..")
 path_interval_type = 0
-path_interval = 1.0
+path_interval = 5.0
 path_simplify_angle = 0.0
 path_rotation = 2
 path_local = true
@@ -81,6 +81,7 @@ material = SubResource( 22 )
 [node name="CSGBox" type="CSGBox" parent="Path/CSGCombiner" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
 operation = 2
+snap = 0.1
 width = 589.656
 height = 19.4136
 depth = 443.585
@@ -202,3 +203,8 @@ radius = 4.51348
 height = 16.3311
 sides = 20
 material = SubResource( 22 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="." index="13"]
+transform = Transform( 0.851306, 0, -0.52467, 0, 1, 0, 0.52467, 0, 0.851306, 0, 35.584, 0 )
+light_energy = 5.0
+shadow_enabled = true

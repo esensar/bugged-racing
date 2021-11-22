@@ -13,4 +13,4 @@
                         1/4 :-d :-a 1/8 :-e :-c 1/4 :-g :d :-f 1/8 :e :g 1/4 :f :a 1/16 :g 1/4 :f  1/2 :c]) [:piano :violin :acoustic-bass])))
 
 (concat
-  (map intro [70 100]))
+  (map intro [70]))

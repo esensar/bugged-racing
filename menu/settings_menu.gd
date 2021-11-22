@@ -21,6 +21,7 @@ onready var borderless_cb: CheckBox = $MarginContainer/VSplitContainer/CenterCon
 
 
 func _ready() -> void:
+	auto_clutch_cb.grab_focus()
 	master_slider.value = db2linear(AudioServer.get_bus_volume_db(master_bus))
 	sound_slider.value = db2linear(AudioServer.get_bus_volume_db(sound_bus))
 	music_slider.value = db2linear(AudioServer.get_bus_volume_db(music_bus))

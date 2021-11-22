@@ -7,10 +7,11 @@ const TEST_SCENE = preload("res://scenes/test_level.tscn")
 const INFINITE_LOOP_SCENE = preload("res://scenes/infinite_loop_track_level.tscn")
 const ROUNDING_ERROR = preload("res://scenes/rounding_error_track_level.tscn")
 const SCARAB = preload("res://scenes/scarab_track_level.tscn")
+const RACE_CONDITION = preload("res://scenes/race_condition_track_level.tscn")
 const GUI_SCENE = preload("res://player/gui.tscn")
 
 var vehicles = [BEETLE, BUGGY, BUGMOBILE]
-var tracks = [INFINITE_LOOP_SCENE, ROUNDING_ERROR, SCARAB, TEST_SCENE]
+var tracks = [INFINITE_LOOP_SCENE, ROUNDING_ERROR, RACE_CONDITION, SCARAB, TEST_SCENE]
 
 # gdlint: ignore=max-line-length
 onready var vehicle_selector = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/VehicleSelector
@@ -26,6 +27,7 @@ func _ready() -> void:
 
 	track_selector.add_item("Infinite Loop")
 	track_selector.add_item("Rounding Error")
+	track_selector.add_item("Race Condition")
 	track_selector.add_item("Scarab")
 	track_selector.add_item("Testing grounds")
 

@@ -1,0 +1,213 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://scenes/base_track_level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/tyretexture.png" type="Texture" id=2]
+[ext_resource path="res://assets/roadtexture.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 0.0980392, 0.247059, 0.00392157, 1 )
+
+[sub_resource type="PlaneMesh" id=12]
+material = SubResource( 11 )
+size = Vector2( 600, 600 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( -300, 0, -300, -300, 0, 300, 300, 0, -300, 300, 0, 300 )
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 0.15, 10, 1 )
+
+[sub_resource type="PlaneMesh" id=2]
+material = SubResource( 1 )
+size = Vector2( 600, 600 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 290.122, 2.1347, 299.772 )
+
+[sub_resource type="Curve3D" id=5]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 1, 0, 128, -128, 0, -0.2, 128, 0, 0.2, 129, 0, 128, 0, 0, 64.3, 0, 0, -64.3, 256, 0, 1, 127.8, 0, -0.4, -127.8, 0, 0.4, 128.388, 0, -127.842, 0, 0, 0, 0, 0, 0, 0.565611, 0, -127.842, 128.1, 0, -0.4, -128.1, 0, 0.4, -127.658, 0, -127.842, 0, 0, -63.9, 0, 0, 63.9, -255.882, 0, -0.422239, -128.7, 0, 0.4, 128.7, 0, -0.4, -127.658, 0, 128.204, 0, 0, 0, 0, 0, 0, 1, 0, 128 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Shader" id=9]
+code = "shader_type spatial;
+
+uniform sampler2D road_texture;
+
+void fragment() {
+	vec2 road_uv = vec2(UV.y * 5.0, UV.x * 0.02);
+	
+	vec4 color = texture(road_texture, road_uv);
+	ALBEDO = color.rgb;
+	METALLIC = 0.0;
+	ROUGHNESS = 0.8;
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+shader_param/road_texture = ExtResource( 3 )
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
+albedo_color = Color( 0.67451, 0.992157, 1, 0.168627 )
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_color = Color( 0.584314, 0.584314, 0.584314, 1 )
+metallic = 1.0
+roughness = 0.63
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
+
+[sub_resource type="SpatialMaterial" id=14]
+albedo_color = Color( 0.294118, 0.243137, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=15]
+albedo_color = Color( 0.203922, 0.203922, 0.203922, 1 )
+
+[node name="Spatial" instance=ExtResource( 1 )]
+
+[node name="Track" parent="." index="1"]
+track_path = NodePath("../Path")
+checkpoint_polygon = PoolVector2Array( -20, -4, -20, 10, 20, 10, 20, -4 )
+
+[node name="Grass" type="StaticBody" parent="." index="2"]
+transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.4, 0, 5, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Grass" index="0"]
+mesh = SubResource( 12 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Grass" index="1"]
+shape = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="." index="3"]
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody" index="0"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="1"]
+shape = SubResource( 3 )
+
+[node name="ResetArea" type="Area" parent="." index="4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="ResetArea" index="0"]
+shape = SubResource( 4 )
+
+[node name="Path" type="Path" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0 )
+curve = SubResource( 5 )
+
+[node name="Track" type="CSGPolygon" parent="Path" index="0"]
+use_collision = true
+polygon = PoolVector2Array( -20, -4, 20, 4, -19, -4 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 1.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource( 10 )
+
+[node name="LeftRail" type="CSGPolygon" parent="Path" index="1"]
+use_collision = true
+polygon = PoolVector2Array( -21, 3, -20, 3, -20, -4, -21, -4 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource( 7 )
+
+[node name="LeftRailTop" type="CSGPolygon" parent="Path" index="2"]
+use_collision = true
+polygon = PoolVector2Array( -21, 4, -20, 4, -20, 3, -21, 3 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource( 8 )
+
+[node name="RightRail" type="CSGPolygon" parent="Path" index="3"]
+use_collision = true
+polygon = PoolVector2Array( 20, 4, 20, 7, 22, 7, 22, 4 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource( 13 )
+
+[node name="Seats" type="CSGPolygon" parent="Path" index="4"]
+use_collision = true
+polygon = PoolVector2Array( 40, 4, 60, 20, 22, 7, 22, 4 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 20.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource( 14 )
+
+[node name="Walls" type="CSGPolygon" parent="Path" index="5"]
+use_collision = true
+polygon = PoolVector2Array( 40, 4, 60, 20, 70, 7, 70, 50, 60, 40, 40, 4 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 20.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+material = SubResource( 15 )
+
+[node name="Roof" type="CSGPolygon" parent="Path" index="6"]
+use_collision = true
+polygon = PoolVector2Array( 70, 50, -50, 70, 20, 68 )
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 20.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = true
+
+[node name="DirectionalLight" type="DirectionalLight" parent="." index="6"]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 69, 0 )
+shadow_enabled = true
+directional_shadow_max_distance = 1000.0
+
+[connection signal="body_entered" from="ResetArea" to="." method="_on_ResetArea_body_entered"]

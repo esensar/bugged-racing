@@ -44,4 +44,4 @@ jobs:
           ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
         run: |
-          ./butler push ./build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:$EXPORT_DIR_NAME
+          ./butler push ./build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:mac

@@ -1,0 +1,47 @@
+name: "Deploy signed MacOS to Itch.io"
+
+on:
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: 3.4
+
+jobs:
+  export:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Step taken from https://github.com/robpc/maze-test-game
+      - name: Build game
+        env:
+          PRESET: Mac OSX
+          BUILD_DIR: build/mac
+        run: |
+          wget -q https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_osx.universal.zip
+          unzip Godot_v${GODOT_VERSION}-stable_osx.universal.zip
+          export XDG_DATA_HOME="$(pwd)/xdg_data_home"
+          export TEMPLATES_DIR="${XDG_DATA_HOME}/godot/templates/${GODOT_VERSION}.stable/"
+          mkdir -p ${TEMPLATES_DIR}
+          wget -q https://downloads.tuxfamily.org/godotengine/${GODOT_VERSION}/Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
+          mv templates/* ${TEMPLATES_DIR}
+          mkdir -p ${BUILD_DIR}
+          Godot.app/Contents/MacOS/Godot --export ${PRESET}
+      - name: Install butler
+        run: |
+          # -L follows redirects
+          # -O specifies output name
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          # GNU unzip tends to not set the executable bit even though it's set in the .zip
+          chmod +x butler
+          # just a sanity check run (and also helpful in case you're sharing CI logs)
+          ./butler -V
+      - name: Itch.io deploy
+        env:
+          ITCHIO_USERNAME: ${{ secrets.ITCHIO_USERNAME }}
+          ITCHIO_GAME: ${{ secrets.ITCHIO_GAME }}
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+        run: |
+          ./butler push ./build/mac $ITCHIO_USERNAME/$ITCHIO_GAME:$EXPORT_DIR_NAME

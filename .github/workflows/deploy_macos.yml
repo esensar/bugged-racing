@@ -27,7 +27,7 @@ jobs:
           unzip Godot_v${GODOT_VERSION}-stable_export_templates.tpz
           mv templates/* ${TEMPLATES_DIR}
           mkdir -p ${BUILD_DIR}
-          Godot.app/Contents/MacOS/Godot --export ${PRESET}
+          Godot.app/Contents/MacOS/Godot --export "${PRESET}"
       - name: Install butler
         run: |
           # -L follows redirects

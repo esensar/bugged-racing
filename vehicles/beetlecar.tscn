@@ -1,8 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://vehicles/vehicle.gd" type="Script" id=1]
 [ext_resource path="res://assets/beetlecar.glb" type="PackedScene" id=2]
 [ext_resource path="res://vehicles/tire_smoke.tscn" type="PackedScene" id=3]
+[ext_resource path="res://vehicles/pedal.gd" type="Script" id=4]
+[ext_resource path="res://vehicles/meter.gd" type="Script" id=5]
+[ext_resource path="res://vehicles/steering_controller.gd" type="Script" id=6]
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 3.60634, 0, 1, Vector2( 0.15566, 0.561364 ), 1.56017, 1.56017, 0, 0, Vector2( 0.830189, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -69,6 +72,26 @@ suspension_travel = 0.3
 suspension_stiffness = 12.0
 damping_compression = 0.75
 damping_relaxation = 0.8
+
+[node name="brake_pedal" parent="chassis/cockpit" index="0"]
+script = ExtResource( 4 )
+
+[node name="clutch_pedal" parent="chassis/cockpit" index="1"]
+script = ExtResource( 4 )
+
+[node name="gas_pedal" parent="chassis/cockpit" index="2"]
+script = ExtResource( 4 )
+
+[node name="rpm_meter" parent="chassis/cockpit" index="3"]
+script = ExtResource( 5 )
+needle_path = NodePath("rpm_needle")
+
+[node name="speed_meter" parent="chassis/cockpit" index="4"]
+script = ExtResource( 5 )
+needle_path = NodePath("speed_needle")
+
+[node name="steering_controller" parent="chassis/cockpit" index="5"]
+script = ExtResource( 6 )
 
 [node name="rear_left" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.375, -0.83483 )
@@ -139,3 +162,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.621508, 0.0502438, 1.19336 
 
 [node name="fl_tire_smoke" parent="." index="12" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, 0.621506, 0.0502438, 1.19336 )
+
+[node name="cockpit" type="Position3D" parent="." index="13"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.122976, 1.13133, 0.315432 )
+
+[node name="hood" type="Position3D" parent="." index="14"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01256, 0.87905 )
+
+[node name="bumper" type="Position3D" parent="." index="15"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.535274, 1.89154 )
+
+[node name="static_follow" type="Position3D" parent="." index="16"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59115, -3.01375 )
+
+[connection signal="brake_updated" from="." to="chassis/cockpit/brake_pedal" method="_on_value_updated"]
+[connection signal="clutch_updated" from="." to="chassis/cockpit/clutch_pedal" method="_on_value_updated"]
+[connection signal="rpm_updated" from="." to="chassis/cockpit/rpm_meter" method="_on_value_updated"]
+[connection signal="speed_updated" from="." to="chassis/cockpit/speed_meter" method="_on_value_updated"]
+[connection signal="steering_updated" from="." to="chassis/cockpit/steering_controller" method="_on_steering_updated"]
+[connection signal="throttle_updated" from="." to="chassis/cockpit/gas_pedal" method="_on_value_updated"]

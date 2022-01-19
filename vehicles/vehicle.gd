@@ -3,7 +3,11 @@ extends VehicleBody
 
 signal speed_updated(speed_kph, speed_percent)
 signal rpm_updated(rpm, rpm_percent)
+signal throttle_updated(throttle_percent)
+signal brake_updated(brake_percent)
+signal clutch_updated(clutch_percent)
 signal gear_updated(gear)
+signal steering_updated(steering_angle, steering_percent)
 
 export(float) var max_steer_angle = 25
 export(float) var speed_steer_angle = 10
@@ -47,6 +51,11 @@ onready var flsmoke: TireSmoke = $fl_tire_smoke
 onready var rrsmoke: TireSmoke = $rr_tire_smoke
 onready var rlsmoke: TireSmoke = $rl_tire_smoke
 
+onready var cockpit: Position3D = $cockpit
+onready var hood: Position3D = $hood
+onready var bumper: Position3D = $bumper
+onready var static_follow: Position3D = $static_follow
+
 onready var engine_sound_player: AudioStreamPlayer3D = $engine_sound_player
 onready var engine_sound_playback: AudioStreamPlayback = $engine_sound_player.get_stream_playback()
 
@@ -64,6 +73,22 @@ func _ready():
 
 	_generate_engine_sound(0)
 	engine_sound_player.play()
+
+
+func get_cockpit_position() -> Node:
+	return cockpit
+
+
+func get_hood_position() -> Node:
+	return hood
+
+
+func get_bumper_position() -> Node:
+	return bumper
+
+
+func get_static_follow_position() -> Node:
+	return static_follow
 
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:
@@ -184,6 +209,9 @@ func _physics_process(delta: float):
 
 	var final_input = transmission_input * final_drive
 
+	emit_signal("throttle_updated", throttle)
+	emit_signal("brake_updated", brake_input)
+	emit_signal("clutch_updated", clutch_position)
 	brake = brake_input * max_brake_force
 	engine_force = throttle * final_input * max_engine_force
 
@@ -210,6 +238,7 @@ func _physics_process(delta: float):
 	var steer_speed_factor = clamp(speed / max_steer_speed, 0.0, 1.0)
 
 	steering = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
+	emit_signal("steering_updated", steering, steering / max_steer_angle_rad)
 
 
 func _generate_engine_sound(rpm_factor):

@@ -47,6 +47,11 @@ onready var flsmoke: TireSmoke = $fl_tire_smoke
 onready var rrsmoke: TireSmoke = $rr_tire_smoke
 onready var rlsmoke: TireSmoke = $rl_tire_smoke
 
+onready var cockpit: Position3D = $cockpit
+onready var hood: Position3D = $hood
+onready var bumper: Position3D = $bumper
+onready var static_follow: Position3D = $static_follow
+
 onready var engine_sound_player: AudioStreamPlayer3D = $engine_sound_player
 onready var engine_sound_playback: AudioStreamPlayback = $engine_sound_player.get_stream_playback()
 
@@ -64,6 +69,22 @@ func _ready():
 
 	_generate_engine_sound(0)
 	engine_sound_player.play()
+
+
+func get_cockpit_position() -> Node:
+	return cockpit
+
+
+func get_hood_position() -> Node:
+	return hood
+
+
+func get_bumper_position() -> Node:
+	return bumper
+
+
+func get_static_follow_position() -> Node:
+	return static_follow
 
 
 func _integrate_forces(state: PhysicsDirectBodyState) -> void:

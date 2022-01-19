@@ -139,3 +139,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.950753, -0.0380455, -1.41438
 
 [node name="rr_tire_smoke" parent="." index="12" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950755, -0.038045, -1.41438 )
+
+[node name="cockpit" type="Position3D" parent="." index="13"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36101, 0 )
+
+[node name="hood" type="Position3D" parent="." index="14"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31056, 0.894584 )
+
+[node name="bumper" type="Position3D" parent="." index="15"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.811448, 1.79879 )
+
+[node name="static_follow" type="Position3D" parent="." index="16"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15146, -4.84184 )

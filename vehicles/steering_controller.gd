@@ -8,4 +8,4 @@ func update_angle(steering_angle_percent: float) -> void:
 
 
 func _on_steering_updated(_steering_angle: float, steering_angle_percent: float) -> void:
-	update_angle(-steering_angle_percent)
+	update_angle(steering_angle_percent)

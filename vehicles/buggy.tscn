@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/basic_buggy.glb" type="PackedScene" id=1]
 [ext_resource path="res://vehicles/tire_smoke.tscn" type="PackedScene" id=2]
 [ext_resource path="res://vehicles/vehicle.gd" type="Script" id=3]
 [ext_resource path="res://vehicles/steering_controller.gd" type="Script" id=4]
 [ext_resource path="res://vehicles/meter.gd" type="Script" id=5]
-[ext_resource path="res://vehicles/pedal.gd" type="Script" id=6]
 [ext_resource path="res://vehicles/pedal.gd" type="Script" id=7]
 
 [sub_resource type="Curve" id=2]
@@ -63,13 +62,13 @@ automatic_gear_up_threshold = 0.85
 automatic_gear_down_threshold = 0.4
 
 [node name="brake_pedal" parent="chassis/cockpit" index="0"]
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="clutch_pedal" parent="chassis/cockpit" index="1"]
 script = ExtResource( 7 )
 
 [node name="gas_pedal" parent="chassis/cockpit" index="2"]
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
 [node name="rpm_meter" parent="chassis/cockpit" index="3"]
 transform = Transform( 1, 0, 0, 0, 0.351842, 0.93606, 0, -0.93606, 0.351842, 0.036114, 0.360487, 0.695986 )
@@ -172,7 +171,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.950753, -0.0380455, -1.41438
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950755, -0.038045, -1.41438 )
 
 [node name="cockpit" type="Position3D" parent="." index="13"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.32501, -0.0235026 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44962, 0.200323 )
 
 [node name="hood" type="Position3D" parent="." index="14"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31056, 0.894584 )

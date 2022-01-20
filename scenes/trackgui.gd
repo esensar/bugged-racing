@@ -59,7 +59,8 @@ remote func update_leaderboard_time(peer_id: String, lap_time: float):
 
 	for entry in leaderboards_sorted:
 		var label = Label.new()
-		label.text = "%s - %s" % [entry[0], _format_time(entry[1])]
+		var player_name = MultiplayerController.peers[int(float(entry[0]))].name
+		label.text = "%s - %s" % [player_name, _format_time(entry[1])]
 
 		leaderboards_list.add_child(label)
 

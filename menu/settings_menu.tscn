@@ -37,7 +37,7 @@ margin_bottom = -20.0
 
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
 margin_right = 984.0
-margin_bottom = 615.0
+margin_bottom = 705.0
 dragger_visibility = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/VSplitContainer"]
@@ -62,12 +62,12 @@ valign = 1
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VSplitContainer"]
 margin_top = 96.0
 margin_right = 984.0
-margin_bottom = 615.0
+margin_bottom = 705.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/CenterContainer"]
 margin_left = 356.0
 margin_right = 627.0
-margin_bottom = 519.0
+margin_bottom = 609.0
 
 [node name="Gameplay" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
 margin_right = 271.0
@@ -101,18 +101,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioLabel" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+[node name="MultiplayerNameLabel" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
 margin_top = 147.0
 margin_right = 271.0
-margin_bottom = 174.0
+margin_bottom = 165.0
+custom_fonts/font = SubResource( 5 )
+text = "Multiplayer name"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MultiplayerNameBox" type="LineEdit" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_top = 173.0
+margin_right = 271.0
+margin_bottom = 229.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioLabel" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
+margin_top = 237.0
+margin_right = 271.0
+margin_bottom = 264.0
 custom_fonts/font = SubResource( 4 )
 text = "Audio"
 align = 1
 
 [node name="MasterLabel" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 182.0
+margin_top = 272.0
 margin_right = 271.0
-margin_bottom = 200.0
+margin_bottom = 290.0
 custom_fonts/font = SubResource( 5 )
 text = "Master"
 align = 1
@@ -121,9 +140,9 @@ __meta__ = {
 }
 
 [node name="MasterSlider" type="HSlider" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 208.0
+margin_top = 298.0
 margin_right = 271.0
-margin_bottom = 240.0
+margin_bottom = 330.0
 max_value = 1.0
 step = 0.05
 value = 1.0
@@ -132,9 +151,9 @@ __meta__ = {
 }
 
 [node name="SoundEffectsLabel" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 248.0
+margin_top = 338.0
 margin_right = 271.0
-margin_bottom = 266.0
+margin_bottom = 356.0
 custom_fonts/font = SubResource( 5 )
 text = "Sound Effects"
 align = 1
@@ -143,9 +162,9 @@ __meta__ = {
 }
 
 [node name="SoundEffectsSlider" type="HSlider" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 274.0
+margin_top = 364.0
 margin_right = 271.0
-margin_bottom = 306.0
+margin_bottom = 396.0
 max_value = 1.0
 step = 0.05
 value = 1.0
@@ -154,9 +173,9 @@ __meta__ = {
 }
 
 [node name="MusicLabel" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 314.0
+margin_top = 404.0
 margin_right = 271.0
-margin_bottom = 332.0
+margin_bottom = 422.0
 custom_fonts/font = SubResource( 5 )
 text = "Music"
 align = 1
@@ -165,9 +184,9 @@ __meta__ = {
 }
 
 [node name="MusicSlider" type="HSlider" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 340.0
+margin_top = 430.0
 margin_right = 271.0
-margin_bottom = 372.0
+margin_bottom = 462.0
 max_value = 1.0
 step = 0.05
 value = 1.0
@@ -176,17 +195,17 @@ __meta__ = {
 }
 
 [node name="VideoLabel" type="Label" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 380.0
+margin_top = 470.0
 margin_right = 271.0
-margin_bottom = 407.0
+margin_bottom = 497.0
 custom_fonts/font = SubResource( 4 )
 text = "Video"
 align = 1
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 415.0
+margin_top = 505.0
 margin_right = 271.0
-margin_bottom = 463.0
+margin_bottom = 553.0
 custom_fonts/font = SubResource( 3 )
 text = "Fullscreen"
 align = 1
@@ -195,9 +214,9 @@ __meta__ = {
 }
 
 [node name="BorderlessCheckBox" type="CheckBox" parent="MarginContainer/VSplitContainer/CenterContainer/VBoxContainer"]
-margin_top = 471.0
+margin_top = 561.0
 margin_right = 271.0
-margin_bottom = 519.0
+margin_bottom = 609.0
 custom_fonts/font = SubResource( 3 )
 text = "Borderless"
 align = 1

@@ -18,6 +18,8 @@ onready var automatic_transmission_cb: CheckBox = $MarginContainer/VSplitContain
 onready var fullscreen_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/FullscreenCheckBox
 # gdlint: ignore=max-line-length
 onready var borderless_cb: CheckBox = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/BorderlessCheckBox
+# gdlint: ignore=max-line-length
+onready var multiplayer_name_box: LineEdit = $MarginContainer/VSplitContainer/CenterContainer/VBoxContainer/MultiplayerNameBox
 
 
 func _ready() -> void:
@@ -27,6 +29,7 @@ func _ready() -> void:
 	music_slider.value = db2linear(AudioServer.get_bus_volume_db(music_bus))
 	auto_clutch_cb.pressed = GlobalSettings.auto_clutch
 	automatic_transmission_cb.pressed = GlobalSettings.automatic_transmission
+	multiplayer_name_box.text = GlobalSettings.multiplayer_name
 	fullscreen_cb.pressed = false
 	borderless_cb.pressed = false
 	if OS.is_window_fullscreen():
@@ -55,6 +58,7 @@ func _on_automatictransmission_toggled(new_state: bool) -> void:
 
 
 func _on_BackButton_pressed() -> void:
+	GlobalSettings.multiplayer_name = multiplayer_name_box.text
 	get_tree().change_scene("res://menu/main_menu.tscn")
 
 

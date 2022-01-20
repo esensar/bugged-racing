@@ -2,10 +2,12 @@ class_name BaseTrackLevel
 extends Spatial
 
 const CAMERA_CONTROLLER = preload("res://player/cameras/camera_controller.gd")
+const PLAYER_CONTROLLER = preload("res://player/vehicle_controller.gd")
 
 var player_node: BuggedVehicle
 var gui: Node
 var camera_controller: CameraController
+var player_controller: PlayerVehicleController
 
 onready var track = $Track
 
@@ -14,12 +16,16 @@ func _ready() -> void:
 	reset_player_to(track.get_furthest_checkpoint(), player_node)
 	add_child(player_node)
 	add_child(gui)
+	player_controller = PLAYER_CONTROLLER.new()
+	player_controller.vehicle_path = player_node.get_path()
+	player_node.add_child(player_controller)
 	camera_controller = CAMERA_CONTROLLER.new()
 	camera_controller.attach_cameras_to(player_node)
 
 
 func spawn_player(player_node: BuggedVehicle, gui: Node) -> void:
 	self.player_node = player_node
+	self.player_node.add_child(player_controller)
 	self.gui = gui
 
 

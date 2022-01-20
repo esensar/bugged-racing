@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/cameras/camera_controller.gd"
 }, {
+"base": "Node",
+"class": "PlayerVehicleController",
+"language": "GDScript",
+"path": "res://player/vehicle_controller.gd"
+}, {
 "base": "Particles",
 "class": "TireSmoke",
 "language": "GDScript",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "BaseTrackLevel": "",
 "BuggedVehicle": "",
 "CameraController": "",
+"PlayerVehicleController": "",
 "TireSmoke": "",
 "Track": ""
 }

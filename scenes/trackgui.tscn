@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/fonts/kenney-future-narrow.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/trackgui.gd" type="Script" id=2]
@@ -9,6 +9,10 @@ outline_size = 2
 outline_color = Color( 1, 1, 1, 0.317647 )
 font_data = ExtResource( 1 )
 
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+Label/colors/font_color = Color( 0.482353, 0, 0, 1 )
+
 [node name="TrackGUI" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,6 +20,7 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = -20.0
 margin_bottom = -20.0
+theme = SubResource( 2 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -34,8 +39,6 @@ margin_right = 289.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 1 )
 text = "Current lap -"
 align = 1
 valign = 1
@@ -46,8 +49,6 @@ margin_right = 489.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 1 )
 text = "12:23.245"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -59,8 +60,6 @@ margin_right = 562.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -71,8 +70,6 @@ margin_right = 784.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 1 )
 text = "Best Lap -"
 
 [node name="BestTimeValue" type="Label" parent="VBoxContainer/HBoxContainer"]
@@ -81,22 +78,48 @@ margin_right = 984.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
-custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 1 )
 text = "01:23.256"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WrongWayLabel" type="Label" parent="VBoxContainer"]
-visible = false
+[node name="LeaderboardsLine" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 49.0
 margin_right = 984.0
-margin_bottom = 90.0
+margin_bottom = 98.0
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/LeaderboardsLine"]
+margin_left = 684.0
+margin_right = 984.0
+margin_bottom = 49.0
+
+[node name="LeaderboardsLabel" type="Label" parent="VBoxContainer/LeaderboardsLine/VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 41.0
+text = "Leaderboards"
+
+[node name="Leaderboards" type="VBoxContainer" parent="VBoxContainer/LeaderboardsLine/VBoxContainer"]
+margin_top = 49.0
+margin_right = 300.0
+margin_bottom = 49.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 984.0
+margin_bottom = 560.0
+
+[node name="WrongWayLabel" type="Label" parent="CenterContainer"]
+visible = false
+margin_left = 238.0
+margin_top = 259.0
+margin_right = 745.0
+margin_bottom = 300.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0.482353, 0, 0, 1 )
-custom_fonts/font = SubResource( 1 )
 text = "Wrong Way! Turn Around!"
 align = 1
 __meta__ = {

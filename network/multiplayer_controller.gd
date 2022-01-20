@@ -45,7 +45,6 @@ func create_client(address, port, vehicle):
 
 
 func _peer_connected(peer_id):
-	print("_peer_connected(%s)" % peer_id)
 	peers[peer_id] = false
 	rpc_id(peer_id, "add_player", get_tree().get_network_unique_id(), current_vehicle)
 	if get_tree().get_network_unique_id() == 1:
@@ -53,14 +52,12 @@ func _peer_connected(peer_id):
 
 
 func _peer_disconnected(peer_id):
-	print("_peer_disconnected(%s)" % peer_id)
 	peers.erase(peer_id)
 	destroy_player(peer_id)
-	print("new peers state: %s" % peers)
 
 
 func _connected_to_server():
-	print("_connected_to_server")
+	pass
 
 
 func _connection_failed():

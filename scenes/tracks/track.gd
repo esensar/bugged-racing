@@ -52,6 +52,12 @@ func _process(_delta: float) -> void:
 
 
 func _on_body_entered_area(body: Node, area: Area) -> void:
+	if (
+		MultiplayerController.is_online()
+		and body.get_network_master() != get_tree().get_network_unique_id()
+	):
+		return
+
 	if body.get_groups().has("car"):
 		if area.get_index() < last_checkpoint || abs(area.get_index() - last_checkpoint) > 1:
 			emit_signal("wrong_way")

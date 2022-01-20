@@ -46,7 +46,6 @@ func reset_player_to(node_to_reset_to: Node, player_node: BuggedVehicle) -> void
 
 
 func _spawn_in_player():
-	print("SPAWNING IN PLAYER")
 	reset_player_to(track.get_furthest_checkpoint(), player_node)
 	add_child(player_node)
 	add_child(gui)

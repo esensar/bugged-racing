@@ -1,14 +1,14 @@
 extends Panel
 
-const BUGGY = preload("res://vehicles/buggy.tscn")
-const BEETLE = preload("res://vehicles/beetlecar.tscn")
-const BUGMOBILE = preload("res://vehicles/bugmobile.tscn")
-const TEST_SCENE = preload("res://scenes/test_level.tscn")
-const INFINITE_LOOP_SCENE = preload("res://scenes/infinite_loop_track_level.tscn")
-const ROUNDING_ERROR = preload("res://scenes/rounding_error_track_level.tscn")
-const SCARAB = preload("res://scenes/scarab_track_level.tscn")
-const RACE_CONDITION = preload("res://scenes/race_condition_track_level.tscn")
-const GUI_SCENE = preload("res://player/gui.tscn")
+const BUGGY = "res://vehicles/buggy.tscn"
+const BEETLE = "res://vehicles/beetlecar.tscn"
+const BUGMOBILE = "res://vehicles/bugmobile.tscn"
+const TEST_SCENE = "res://scenes/test_level.tscn"
+const INFINITE_LOOP_SCENE = "res://scenes/infinite_loop_track_level.tscn"
+const ROUNDING_ERROR = "res://scenes/rounding_error_track_level.tscn"
+const SCARAB = "res://scenes/scarab_track_level.tscn"
+const RACE_CONDITION = "res://scenes/race_condition_track_level.tscn"
+const GUI_SCENE = "res://player/gui.tscn"
 
 var vehicles = [BEETLE, BUGGY, BUGMOBILE]
 var tracks = [INFINITE_LOOP_SCENE, ROUNDING_ERROR, RACE_CONDITION, SCARAB, TEST_SCENE]
@@ -39,11 +39,11 @@ func _on_StartButton_pressed() -> void:
 		return
 	var vehicle = vehicles[vehicle_selector.get_selected_id()]
 	var track = tracks[track_selector.get_selected_id()]
-	_start_track_with_vehicle(track.instance(), vehicle.instance())
+	_start_track_with_vehicle(load(track).instance(), load(vehicle).instance())
 
 
 func _start_track_with_vehicle(track: Node, vehicle: Node) -> void:
-	var gui = GUI_SCENE.instance()
+	var gui = load(GUI_SCENE).instance()
 	vehicle.connect("speed_updated", gui, "update_speed")
 	vehicle.connect("rpm_updated", gui, "update_rpm")
 	vehicle.connect("gear_updated", gui, "update_gear")

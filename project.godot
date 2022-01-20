@@ -57,7 +57,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GlobalSettings="*res://settings/GlobalSettings.gd"
+GlobalSettings="*res://settings/global_settings.gd"
+MultiplayerController="*res://network/multiplayer_controller.gd"
 
 [editor_plugins]
 

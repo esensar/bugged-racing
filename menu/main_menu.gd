@@ -3,11 +3,15 @@ extends Panel
 
 func _ready() -> void:
 	# gdlint: ignore=max-line-length
-	$MarginContainer/VSplitContainer/VSplitContainer/CenterContainer/VBoxContainer/StartButton.grab_focus()
+	$MarginContainer/VSplitContainer/VSplitContainer/CenterContainer/VBoxContainer/SingleplayerButton.grab_focus()
 
 
-func _on_StartButton_pressed() -> void:
+func _on_SingleplayerButton_pressed() -> void:
 	get_tree().change_scene("res://menu/start_menu.tscn")
+
+
+func _on_MultiplayerButton_pressed() -> void:
+	get_tree().change_scene("res://menu/multiplayer_menu.tscn")
 
 
 func _on_ExitButton_pressed() -> void:

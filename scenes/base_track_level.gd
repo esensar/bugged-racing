@@ -8,25 +8,32 @@ var player_node: BuggedVehicle
 var gui: Node
 var camera_controller: CameraController
 var player_controller: PlayerVehicleController
+var ready = false
 
 onready var track = $Track
 
 
 func _ready() -> void:
-	reset_player_to(track.get_furthest_checkpoint(), player_node)
-	add_child(player_node)
-	add_child(gui)
-	player_controller = PLAYER_CONTROLLER.new()
-	player_controller.vehicle_path = player_node.get_path()
-	player_node.add_child(player_controller)
-	camera_controller = CAMERA_CONTROLLER.new()
-	camera_controller.attach_cameras_to(player_node)
+	if player_node != null:
+		_spawn_in_player()
+	ready = true
 
 
 func spawn_player(player_node: BuggedVehicle, gui: Node) -> void:
 	self.player_node = player_node
 	self.player_node.add_child(player_controller)
 	self.gui = gui
+	if ready:
+		_spawn_in_player()
+
+
+func spawn_vehicle(vehicle: BuggedVehicle) -> void:
+	reset_player_to(track.get_furthest_checkpoint(), vehicle)
+	add_child(vehicle)
+
+
+func remove_player(peer_id: String) -> void:
+	get_node(peer_id).queue_free()
 
 
 func reset_player_to(node_to_reset_to: Node, player_node: BuggedVehicle) -> void:
@@ -37,6 +44,18 @@ func reset_player_to(node_to_reset_to: Node, player_node: BuggedVehicle) -> void
 		node_to_reset_to.global_transform.basis.y
 	)
 	player_node.reset_transform.origin += node_to_reset_to.global_transform.basis.y * 3
+
+
+func _spawn_in_player():
+	print("SPAWNING IN PLAYER")
+	reset_player_to(track.get_furthest_checkpoint(), player_node)
+	add_child(player_node)
+	add_child(gui)
+	player_controller = PLAYER_CONTROLLER.new()
+	player_controller.vehicle_path = player_node.get_path()
+	player_node.add_child(player_controller)
+	camera_controller = CAMERA_CONTROLLER.new()
+	camera_controller.attach_cameras_to(player_node)
 
 
 func _process(_delta: float) -> void:

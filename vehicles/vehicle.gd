@@ -74,6 +74,17 @@ class VehicleInputs:
 	# Left is positive, right is negative
 	var steering = 0.0
 
+	func to_array() -> Array:
+		return [gear_request, clutch, throttle, brake, handbrake, steering]
+
+	func from_array(array: Array) -> void:
+		gear_request = array[0]
+		clutch = array[1]
+		throttle = array[2]
+		brake = array[3]
+		handbrake = array[4]
+		steering = array[5]
+
 
 func _ready():
 	for wheel in [frwheel, flwheel, rrwheel, rlwheel]:
@@ -245,6 +256,9 @@ func _physics_process(delta: float):
 	steering = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
 	emit_signal("steering_updated", steering, steering / max_steer_angle_rad)
 
+	if get_network_master() == get_tree().get_network_unique_id():
+		_synchronize()
+
 
 func _generate_engine_sound(rpm_factor):
 	engine_sound_player.pitch_scale = base_engine_pitch + 2 * rpm_factor
@@ -264,3 +278,16 @@ func _generate_engine_sound(rpm_factor):
 		)
 		to_fill -= 1
 		fill_percent += fill_segment
+
+
+func _synchronize():
+	rpc("sync_position", transform)
+	rpc("sync_inputs", inputs.to_array())
+
+
+remote func sync_position(position: Transform):
+	reset_transform = position
+
+
+remote func sync_inputs(remote_inputs):
+	inputs.from_array(remote_inputs)

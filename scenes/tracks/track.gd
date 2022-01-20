@@ -5,12 +5,15 @@ signal time_updated(new_time)
 signal lap_complete(lap_time)
 signal wrong_way
 
+const FINISH_GATE = preload("res://scenes/finish_gate.tscn")
+
 export(NodePath) var track_path = null
 export(int, 10, 50) var checkpoint_count = 20
 export(float) var checkpoint_depth = 5.0
 export(PoolVector2Array) var checkpoint_polygon = PoolVector2Array(
 	[Vector2(-10, -10), Vector2(-10, 10), Vector2(10, 10), Vector2(10, -10)]
 )
+export(Vector3) var gate_size = Vector3(20, 10, 5)
 
 var furthest_checkpoint = -1
 var last_checkpoint = -1
@@ -44,6 +47,9 @@ func _ready() -> void:
 		section += section_size
 		checkpoints.add_child(new_checkpoint)
 		new_checkpoint.connect("body_entered", self, "_on_body_entered_area", [new_checkpoint])
+	var gate = FINISH_GATE.instance()
+	gate.scale = gate_size
+	checkpoints.get_child(0).add_child(gate)
 	checkpoints.global_transform.origin = path.global_transform.origin
 
 

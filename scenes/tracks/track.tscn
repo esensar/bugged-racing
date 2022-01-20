@@ -1,15 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/tracks/track.gd" type="Script" id=1]
 [ext_resource path="res://scenes/trackgui.tscn" type="PackedScene" id=2]
 
-[sub_resource type="SpatialMaterial" id=7]
-flags_transparent = true
-albedo_color = Color( 0.0470588, 0.956863, 0.921569, 0.439216 )
-
 [node name="Track" type="Spatial"]
 script = ExtResource( 1 )
-debug_material = SubResource( 7 )
 
 [node name="Checkpoints" type="Spatial" parent="."]
 

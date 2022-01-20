@@ -42,7 +42,7 @@ func reset_player_to(node_to_reset_to: Node, player_node: BuggedVehicle) -> void
 		).origin,
 		node_to_reset_to.global_transform.basis.y
 	)
-	player_node.reset_transform.origin += node_to_reset_to.global_transform.basis.y * 3
+	player_node.reset_transform.origin += node_to_reset_to.global_transform.basis.y * 2
 
 
 func _spawn_in_player():

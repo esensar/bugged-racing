@@ -72,6 +72,7 @@ albedo_color = Color( 0.203922, 0.203922, 0.203922, 1 )
 [node name="Track" parent="." index="1"]
 track_path = NodePath("../Path")
 checkpoint_polygon = PoolVector2Array( -20, -4, -20, 10, 20, 10, 20, -4 )
+gate_size = Vector3( 42, 20, 5 )
 
 [node name="Grass" type="StaticBody" parent="." index="2"]
 transform = Transform( 0.8, 0, 0, 0, 1, 0, 0, 0, 0.4, 0, 5, 0 )

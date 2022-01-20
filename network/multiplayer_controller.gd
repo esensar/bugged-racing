@@ -9,7 +9,6 @@ var peers_vehicles = {}
 var current_track: Node = null
 var current_track_path: String
 var current_vehicle: String
-var connected = false
 
 
 func _ready():
@@ -18,6 +17,13 @@ func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_to_server")
 	enet_peer.connect("server_disconnected", self, "_server_disconnected")
 	get_tree().connect("connection_failed", self, "_connection_failed")
+
+
+func is_online():
+	var network_peer = get_tree().get_network_peer()
+	if network_peer == null:
+		return false
+	return network_peer.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED
 
 
 func create_server(port, track, vehicle):
@@ -29,7 +35,6 @@ func create_server(port, track, vehicle):
 	peers[1] = true
 	create_player(1, vehicle)
 	get_tree().root.call_deferred("add_child", current_track)
-	connected = true
 
 
 func create_client(address, port, vehicle):
@@ -56,21 +61,20 @@ func _peer_disconnected(peer_id):
 
 func _connected_to_server():
 	print("_connected_to_server")
-	connected = true
 
 
 func _connection_failed():
-	connected = false
 	current_track = null
 	peers_vehicles.clear()
+	get_tree().network_peer = null
 	_server_disconnected()
 
 
 func _server_disconnected():
-	connected = false
 	current_track = null
 	peers.clear()
 	peers_vehicles.clear()
+	get_tree().network_peer = null
 	get_tree().root.get_child(get_tree().root.get_child_count() - 1).queue_free()
 	get_tree().change_scene("res://menu/main_menu.tscn")
 
@@ -97,8 +101,8 @@ func destroy_player(peer_id):
 
 func quit():
 	enet_peer.close_connection()
-	connected = false
 	current_track = null
+	get_tree().network_peer = null
 	peers.clear()
 	peers_vehicles.clear()
 

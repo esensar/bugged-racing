@@ -256,8 +256,9 @@ func _physics_process(delta: float):
 	steering = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
 	emit_signal("steering_updated", steering, steering / max_steer_angle_rad)
 
-	if get_network_master() == get_tree().get_network_unique_id():
-		_synchronize()
+	if MultiplayerController.is_online():
+		if get_network_master() == get_tree().get_network_unique_id():
+			_synchronize()
 
 
 func _generate_engine_sound(rpm_factor):

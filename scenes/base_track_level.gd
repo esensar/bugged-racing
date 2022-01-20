@@ -21,7 +21,6 @@ func _ready() -> void:
 
 func spawn_player(player_node: BuggedVehicle, gui: Node) -> void:
 	self.player_node = player_node
-	self.player_node.add_child(player_controller)
 	self.gui = gui
 	if ready:
 		_spawn_in_player()

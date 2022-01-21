@@ -8,6 +8,7 @@ onready var best_time_value = $VBoxContainer/HBoxContainer/BestTimeValue
 onready var wrong_way_label = $CenterContainer/WrongWayLabel
 onready var leaderboards = $VBoxContainer/LeaderboardsLine
 onready var leaderboards_list = $VBoxContainer/LeaderboardsLine/VBoxContainer/Leaderboards
+onready var track_minimap = $VBoxContainer2/HBoxContainer/ViewportContainer/TrackRadar/TrackMinimap
 
 
 func _ready() -> void:
@@ -15,6 +16,7 @@ func _ready() -> void:
 	best_time_value.text = "NaN"
 	if MultiplayerController.is_online():
 		leaderboards.visible = true
+		MultiplayerController.connect("peers_updated", self, "_on_peers_updated")
 	else:
 		leaderboards.visible = false
 
@@ -47,7 +49,10 @@ func _format_time(time: float) -> String:
 
 remote func update_leaderboard_time(peer_id: String, lap_time: float):
 	leaderboards_data[peer_id] = lap_time
+	_refresh_leaderboard()
 
+
+func _refresh_leaderboard():
 	var leaderboards_sorted = []
 	for peer in leaderboards_data:
 		leaderboards_sorted.append([peer, leaderboards_data[peer]])
@@ -67,3 +72,19 @@ remote func update_leaderboard_time(peer_id: String, lap_time: float):
 
 func _leaderbords_comparison(left: Array, right: Array) -> bool:
 	return left[1] < right[1]
+
+
+func set_curve(curve: Curve3D) -> void:
+	track_minimap.set_curve(curve)
+
+
+func on_player_position_updated(player_id: int, position: Transform) -> void:
+	track_minimap.on_player_position_updated(player_id, position)
+
+
+func _on_peers_updated() -> void:
+	for peer in leaderboards_data.keys():
+		if not MultiplayerController.peers.has(peer):
+			leaderboards_data.erase(peer)
+
+	_refresh_leaderboard()

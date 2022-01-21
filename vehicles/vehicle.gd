@@ -8,6 +8,7 @@ signal brake_updated(brake_percent)
 signal clutch_updated(clutch_percent)
 signal gear_updated(gear)
 signal steering_updated(steering_angle, steering_percent)
+signal position_updated(player_id, position)
 
 enum GearRequest { NONE, UP, DOWN }
 
@@ -256,6 +257,8 @@ func _physics_process(delta: float):
 	steering = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
 	emit_signal("steering_updated", steering, steering / max_steer_angle_rad)
 
+	emit_signal("position_updated", get_network_master(), global_transform)
+
 	if MultiplayerController.is_online():
 		if get_network_master() == get_tree().get_network_unique_id():
 			_synchronize()
@@ -288,6 +291,7 @@ func _synchronize():
 
 remote func sync_position(position: Transform):
 	reset_transform = position
+	emit_signal("position_updated", get_network_master(), global_transform)
 
 
 remote func sync_inputs(remote_inputs):

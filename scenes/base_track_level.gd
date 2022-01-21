@@ -27,6 +27,7 @@ func spawn_player(player_node: BuggedVehicle, gui: Node) -> void:
 
 
 func spawn_vehicle(vehicle: BuggedVehicle) -> void:
+	vehicle.connect("position_updated", track, "_on_player_position_updated")
 	reset_player_to(track.get_furthest_checkpoint(), vehicle)
 	add_child(vehicle)
 
@@ -47,6 +48,7 @@ func reset_player_to(node_to_reset_to: Node, player_node: BuggedVehicle) -> void
 
 func _spawn_in_player():
 	reset_player_to(track.get_furthest_checkpoint(), player_node)
+	player_node.connect("position_updated", track, "_on_player_position_updated")
 	add_child(player_node)
 	add_child(gui)
 	player_controller = PLAYER_CONTROLLER.new()

@@ -24,6 +24,7 @@ var current_time = 0
 var lap_done = false
 
 onready var checkpoints = $Checkpoints
+onready var track_gui = $TrackGUI
 onready var path: Path = get_node(track_path)
 
 
@@ -51,6 +52,7 @@ func _ready() -> void:
 	gate.scale = gate_size
 	checkpoints.get_child(0).add_child(gate)
 	checkpoints.global_transform.origin = path.global_transform.origin
+	track_gui.set_curve(path.curve)
 
 
 func _process(_delta: float) -> void:
@@ -96,3 +98,7 @@ func _build_checkpoint_collision():
 func _update_time():
 	current_time = OS.get_ticks_msec() - start_time
 	emit_signal("time_updated", current_time)
+
+
+func _on_player_position_updated(player_id: int, position: Transform) -> void:
+	track_gui.on_player_position_updated(player_id, position)

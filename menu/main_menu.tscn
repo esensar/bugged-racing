@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/fonts/kenney-future-narrow.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menu/main_menu.gd" type="Script" id=2]
@@ -10,6 +10,9 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -41,7 +44,11 @@ margin_right = 984.0
 margin_bottom = 560.0
 dragger_visibility = 1
 
-[node name="Title" type="Label" parent="MarginContainer/VSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer"]
+margin_right = 984.0
+margin_bottom = 98.0
+
+[node name="Title" type="Label" parent="MarginContainer/VSplitContainer/VBoxContainer"]
 margin_right = 984.0
 margin_bottom = 72.0
 custom_colors/font_color = Color( 0.419608, 0.0117647, 0.0117647, 1 )
@@ -50,8 +57,19 @@ text = "Bugged Racing"
 align = 1
 valign = 1
 
+[node name="VersionLabel" type="Label" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 984.0
+margin_bottom = 98.0
+custom_fonts/font = SubResource( 3 )
+text = "Version:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer/VSplitContainer"]
-margin_top = 96.0
+margin_top = 122.0
 margin_right = 984.0
 margin_bottom = 560.0
 split_offset = 973
@@ -59,16 +77,16 @@ dragger_visibility = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VSplitContainer/VSplitContainer"]
 margin_right = 984.0
-margin_bottom = 376.0
+margin_bottom = 350.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/VSplitContainer/CenterContainer"]
 margin_left = 348.0
-margin_top = 52.0
+margin_top = 39.0
 margin_right = 636.0
-margin_bottom = 324.0
+margin_bottom = 311.0
 
 [node name="SingleplayerButton" type="Button" parent="MarginContainer/VSplitContainer/VSplitContainer/CenterContainer/VBoxContainer"]
 margin_right = 288.0
@@ -103,9 +121,9 @@ margin_bottom = 272.0
 text = "Exit"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer/VSplitContainer"]
-margin_top = 400.0
+margin_top = 374.0
 margin_right = 984.0
-margin_bottom = 464.0
+margin_bottom = 438.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

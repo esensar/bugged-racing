@@ -6,6 +6,7 @@ const GUI_SCENE = "res://player/gui.tscn"
 
 var enet_peer = NetworkedMultiplayerENet.new()
 var peers = {}
+var version_checked = []
 
 var current_track: Node = null
 var current_track_path: String
@@ -102,7 +103,8 @@ func _peer_connected(peer_id):
 	)
 	emit_signal("peers_updated")
 	if get_tree().get_network_unique_id() == 1:
-		rpc_id(peer_id, "select_track", current_track_path)
+		if version_checked.has(peer_id):
+			rpc_id(peer_id, "select_track", current_track_path)
 
 
 func _peer_disconnected(peer_id):
@@ -111,7 +113,9 @@ func _peer_disconnected(peer_id):
 
 
 func _connected_to_server():
-	pass
+	rpc_id(
+		1, "check_version", get_tree().get_network_unique_id(), GlobalSettings.get_version_string()
+	)
 
 
 func _connection_failed():
@@ -125,6 +129,13 @@ func _server_disconnected():
 	peers.clear()
 	get_tree().network_peer = null
 	get_tree().root.get_child(get_tree().root.get_child_count() - 1).queue_free()
+	var alert = Alerter.create_simple_alert("Connection to the host has been lost.")
+	get_tree().root.add_child(alert)
+	alert.connect("popup_hide", self, "_on_disconnect_confirmed")
+	alert.popup_centered()
+
+
+func _on_disconnect_confirmed():
 	get_tree().change_scene("res://menu/main_menu.tscn")
 
 
@@ -182,6 +193,15 @@ remote func add_player(peer_id, peer_info: Array):
 		else:
 			peers[peer_id].spawned = false
 		emit_signal("peers_updated")
+
+
+remote func check_version(peer_id: int, version: String) -> void:
+	if version != GlobalSettings.get_version_string():
+		enet_peer.disconnect_peer(peer_id)
+		return
+
+	version_checked.append(peer_id)
+	rpc_id(peer_id, "select_track", current_track_path)
 
 
 remote func select_track(track_path):

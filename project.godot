@@ -59,6 +59,7 @@ config/icon="res://icon.png"
 
 GlobalSettings="*res://settings/global_settings.gd"
 MultiplayerController="*res://network/multiplayer_controller.gd"
+Alerter="*res://menu/components/alerter.gd"
 
 [editor_plugins]
 

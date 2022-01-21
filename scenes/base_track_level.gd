@@ -52,7 +52,7 @@ func _spawn_in_player():
 	add_child(player_node)
 	add_child(gui)
 	player_controller = PLAYER_CONTROLLER.new()
-	player_controller.vehicle_path = player_node.get_path()
+	player_controller.input_sink_path = player_node.get_path()
 	player_node.add_child(player_controller)
 	camera_controller = CAMERA_CONTROLLER.new()
 	camera_controller.attach_cameras_to(player_node)

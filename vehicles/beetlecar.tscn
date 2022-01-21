@@ -48,10 +48,7 @@ rings = 3
 [node name="beetlecar" groups=["car"] instance=ExtResource( 2 )]
 mass = 340.0
 script = ExtResource( 1 )
-max_steer_angle = 18.0
-speed_steer_angle = 8.0
-max_steer_speed = 60.0
-max_steer_input = 60.0
+max_steer_input = 40.0
 max_engine_force = 100.0
 max_brake_force = 60.0
 base_engine_pitch = 0.38
@@ -91,6 +88,7 @@ script = ExtResource( 5 )
 needle_path = NodePath("speed_needle")
 
 [node name="steering_controller" parent="chassis/cockpit" index="5"]
+transform = Transform( -5.15093, 0, -4.50309e-07, 0, 5.15093, 0, 4.50309e-07, 0, -5.15093, 0.591791, 0.882535, 1.0757 )
 script = ExtResource( 6 )
 
 [node name="rear_left" parent="." index="3"]

@@ -12,10 +12,7 @@ signal position_updated(player_id, position)
 
 enum GearRequest { NONE, UP, DOWN }
 
-export(float) var max_steer_angle = 25
-export(float) var speed_steer_angle = 10
-export(float) var max_steer_speed = 100.0
-export(float) var max_steer_input = 80.0
+export(float) var max_steer_input = 30
 
 export(float) var max_engine_force = 85.0
 export(float) var max_brake_force = 50.0
@@ -59,8 +56,6 @@ onready var rlsmoke: TireSmoke = $rl_tire_smoke
 onready var engine_sound_player: AudioStreamPlayer3D = $engine_sound_player
 onready var engine_sound_playback: AudioStreamPlayback = $engine_sound_player.get_stream_playback()
 
-onready var max_steer_angle_rad: float = deg2rad(max_steer_angle)
-onready var speed_steer_angle_rad: float = deg2rad(speed_steer_angle)
 onready var max_steer_input_rad: float = deg2rad(max_steer_input)
 
 onready var auto_clutch_rpm_limit = max_rpm * automatic_gear_down_threshold
@@ -250,12 +245,10 @@ func _physics_process(delta: float):
 	emit_signal("speed_updated", speed, speed / expected_max_speed)
 	emit_signal("rpm_updated", rpm, rpm_factor)
 
-	var steering_input = inputs.steering
+	var steering_input = inputs.steering * max_steer_input_rad
 
-	var steer_speed_factor = clamp(speed / max_steer_speed, 0.0, 1.0)
-
-	steering = steering_input * lerp(max_steer_angle_rad, speed_steer_angle_rad, steer_speed_factor)
-	emit_signal("steering_updated", steering, steering / max_steer_angle_rad)
+	steering = clamp(steering_input, -max_steer_input_rad, max_steer_input_rad)
+	emit_signal("steering_updated", steering, steering / max_steer_input_rad)
 
 	emit_signal("position_updated", get_network_master(), global_transform)
 

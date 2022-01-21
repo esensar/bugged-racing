@@ -55,10 +55,6 @@ rings = 3
 [node name="bugmobile" groups=["car"] instance=ExtResource( 2 )]
 mass = 600.0
 script = ExtResource( 3 )
-max_steer_angle = 16.0
-speed_steer_angle = 8.0
-max_steer_speed = 60.0
-max_steer_input = 50.0
 max_engine_force = 320.0
 max_brake_force = 95.0
 throttle_power = 8000.0

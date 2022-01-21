@@ -2,6 +2,13 @@ extends Node
 
 var auto_clutch: bool = false
 var automatic_transmission: bool = true
+var steering_sensitivity = 1.0
+var return_speed = 2.0
+var throttle_sensitivity = 1.0
+var brake_sensitivity = 1.0
+var steering_deadzone_inner = 0.0
+var steering_deadzone_outer = 0.0
+
 var selected_camera: int = 0
 var multiplayer_name: String = "Player"
 

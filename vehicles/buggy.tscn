@@ -47,9 +47,6 @@ rings = 3
 [node name="buggy" groups=["car"] instance=ExtResource( 1 )]
 mass = 400.0
 script = ExtResource( 3 )
-max_steer_angle = 30.0
-speed_steer_angle = 14.0
-max_steer_speed = 120.0
 max_engine_force = 160.0
 max_brake_force = 80.0
 throttle_power = 10000.0

@@ -50,9 +50,7 @@ func _physics_process(delta: float) -> void:
 
 	var steering_factor = steering_sensitivity
 	if abs(_input_sink.inputs.steering) > abs(steering_input):
-		print("detected returning: %s, %s" % [steering_factor, return_speed])
 		steering_factor *= return_speed
-		print("updated turn speed: %s" % steering_factor)
 
 	_input_sink.inputs.steering = move_toward(
 		_input_sink.inputs.steering, steering_input, lerp(delta, 1, steering_factor)

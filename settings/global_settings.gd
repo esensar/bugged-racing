@@ -1,6 +1,6 @@
 extends Node
 
-var auto_clutch: bool = false
+var auto_clutch: bool = true
 var automatic_transmission: bool = true
 var steering_sensitivity = 1.0
 var return_speed = 2.0
@@ -17,6 +17,23 @@ var _config: Dictionary
 
 func _ready() -> void:
 	_config = read_json_file("res://info.json")
+	get_tree().set_auto_accept_quit(false)
+	var stored_config = read_json_file("user://settings.json")
+	if stored_config.has("hidden"):
+		selected_camera = stored_config["hidden"].get("selected_camera", 0)
+
+	if stored_config.has("gameplay"):
+		multiplayer_name = stored_config["gameplay"].get("multiplayer_name", "Player")
+
+	if stored_config.has("controls"):
+		auto_clutch = stored_config["controls"].get("auto_clutch", true)
+		automatic_transmission = stored_config["controls"].get("automatic_transmission", true)
+		steering_sensitivity = stored_config["controls"].get("steering_sensitivity", 1.0)
+		return_speed = stored_config["controls"].get("return_speed", 2.0)
+		throttle_sensitivity = stored_config["controls"].get("throttle_sensitivity", 1.0)
+		brake_sensitivity = stored_config["controls"].get("brake_sensitivity", 1.0)
+		steering_deadzone_inner = stored_config["controls"].get("steering_deadzone_inner", 1.0)
+		steering_deadzone_outer = stored_config["controls"].get("steering_deadzone_outer", 1.0)
 
 
 func read_json_file(file_path: String) -> Dictionary:
@@ -43,3 +60,32 @@ func get_version_string() -> String:
 	var minor = version["minor"]
 	var patch = version["patch"]
 	return "%d.%d.%d" % [major, minor, patch]
+
+
+func save_settings() -> void:
+	save_json_file("user://settings.json", to_dictionary())
+
+
+func to_dictionary() -> Dictionary:
+	return {
+		"hidden": {"selected_camera": selected_camera},
+		"gameplay": {"multiplayer_name": multiplayer_name},
+		"controls":
+		{
+			"auto_clutch": auto_clutch,
+			"automatic_transmission": automatic_transmission,
+			"steering_sensitivity": steering_sensitivity,
+			"return_speed": return_speed,
+			"throttle_sensitivity": throttle_sensitivity,
+			"brake_sensitivity": brake_sensitivity,
+			"steering_deadzone_inner": steering_deadzone_inner,
+			"steering_deadzone_outer": steering_deadzone_outer,
+		}
+	}
+
+
+# Handle quit
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST:
+		save_settings()
+		get_tree().quit()  # default behavior

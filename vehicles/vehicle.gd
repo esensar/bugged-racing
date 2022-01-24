@@ -21,6 +21,9 @@ export(float) var max_rpm_loss_ps = 3000.0
 export(float) var base_engine_pitch = 0.5
 export(float) var expected_max_speed = 200
 
+export(float) var drag_factor = 1.0
+export(float) var downforce_factor = 1.0
+
 export(Array) var gear_ratios = [3.4, 2.5, 2.0, 1.5, 1.25]
 export(float) var reverse_ratio = -3
 export(float) var final_drive = 3.45
@@ -200,6 +203,11 @@ func _physics_process(delta: float):
 		clutch_position = 1 - min(rpm, auto_clutch_rpm_limit) / auto_clutch_rpm_limit
 		if throttle == 0.0 and linear_velocity.length() < 1:
 			clutch_position = 1
+
+	apply_central_impulse(linear_velocity * -1 * drag_factor)
+	apply_central_impulse(
+		linear_velocity.length() * -1 * global_transform.basis.y * downforce_factor
+	)
 
 	if gear_timer > 0:
 		clutch_position = 1

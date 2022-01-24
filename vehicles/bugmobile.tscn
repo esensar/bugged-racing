@@ -6,19 +6,15 @@
 [ext_resource path="res://vehicles/steering_controller.gd" type="Script" id=4]
 [ext_resource path="res://vehicles/pedal.gd" type="Script" id=5]
 [ext_resource path="res://vehicles/meter.gd" type="Script" id=6]
+[ext_resource path="res://assets/engine.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/wind woosh loop.ogg" type="AudioStream" id=8]
 
 [sub_resource type="Curve" id=18]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.179245, 0.584091 ), 4.91185, 4.91185, 0, 0, Vector2( 0.603774, 0.954545 ), 6.05975, 6.05975, 0, 0, Vector2( 0.806604, 0.989773 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=19]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.127358, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.174528, 0.65 ), 0.0, 0.0, 0, 0, Vector2( 0.212264, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.353774, 0.35 ), 0.0, 0.0, 0, 0, Vector2( 0.363208, 0.968182 ), 0.0, 0.0, 0, 0, Vector2( 0.485849, 0.313636 ), 0.0, 0.0, 0, 0, Vector2( 0.627358, 0.140909 ), 0.0, 0.0, 0, 0, Vector2( 0.721698, 0.259091 ), 0.0, 0.0, 0, 0, Vector2( 0.745283, 0.623864 ), 0.0, 0.0, 0, 0, Vector2( 0.872642, 0.794318 ), 0.0, 0.0, 0, 0, Vector2( 0.915094, 0.248864 ), 0.0, 0.0, 0, 0, Vector2( 0.933962, 0.5125 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
-
 [sub_resource type="CapsuleShape" id=20]
 radius = 0.274866
 height = 2.75974
-
-[sub_resource type="AudioStreamGenerator" id=12]
-mix_rate = 5500.0
 
 [sub_resource type="Gradient" id=13]
 offsets = PoolRealArray( 0, 0.5, 1 )
@@ -53,38 +49,39 @@ radial_segments = 4
 rings = 3
 
 [node name="bugmobile" groups=["car"] instance=ExtResource( 2 )]
-mass = 600.0
+mass = 1900.0
 script = ExtResource( 3 )
-max_engine_force = 320.0
-max_brake_force = 95.0
+max_engine_force = 1400.0
+max_brake_force = 230.0
 throttle_power = 8000.0
 max_rpm_loss_ps = 2200.0
 base_engine_pitch = 0.65
+drag_factor = 0.85
+downforce_factor = 1.8
 gear_ratios = [ 3.5, 2.95, 2.64, 2.0, 1.67, 1.42 ]
 final_drive = 4.36
 max_rpm = 9000.0
 power_curve = SubResource( 18 )
-sound_curve = SubResource( 19 )
 
 [node name="rear_left" parent="." index="0"]
 use_as_traction = true
 wheel_radius = 0.52
 wheel_rest_length = 0.47
-wheel_friction_slip = 8.0
-suspension_travel = 0.4
-suspension_stiffness = 9.0
-suspension_max_force = 7000.0
+wheel_friction_slip = 5.54
+suspension_travel = 0.35
+suspension_stiffness = 12.0
+suspension_max_force = 10000.0
 damping_compression = 0.87
 damping_relaxation = 0.9
 
 [node name="front_left" parent="." index="2"]
 use_as_steering = true
 wheel_radius = 0.35
-wheel_rest_length = 0.45
-wheel_friction_slip = 7.0
-suspension_travel = 0.45
-suspension_stiffness = 12.0
-suspension_max_force = 7000.0
+wheel_rest_length = 0.47
+wheel_friction_slip = 4.45
+suspension_travel = 0.55
+suspension_stiffness = 15.0
+suspension_max_force = 15000.0
 damping_compression = 0.9
 damping_relaxation = 0.92
 
@@ -111,11 +108,11 @@ needle_path = NodePath("speed_needle")
 [node name="front_right" parent="." index="4"]
 use_as_steering = true
 wheel_radius = 0.35
-wheel_rest_length = 0.45
-wheel_friction_slip = 7.0
-suspension_travel = 0.45
-suspension_stiffness = 12.0
-suspension_max_force = 7000.0
+wheel_rest_length = 0.47
+wheel_friction_slip = 4.45
+suspension_travel = 0.55
+suspension_stiffness = 15.0
+suspension_max_force = 15000.0
 damping_compression = 0.9
 damping_relaxation = 0.92
 
@@ -123,10 +120,10 @@ damping_relaxation = 0.92
 use_as_traction = true
 wheel_radius = 0.52
 wheel_rest_length = 0.47
-wheel_friction_slip = 8.0
-suspension_travel = 0.4
-suspension_stiffness = 9.0
-suspension_max_force = 7000.0
+wheel_friction_slip = 5.54
+suspension_travel = 0.35
+suspension_stiffness = 12.0
+suspension_max_force = 10000.0
 damping_compression = 0.87
 damping_relaxation = 0.9
 
@@ -136,8 +133,8 @@ shape = SubResource( 20 )
 
 [node name="engine_sound_player" type="AudioStreamPlayer3D" parent="." index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.791119, -2.27857 )
-stream = SubResource( 12 )
-unit_db = 14.0
+stream = ExtResource( 7 )
+pitch_scale = 0.1
 bus = "Sound"
 
 [node name="Smoke" type="Particles" parent="." index="8"]
@@ -169,6 +166,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.605405, 1.5324 )
 
 [node name="static_follow" type="Position3D" parent="." index="16"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88984, -4.78212 )
+
+[node name="wind_sound_player" type="AudioStreamPlayer3D" parent="." index="17"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18462, 0.791153 )
+stream = ExtResource( 8 )
 
 [connection signal="brake_updated" from="." to="chassis/cockpit/brake_pedal" method="_on_value_updated"]
 [connection signal="clutch_updated" from="." to="chassis/cockpit/clutch_pedal" method="_on_value_updated"]

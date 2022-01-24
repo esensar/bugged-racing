@@ -45,10 +45,10 @@ radial_segments = 4
 rings = 3
 
 [node name="buggy" groups=["car"] instance=ExtResource( 1 )]
-mass = 400.0
+mass = 1400.0
 script = ExtResource( 3 )
-max_engine_force = 160.0
-max_brake_force = 80.0
+max_engine_force = 1250.0
+max_brake_force = 220.0
 throttle_power = 10000.0
 max_rpm_loss_ps = 4000.0
 base_engine_pitch = 0.45
@@ -86,11 +86,10 @@ transform = Transform( 1, 0, 0, 0, 0.351841, -0.93606, 0, 0.93606, 0.351841, -0.
 script = ExtResource( 4 )
 
 [node name="front_left" parent="." index="1"]
-use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.6
 wheel_rest_length = 0.68
-wheel_friction_slip = 2.0
+wheel_friction_slip = 2.7
 suspension_travel = 1.2
 suspension_stiffness = 4.5
 suspension_max_force = 14000.0
@@ -103,11 +102,10 @@ shape = SubResource( 11 )
 
 [node name="front_right" parent="." index="4"]
 transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950754, 0.503756, 1.41438 )
-use_as_traction = true
 use_as_steering = true
 wheel_radius = 0.6
 wheel_rest_length = 0.68
-wheel_friction_slip = 2.0
+wheel_friction_slip = 2.7
 suspension_travel = 1.2
 suspension_stiffness = 4.5
 suspension_max_force = 14000.0
@@ -121,7 +119,7 @@ transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 use_as_traction = true
 wheel_radius = 0.6
 wheel_rest_length = 0.68
-wheel_friction_slip = 1.9
+wheel_friction_slip = 2.1
 suspension_travel = 1.2
 suspension_stiffness = 4.5
 suspension_max_force = 14000.0
@@ -133,7 +131,7 @@ transform = Transform( 1, 0, 0, 0, 1, -1.50996e-07, 0, 1.50996e-07, 1, -0.950755
 use_as_traction = true
 wheel_radius = 0.6
 wheel_rest_length = 0.68
-wheel_friction_slip = 1.9
+wheel_friction_slip = 2.1
 suspension_travel = 1.2
 suspension_stiffness = 4.5
 suspension_max_force = 14000.0

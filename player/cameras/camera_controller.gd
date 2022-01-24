@@ -10,7 +10,7 @@ var _cameras = []
 func attach_cameras_to(player_node: BuggedVehicle) -> void:
 	var cockpit_camera = STATIC_CAMERA.instance()
 	player_node.get_cockpit_position().add_child(cockpit_camera)
-	cockpit_camera.rotate(Vector3.UP, deg2rad(180))
+	cockpit_camera.reset()
 	var follow_camera = FOLLOW_CAMERA.instance()
 	follow_camera.global_transform = player_node.global_transform.translated(
 		-player_node.global_transform.basis.z * 100
@@ -19,14 +19,13 @@ func attach_cameras_to(player_node: BuggedVehicle) -> void:
 	player_node.get_parent().add_child(follow_camera)
 	var bumpera_camera = STATIC_CAMERA.instance()
 	player_node.get_bumper_position().add_child(bumpera_camera)
-	bumpera_camera.rotate(Vector3.UP, deg2rad(180))
 	var hood_camera = STATIC_CAMERA.instance()
 	player_node.get_hood_position().add_child(hood_camera)
-	hood_camera.rotate(Vector3.UP, deg2rad(180))
 	var static_follow_camera = STATIC_CAMERA.instance()
 	player_node.get_static_follow_position().add_child(static_follow_camera)
-	static_follow_camera.rotate(Vector3.UP, deg2rad(180))
 	_cameras = [follow_camera, cockpit_camera, hood_camera, bumpera_camera, static_follow_camera]
+	for cam in _cameras:
+		cam.reset()
 	select_camera(GlobalSettings.selected_camera)
 
 
@@ -41,3 +40,15 @@ func select_camera(camera_index: int) -> void:
 
 func next_camera() -> void:
 	select_camera(GlobalSettings.selected_camera + 1)
+
+
+func update_camera(horizontal: float, vertical: float, look_back: bool) -> void:
+	horizontal = clamp(horizontal, -1.0, 1.0)
+	vertical = clamp(vertical, -1.0, 1.0)
+
+	if look_back:
+		horizontal = 2.0
+
+	for cam in _cameras:
+		cam.reset()
+		cam.update_rotation(horizontal, vertical)

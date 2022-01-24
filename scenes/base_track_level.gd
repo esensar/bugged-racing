@@ -65,6 +65,15 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_released("next_camera"):
 		camera_controller.next_camera()
 
+	camera_controller.update_camera(
+		(
+			Input.get_action_strength("turn_camera_right")
+			- Input.get_action_strength("turn_camera_left")
+		),
+		Input.get_action_strength("turn_camera_up") - Input.get_action_strength("turn_camera_down"),
+		Input.is_action_pressed("look_backwards")
+	)
+
 
 func _on_ResetArea_body_entered(body: Node) -> void:
 	if body.get_groups().has("car"):

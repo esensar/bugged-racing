@@ -6,6 +6,8 @@ export var target_height: float = 2.0
 
 var follow_target: Node = null
 var last_lookat: Vector3
+var target_angle_horizontal = 0
+var target_angle_vertical = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -27,10 +29,28 @@ func _physics_process(delta):
 	else:
 		target_pos.y = follow_target.global_transform.origin.y + target_height
 
-	global_transform.origin = global_transform.origin.linear_interpolate(target_pos, delta * 20.0)
-
 	last_lookat = last_lookat.linear_interpolate(
 		follow_target.global_transform.origin, delta * 20.0
 	)
 
+	var original_diff = target_pos - follow_target.global_transform.origin
+	var rotation_adjustment = (
+		original_diff.rotated(Vector3.DOWN, target_angle_horizontal).rotated(
+			Vector3.LEFT, target_angle_vertical
+		)
+		- original_diff
+	)
+	target_pos += rotation_adjustment
+
+	global_transform.origin = global_transform.origin.linear_interpolate(target_pos, delta * 20.0)
+
 	look_at(last_lookat, Vector3(0.0, 1.0, 0.0))
+
+
+func reset() -> void:
+	pass
+
+
+func update_rotation(horizontal: float, vertical: float) -> void:
+	target_angle_horizontal = horizontal * deg2rad(90)
+	target_angle_vertical = vertical * deg2rad(90)

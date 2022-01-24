@@ -1,6 +1,13 @@
 extends Panel
 
 const PLAYER_CONTROLLER = preload("res://player/vehicle_controller.gd")
+const CAMERA_TEST_SCENE = preload("res://menu/camera_config_scene.tscn")
+
+const BUGGY = "res://vehicles/buggy.tscn"
+const BEETLE = "res://vehicles/beetlecar.tscn"
+const BUGMOBILE = "res://vehicles/bugmobile.tscn"
+
+var vehicles = [BEETLE, BUGGY, BUGMOBILE]
 
 var inputs = BuggedVehicle.VehicleInputs.new()
 
@@ -19,9 +26,9 @@ onready var auto_clutch_cb: CheckBox = $MarginContainer/VSplitContainer/TabConta
 # gdlint: ignore=max-line-length
 onready var automatic_transmission_cb: CheckBox = $MarginContainer/VSplitContainer/TabContainer/Controls/Controls/AutomaticTransmissionCheckBox
 # gdlint: ignore=max-line-length
-onready var fullscreen_cb: CheckBox = $MarginContainer/VSplitContainer/TabContainer/Video/Video/FullscreenCheckBox
+onready var fullscreen_cb: CheckBox = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/System/FullscreenCheckBox
 # gdlint: ignore=max-line-length
-onready var borderless_cb: CheckBox = $MarginContainer/VSplitContainer/TabContainer/Video/Video/BorderlessCheckBox
+onready var borderless_cb: CheckBox = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/System/BorderlessCheckBox
 # gdlint: ignore=max-line-length
 onready var multiplayer_name_box: LineEdit = $MarginContainer/VSplitContainer/TabContainer/Gameplay/Gameplay/MultiplayerNameBox
 # gdlint: ignore=max-line-length
@@ -46,6 +53,26 @@ onready var brakes_value_slider: HSlider = $MarginContainer/VSplitContainer/TabC
 # gdlint: ignore=max-line-length
 onready var gear_value_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Controls/Controls/HBoxContainer/Gear/HSlider
 
+# gdlint: ignore=max-line-length
+onready var fov_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/FovSlider
+# gdlint: ignore=max-line-length
+onready var move_forward_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveForwardSlider
+# gdlint: ignore=max-line-length
+onready var move_backward_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveBackwardSlider
+# gdlint: ignore=max-line-length
+onready var move_left_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveLeftSlider
+# gdlint: ignore=max-line-length
+onready var move_right_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveRightSlider
+# gdlint: ignore=max-line-length
+onready var move_up_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveUpSlider
+# gdlint: ignore=max-line-length
+onready var move_down_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveDownSlider
+# gdlint: ignore=max-line-length
+onready var vehicle_selector: OptionButton = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/VBoxContainer/VehicleSelector
+# gdlint: ignore=max-line-length
+onready var viewport: Viewport = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/VBoxContainer/ViewportContainer/Viewport
+onready var camera_scene = CAMERA_TEST_SCENE.instance()
+
 
 func _ready() -> void:
 	auto_clutch_cb.grab_focus()
@@ -61,6 +88,13 @@ func _ready() -> void:
 	steering_deadzone_outer_slider.value = GlobalSettings.steering_deadzone_outer
 	throttle_sensitivity_slider.value = GlobalSettings.throttle_sensitivity
 	brakes_sensitivity_slider.value = GlobalSettings.brake_sensitivity
+	fov_slider.value = GlobalSettings.camera_fov
+	move_forward_slider.value = GlobalSettings.camera_move_forward
+	move_backward_slider.value = GlobalSettings.camera_move_backward
+	move_right_slider.value = GlobalSettings.camera_move_right
+	move_left_slider.value = GlobalSettings.camera_move_left
+	move_up_slider.value = GlobalSettings.camera_move_up
+	move_down_slider.value = GlobalSettings.camera_move_down
 	fullscreen_cb.pressed = false
 	borderless_cb.pressed = false
 	var controller = PLAYER_CONTROLLER.new()
@@ -70,6 +104,13 @@ func _ready() -> void:
 		_set_fullscreen(true)
 	if OS.get_borderless_window():
 		_set_borderless(true)
+
+	vehicle_selector.add_item("Beetlecar")
+	vehicle_selector.add_item("Buggy")
+	vehicle_selector.add_item("Bugmobile")
+	vehicle_selector.selected = 1
+
+	viewport.add_child(camera_scene)
 
 
 func _physics_process(_delta: float) -> void:
@@ -141,6 +182,38 @@ func _on_ThrottleSensitivitySlider_value_changed(new_value: float) -> void:
 
 func _on_BrakesSensitivitySlider_value_changed(new_value: float) -> void:
 	GlobalSettings.brake_sensitivity = new_value
+
+
+func _on_FovSlider_value_changed(new_value: float) -> void:
+	GlobalSettings.camera_fov = new_value
+
+
+func _on_MoveForwardSlider_value_changed(new_value: float) -> void:
+	GlobalSettings.camera_move_forward = new_value
+
+
+func _on_MoveBackwardSlider_value_changed(new_value: float) -> void:
+	GlobalSettings.camera_move_backward = new_value
+
+
+func _on_MoveLeftSlider_value_changed(new_value: float) -> void:
+	GlobalSettings.camera_move_left = new_value
+
+
+func _on_MoveRightSlider_value_changed(new_value: float) -> void:
+	GlobalSettings.camera_move_right = new_value
+
+
+func _on_MoveUpSlider_value_changed(new_value: float) -> void:
+	GlobalSettings.camera_move_up = new_value
+
+
+func _on_MoveDownSlider_value_changed(new_value: float) -> void:
+	GlobalSettings.camera_move_down = new_value
+
+
+func _on_VehicleSelector_item_selected(item_index: int) -> void:
+	camera_scene.change_vehicle_to(vehicles[item_index])
 
 
 func _set_fullscreen(new_state: bool) -> void:

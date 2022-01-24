@@ -12,6 +12,14 @@ var steering_deadzone_outer = 0.0
 var selected_camera: int = 0
 var multiplayer_name: String = "Player"
 
+var camera_fov = 70
+var camera_move_forward = 0
+var camera_move_backward = 0
+var camera_move_right = 0
+var camera_move_left = 0
+var camera_move_up = 0
+var camera_move_down = 0
+
 var _config: Dictionary
 
 
@@ -34,6 +42,15 @@ func _ready() -> void:
 		brake_sensitivity = stored_config["controls"].get("brake_sensitivity", 1.0)
 		steering_deadzone_inner = stored_config["controls"].get("steering_deadzone_inner", 1.0)
 		steering_deadzone_outer = stored_config["controls"].get("steering_deadzone_outer", 1.0)
+
+	if stored_config.has("camera"):
+		camera_fov = stored_config["camera"].get("fov", 70)
+		camera_move_forward = stored_config["camera"].get("camera_move_forward", 0)
+		camera_move_backward = stored_config["camera"].get("camera_move_backward", 0)
+		camera_move_left = stored_config["camera"].get("camera_move_left", 0)
+		camera_move_right = stored_config["camera"].get("camera_move_right", 0)
+		camera_move_up = stored_config["camera"].get("camera_move_up", 0)
+		camera_move_down = stored_config["camera"].get("camera_move_down", 0)
 
 
 func read_json_file(file_path: String) -> Dictionary:
@@ -80,6 +97,16 @@ func to_dictionary() -> Dictionary:
 			"brake_sensitivity": brake_sensitivity,
 			"steering_deadzone_inner": steering_deadzone_inner,
 			"steering_deadzone_outer": steering_deadzone_outer,
+		},
+		"camera":
+		{
+			"fov": camera_fov,
+			"move_forward": camera_move_forward,
+			"move_backward": camera_move_backward,
+			"move_right": camera_move_right,
+			"move_left": camera_move_left,
+			"move_up": camera_move_up,
+			"move_down": camera_move_down
 		}
 	}
 

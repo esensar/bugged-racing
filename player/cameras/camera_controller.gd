@@ -30,12 +30,21 @@ func attach_cameras_to(player_node: BuggedVehicle) -> void:
 
 
 func select_camera(camera_index: int) -> void:
+	if _cameras.size() == 0:
+		return
+
 	var select_index = camera_index
 	if camera_index < 0 or camera_index >= _cameras.size():
 		select_index = 0
 
 	GlobalSettings.selected_camera = select_index
 	_cameras[select_index].current = true
+
+
+func clear():
+	for cam in _cameras:
+		cam.queue_free()
+	_cameras = []
 
 
 func next_camera() -> void:

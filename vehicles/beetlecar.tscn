@@ -41,20 +41,21 @@ radial_segments = 4
 rings = 3
 
 [node name="beetlecar" groups=["car"] instance=ExtResource( 2 )]
-mass = 850.0
+mass = 750.0
 script = ExtResource( 1 )
 max_steer_input = 35.0
-max_engine_force = 450.0
+max_engine_force = 650.0
 max_brake_force = 90.0
 base_engine_pitch = 0.38
 expected_max_speed = 170.0
 drag_factor = 1.55
-downforce_factor = -0.2
-gear_ratios = [ 2.99, 2.5, 1.98, 1.56, 1.32, 1.12 ]
-final_drive = 4.0
-max_rpm = 8000.0
-gear_switch_time = 0.5
+downforce_factor = 0.2
+gear_ratios = [ 6.67, 4.95, 3.65, 2.78, 2.25 ]
+final_drive = 2.5
+max_rpm = 8500.0
+gear_switch_time = 0.3
 power_curve = SubResource( 3 )
+automatic_gear_up_threshold = 0.85
 
 [node name="rear_right" parent="." index="0"]
 use_as_traction = true
@@ -110,7 +111,7 @@ use_as_steering = true
 wheel_roll_influence = 0.01
 wheel_radius = 0.38
 wheel_rest_length = 0.3
-wheel_friction_slip = 1.8
+wheel_friction_slip = 1.95
 suspension_travel = 0.3
 suspension_stiffness = 12.0
 suspension_max_force = 4000.0
@@ -123,7 +124,7 @@ use_as_steering = true
 wheel_roll_influence = 0.01
 wheel_radius = 0.38
 wheel_rest_length = 0.3
-wheel_friction_slip = 1.8
+wheel_friction_slip = 1.95
 suspension_travel = 0.3
 suspension_stiffness = 12.0
 suspension_max_force = 4000.0

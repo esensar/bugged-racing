@@ -6,20 +6,15 @@
 [ext_resource path="res://vehicles/pedal.gd" type="Script" id=4]
 [ext_resource path="res://vehicles/meter.gd" type="Script" id=5]
 [ext_resource path="res://vehicles/steering_controller.gd" type="Script" id=6]
+[ext_resource path="res://assets/engine.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/wind woosh loop.ogg" type="AudioStream" id=8]
 
 [sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 0 ), 0.0, 3.60634, 0, 1, Vector2( 0.15566, 0.561364 ), 1.56017, 1.56017, 0, 0, Vector2( 0.830189, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="Curve" id=4]
-_data = [ Vector2( 0, 0.492045 ), 0.0, 0.0, 0, 0, Vector2( 0.15566, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.212264, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.29717, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.410377, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.481132, 0.701136 ), 0.0, 0.0, 0, 0, Vector2( 0.566038, 0.282955 ), 0.0, 0.0, 0, 0, Vector2( 0.589623, 0.6375 ), 0.0, 0.0, 0, 0, Vector2( 0.660377, 0.373864 ), 0.0, 0.0, 0, 0, Vector2( 0.669811, 0.5375 ), 0.0, 0.0, 0, 0, Vector2( 0.764151, 0.0284091 ), 0.0, 0.0, 0, 0, Vector2( 0.811321, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.938679, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
-
 [sub_resource type="CapsuleShape" id=11]
 radius = 0.394377
 height = 2.03536
-
-[sub_resource type="AudioStreamGenerator" id=2]
-mix_rate = 5500.0
-buffer_length = 1.0
 
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.493182 ), 0.0, 0.0, 0, 0 ]
@@ -60,7 +55,6 @@ final_drive = 4.0
 max_rpm = 8000.0
 gear_switch_time = 0.5
 power_curve = SubResource( 3 )
-sound_curve = SubResource( 4 )
 
 [node name="rear_right" parent="." index="0"]
 use_as_traction = true
@@ -145,8 +139,8 @@ shape = SubResource( 11 )
 
 [node name="engine_sound_player" type="AudioStreamPlayer3D" parent="." index="7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14201, 0.968668 )
-stream = SubResource( 2 )
-unit_db = 14.0
+stream = ExtResource( 7 )
+pitch_scale = 0.1
 bus = "Sound"
 
 [node name="Smoke" type="Particles" parent="." index="8"]
@@ -179,6 +173,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.535274, 1.89154 )
 
 [node name="static_follow" type="Position3D" parent="." index="16"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59115, -3.01375 )
+
+[node name="wind_sound_player" type="AudioStreamPlayer3D" parent="." index="17"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08447, 1.12391 )
+stream = ExtResource( 8 )
 
 [connection signal="brake_updated" from="." to="chassis/cockpit/brake_pedal" method="_on_value_updated"]
 [connection signal="clutch_updated" from="." to="chassis/cockpit/clutch_pedal" method="_on_value_updated"]

@@ -57,7 +57,7 @@ onready var rrsmoke: TireSmoke = $rr_tire_smoke
 onready var rlsmoke: TireSmoke = $rl_tire_smoke
 
 onready var engine_sound_player: AudioStreamPlayer3D = $engine_sound_player
-onready var engine_sound_playback: AudioStreamPlayback = $engine_sound_player.get_stream_playback()
+onready var wind_sound_player: AudioStreamPlayer3D = $wind_sound_player
 
 onready var max_steer_input_rad: float = deg2rad(max_steer_input)
 
@@ -92,6 +92,7 @@ func _ready():
 
 	_generate_engine_sound(0)
 	engine_sound_player.play()
+	wind_sound_player.play()
 
 
 func get_cockpit_position() -> Node:
@@ -230,6 +231,7 @@ func _physics_process(delta: float):
 	var power_factor = power_curve.interpolate_baked(rpm_factor)
 
 	_generate_engine_sound(rpm_factor)
+	_generate_wind_sound(speed)
 
 	# Transfer to transmission
 	var transmission_input = power_factor * (1 - clutch_position) * _get_gear_ratio()
@@ -269,22 +271,12 @@ func _physics_process(delta: float):
 
 func _generate_engine_sound(rpm_factor):
 	engine_sound_player.pitch_scale = base_engine_pitch + 2 * rpm_factor
-	var to_fill = engine_sound_playback.get_frames_available()
-	var factor = rpm_factor
-	if to_fill <= 0:
-		return
-	var fill_segment = 1.0 / to_fill
-	var fill_percent = 0.0
-	while to_fill > 0:
-		engine_sound_playback.push_frame(Vector2(1.0, 1.0) * factor)
-		factor += (
-			cos(factor)
-			* sin(factor)
-			* (1 + to_fill % 2)
-			* ((sound_curve.interpolate_baked(fill_percent) - 0.5) * 2)
-		)
-		to_fill -= 1
-		fill_percent += fill_segment
+	engine_sound_player.unit_db = 1 + 2 * rpm_factor
+
+
+func _generate_wind_sound(speed):
+	wind_sound_player.pitch_scale = 1 + speed / 150
+	wind_sound_player.unit_db = pow(speed, 2) / 1500 * (0.5 + drag_factor) - 20
 
 
 func _synchronize():

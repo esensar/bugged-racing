@@ -198,6 +198,8 @@ func _physics_process(delta: float):
 
 	if GlobalSettings.auto_clutch or GlobalSettings.automatic_transmission:
 		clutch_position = 1 - min(rpm, auto_clutch_rpm_limit) / auto_clutch_rpm_limit
+		if throttle == 0.0 and linear_velocity.length() < 1:
+			clutch_position = 1
 
 	if gear_timer > 0:
 		clutch_position = 1

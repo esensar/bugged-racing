@@ -67,21 +67,21 @@ power_curve = SubResource( 18 )
 use_as_traction = true
 wheel_radius = 0.52
 wheel_rest_length = 0.47
-wheel_friction_slip = 8.0
-suspension_travel = 0.4
-suspension_stiffness = 9.0
-suspension_max_force = 7000.0
+wheel_friction_slip = 5.54
+suspension_travel = 0.35
+suspension_stiffness = 12.0
+suspension_max_force = 10000.0
 damping_compression = 0.87
 damping_relaxation = 0.9
 
 [node name="front_left" parent="." index="2"]
 use_as_steering = true
 wheel_radius = 0.35
-wheel_rest_length = 0.45
-wheel_friction_slip = 7.0
-suspension_travel = 0.3
-suspension_stiffness = 12.0
-suspension_max_force = 9000.0
+wheel_rest_length = 0.47
+wheel_friction_slip = 4.45
+suspension_travel = 0.55
+suspension_stiffness = 15.0
+suspension_max_force = 15000.0
 damping_compression = 0.9
 damping_relaxation = 0.92
 
@@ -108,11 +108,11 @@ needle_path = NodePath("speed_needle")
 [node name="front_right" parent="." index="4"]
 use_as_steering = true
 wheel_radius = 0.35
-wheel_rest_length = 0.45
-wheel_friction_slip = 7.0
-suspension_travel = 0.3
-suspension_stiffness = 12.0
-suspension_max_force = 9000.0
+wheel_rest_length = 0.47
+wheel_friction_slip = 4.45
+suspension_travel = 0.55
+suspension_stiffness = 15.0
+suspension_max_force = 15000.0
 damping_compression = 0.9
 damping_relaxation = 0.92
 
@@ -120,10 +120,10 @@ damping_relaxation = 0.92
 use_as_traction = true
 wheel_radius = 0.52
 wheel_rest_length = 0.47
-wheel_friction_slip = 8.0
-suspension_travel = 0.4
-suspension_stiffness = 9.0
-suspension_max_force = 7000.0
+wheel_friction_slip = 5.54
+suspension_travel = 0.35
+suspension_stiffness = 12.0
+suspension_max_force = 10000.0
 damping_compression = 0.87
 damping_relaxation = 0.9
 

@@ -21,7 +21,7 @@ This game includes assets from [opengameart.org](opengameart.org), [freesound.or
 
 #### Wind sounds
 
-[Wind sounds](/assets/wind woosh loop.ogg) used in the game is available on [opengameart.org](https://opengameart.org/content/wind-whoosh-loop) under CC0 license (public domain).
+[Wind sounds](/assets/wind%20woosh%20loop.ogg) used in the game is available on [opengameart.org](https://opengameart.org/content/wind-whoosh-loop) under CC0 license (public domain).
 
 #### Engine sounds
 

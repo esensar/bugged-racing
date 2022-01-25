@@ -195,6 +195,13 @@ func _on_VehicleSelector_item_selected(item_index: int) -> void:
 	camera_scene.change_vehicle_to(vehicles[item_index])
 
 
+func _on_ResetToDefaultButton_pressed() -> void:
+	fov_slider.value = 70
+	move_depth_slider.value = 0
+	move_horizontal_slider.value = 0
+	move_vertical_slider.value = 0
+
+
 func _set_fullscreen(new_state: bool) -> void:
 	OS.set_window_fullscreen(new_state)
 	OS.set_window_maximized(new_state)

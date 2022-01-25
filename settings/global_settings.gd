@@ -42,9 +42,9 @@ func _ready() -> void:
 
 	if stored_config.has("camera"):
 		camera_fov = stored_config["camera"].get("fov", 70)
-		camera_move_depth = stored_config["camera"].get("camera_move_depth", 0)
-		camera_move_horizontal = stored_config["camera"].get("camera_move_horizontal", 0)
-		camera_move_vertical = stored_config["camera"].get("camera_move_vertical", 0)
+		camera_move_depth = stored_config["camera"].get("move_depth", 0)
+		camera_move_horizontal = stored_config["camera"].get("move_horizontal", 0)
+		camera_move_vertical = stored_config["camera"].get("move_vertical", 0)
 
 
 func read_json_file(file_path: String) -> Dictionary:

@@ -56,17 +56,11 @@ onready var gear_value_slider: HSlider = $MarginContainer/VSplitContainer/TabCon
 # gdlint: ignore=max-line-length
 onready var fov_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/FovSlider
 # gdlint: ignore=max-line-length
-onready var move_forward_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveForwardSlider
+onready var move_depth_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveDepthSlider
 # gdlint: ignore=max-line-length
-onready var move_backward_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveBackwardSlider
+onready var move_horizontal_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveHorizontalSlider
 # gdlint: ignore=max-line-length
-onready var move_left_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveLeftSlider
-# gdlint: ignore=max-line-length
-onready var move_right_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveRightSlider
-# gdlint: ignore=max-line-length
-onready var move_up_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveUpSlider
-# gdlint: ignore=max-line-length
-onready var move_down_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveDownSlider
+onready var move_vertical_slider: HSlider = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveVerticalSlider
 # gdlint: ignore=max-line-length
 onready var vehicle_selector: OptionButton = $MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/VBoxContainer/VehicleSelector
 # gdlint: ignore=max-line-length
@@ -89,12 +83,9 @@ func _ready() -> void:
 	throttle_sensitivity_slider.value = GlobalSettings.throttle_sensitivity
 	brakes_sensitivity_slider.value = GlobalSettings.brake_sensitivity
 	fov_slider.value = GlobalSettings.camera_fov
-	move_forward_slider.value = GlobalSettings.camera_move_forward
-	move_backward_slider.value = GlobalSettings.camera_move_backward
-	move_right_slider.value = GlobalSettings.camera_move_right
-	move_left_slider.value = GlobalSettings.camera_move_left
-	move_up_slider.value = GlobalSettings.camera_move_up
-	move_down_slider.value = GlobalSettings.camera_move_down
+	move_depth_slider.value = GlobalSettings.camera_move_depth
+	move_horizontal_slider.value = GlobalSettings.camera_move_horizontal
+	move_vertical_slider.value = GlobalSettings.camera_move_vertical
 	fullscreen_cb.pressed = false
 	borderless_cb.pressed = false
 	var controller = PLAYER_CONTROLLER.new()
@@ -188,28 +179,16 @@ func _on_FovSlider_value_changed(new_value: float) -> void:
 	GlobalSettings.camera_fov = new_value
 
 
-func _on_MoveForwardSlider_value_changed(new_value: float) -> void:
-	GlobalSettings.camera_move_forward = new_value
+func _on_MoveDepthSlider_value_changed(new_value: float) -> void:
+	GlobalSettings.camera_move_depth = new_value
 
 
-func _on_MoveBackwardSlider_value_changed(new_value: float) -> void:
-	GlobalSettings.camera_move_backward = new_value
+func _on_MoveHorizontalSlider_value_changed(new_value: float) -> void:
+	GlobalSettings.camera_move_horizontal = new_value
 
 
-func _on_MoveLeftSlider_value_changed(new_value: float) -> void:
-	GlobalSettings.camera_move_left = new_value
-
-
-func _on_MoveRightSlider_value_changed(new_value: float) -> void:
-	GlobalSettings.camera_move_right = new_value
-
-
-func _on_MoveUpSlider_value_changed(new_value: float) -> void:
-	GlobalSettings.camera_move_up = new_value
-
-
-func _on_MoveDownSlider_value_changed(new_value: float) -> void:
-	GlobalSettings.camera_move_down = new_value
+func _on_MoveVerticalSlider_value_changed(new_value: float) -> void:
+	GlobalSettings.camera_move_vertical = new_value
 
 
 func _on_VehicleSelector_item_selected(item_index: int) -> void:

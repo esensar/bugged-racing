@@ -8,9 +8,9 @@ func reset() -> void:
 	translation = Vector3.ZERO
 	translate(
 		Vector3(
-			GlobalSettings.camera_move_right - GlobalSettings.camera_move_left,
-			GlobalSettings.camera_move_up - GlobalSettings.camera_move_down,
-			GlobalSettings.camera_move_backward - GlobalSettings.camera_move_forward
+			GlobalSettings.camera_move_horizontal,
+			GlobalSettings.camera_move_vertical,
+			GlobalSettings.camera_move_depth
 		)
 	)
 

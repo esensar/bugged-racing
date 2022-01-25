@@ -13,12 +13,9 @@ var selected_camera: int = 0
 var multiplayer_name: String = "Player"
 
 var camera_fov = 70
-var camera_move_forward = 0
-var camera_move_backward = 0
-var camera_move_right = 0
-var camera_move_left = 0
-var camera_move_up = 0
-var camera_move_down = 0
+var camera_move_depth = 0
+var camera_move_horizontal = 0
+var camera_move_vertical = 0
 
 var _config: Dictionary
 
@@ -45,12 +42,9 @@ func _ready() -> void:
 
 	if stored_config.has("camera"):
 		camera_fov = stored_config["camera"].get("fov", 70)
-		camera_move_forward = stored_config["camera"].get("camera_move_forward", 0)
-		camera_move_backward = stored_config["camera"].get("camera_move_backward", 0)
-		camera_move_left = stored_config["camera"].get("camera_move_left", 0)
-		camera_move_right = stored_config["camera"].get("camera_move_right", 0)
-		camera_move_up = stored_config["camera"].get("camera_move_up", 0)
-		camera_move_down = stored_config["camera"].get("camera_move_down", 0)
+		camera_move_depth = stored_config["camera"].get("camera_move_depth", 0)
+		camera_move_horizontal = stored_config["camera"].get("camera_move_horizontal", 0)
+		camera_move_vertical = stored_config["camera"].get("camera_move_vertical", 0)
 
 
 func read_json_file(file_path: String) -> Dictionary:
@@ -101,12 +95,9 @@ func to_dictionary() -> Dictionary:
 		"camera":
 		{
 			"fov": camera_fov,
-			"move_forward": camera_move_forward,
-			"move_backward": camera_move_backward,
-			"move_right": camera_move_right,
-			"move_left": camera_move_left,
-			"move_up": camera_move_up,
-			"move_down": camera_move_down
+			"move_depth": camera_move_depth,
+			"move_horizontal": camera_move_horizontal,
+			"move_vertical": camera_move_vertical
 		}
 	}
 

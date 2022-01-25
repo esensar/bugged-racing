@@ -189,7 +189,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="System" type="VBoxContainer" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -221,6 +220,7 @@ __meta__ = {
 }
 
 [node name="Camera" type="HSplitContainer" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -259,126 +259,66 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveForwardLabel" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
+[node name="MoveDepthLabel" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
 margin_top = 66.0
 margin_right = 404.0
 margin_bottom = 84.0
 custom_fonts/font = SubResource( 5 )
-text = "Move forward"
+text = "Move forward/backward"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveForwardSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
+[node name="MoveDepthSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
 margin_top = 92.0
 margin_right = 404.0
 margin_bottom = 124.0
+min_value = -10.0
 max_value = 10.0
 step = 0.01
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveBackwardLabel" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
-margin_top = 132.0
-margin_right = 404.0
-margin_bottom = 150.0
-custom_fonts/font = SubResource( 5 )
-text = "Move back"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MoveBackwardSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
-margin_top = 158.0
-margin_right = 404.0
-margin_bottom = 190.0
-max_value = 10.0
-step = 0.01
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MoveLeftLabel" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
+[node name="MoveHorizontalLabel" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
 margin_top = 198.0
 margin_right = 404.0
 margin_bottom = 216.0
 custom_fonts/font = SubResource( 5 )
-text = "Move left"
+text = "Move left/right"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveLeftSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
+[node name="MoveHorizontalSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
 margin_top = 224.0
 margin_right = 404.0
 margin_bottom = 256.0
+min_value = -10.0
 max_value = 10.0
 step = 0.01
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveRightLabel" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
-margin_top = 264.0
-margin_right = 404.0
-margin_bottom = 282.0
-custom_fonts/font = SubResource( 5 )
-text = "Move right"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MoveRightSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
-margin_top = 290.0
-margin_right = 404.0
-margin_bottom = 322.0
-max_value = 10.0
-step = 0.01
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MoveUpLabel" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
+[node name="MoveVerticalLabel" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
 margin_top = 330.0
 margin_right = 404.0
 margin_bottom = 348.0
 custom_fonts/font = SubResource( 5 )
-text = "Move up"
+text = "Move down/up"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MoveUpSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
+[node name="MoveVerticalSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
 margin_top = 356.0
 margin_right = 404.0
 margin_bottom = 388.0
-max_value = 10.0
-step = 0.01
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MoveDownLabel" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
-margin_top = 396.0
-margin_right = 404.0
-margin_bottom = 414.0
-custom_fonts/font = SubResource( 5 )
-text = "Move down"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="MoveDownSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera"]
-margin_top = 422.0
-margin_right = 404.0
-margin_bottom = 454.0
+min_value = -10.0
 max_value = 10.0
 step = 0.01
 __meta__ = {
@@ -668,12 +608,9 @@ __meta__ = {
 [connection signal="toggled" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/System/FullscreenCheckBox" to="." method="_on_fullscreen_toggled"]
 [connection signal="toggled" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/System/BorderlessCheckBox" to="." method="_on_borderless_toggled"]
 [connection signal="value_changed" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/FovSlider" to="." method="_on_FovSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveForwardSlider" to="." method="_on_MoveForwardSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveBackwardSlider" to="." method="_on_MoveBackwardSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveLeftSlider" to="." method="_on_MoveLeftSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveRightSlider" to="." method="_on_MoveRightSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveUpSlider" to="." method="_on_MoveUpSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveDownSlider" to="." method="_on_MoveDownSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveDepthSlider" to="." method="_on_MoveDepthSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveHorizontalSlider" to="." method="_on_MoveHorizontalSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/Camera/MoveVerticalSlider" to="." method="_on_MoveVerticalSlider_value_changed"]
 [connection signal="item_selected" from="MarginContainer/VSplitContainer/TabContainer/Video/TabContainer/Camera/VBoxContainer/VehicleSelector" to="." method="_on_VehicleSelector_item_selected"]
 [connection signal="toggled" from="MarginContainer/VSplitContainer/TabContainer/Controls/Controls/AutoClutchCheckBox" to="." method="_on_autoclutch_toggled"]
 [connection signal="toggled" from="MarginContainer/VSplitContainer/TabContainer/Controls/Controls/AutomaticTransmissionCheckBox" to="." method="_on_automatictransmission_toggled"]
